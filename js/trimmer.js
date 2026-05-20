@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Total frames in the trimmer sequence
     const frameCount = 192;
     const currentFrame = index => {
-        // Generates path like "trimmer sequence/00001.png"
-        return `trimmer sequence/${index.toString().padStart(5, '0')}.png`;
+        // Generates path like "trimmer sequence/00001.jpg"
+        return `trimmer sequence/${index.toString().padStart(5, '0')}.jpg`;
     };
 
     const images = [];

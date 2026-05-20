@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Kick off all 5 sequences — first frames load in parallel
         loadSequence(
             trimmerImages,
-            i => `trimmer sequence/${(i).toString().padStart(5, '0')}.png`,
+            i => `trimmer sequence/${(i).toString().padStart(5, '0')}.jpg`,
             trimmerFrameCount,
             'trimmer',
             1  // trimmer is 1-indexed
