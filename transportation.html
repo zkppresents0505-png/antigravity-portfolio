@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autonomous Urban Transit Concept - Oblique.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .transportation-nav {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 100;
+        }
+        
+        .back-link {
+            font-family: 'Space Grotesk', sans-serif;
+            text-decoration: none;
+            color: var(--text, #fff);
+            font-weight: 500;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: opacity 0.3s;
+        }
+        
+        .back-link:hover {
+            opacity: 0.7;
+        }
+
+        .scroll-container {
+            height: 700vh;
+            position: relative;
+        }
+
+        .canvas-container {
+            position: sticky;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+        }
+
+        #transportationCanvas {
+            max-width: 100%;
+            max-height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.1s ease-out;
+        }
+
+        .transportation-description {
+            position: absolute;
+            right: 10%;
+            top: 50%;
+            transform: translateY(-40%);
+            width: 35%;
+            color: #fff;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease-out, transform 0.8s ease-out;
+            font-family: 'Space Grotesk', sans-serif;
+            z-index: 10;
+        }
+
+        .transportation-description h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .transportation-description p {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #ccc;
+            margin-bottom: 1rem;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            z-index: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.2em;
+            transition: opacity 0.8s ease;
+        }
+        
+        .scroll-indicator {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            opacity: 0.6;
+            animation: pulseFade 2s infinite ease-in-out;
+            pointer-events: none;
+        }
+        
+        @keyframes pulseFade {
+            0%, 100% { opacity: 0.3; transform: translate(-50%, 0); }
+            50% { opacity: 0.8; transform: translate(-50%, 5px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+
+    <nav class="transportation-nav">
+        <a href="works.html?view=tile" class="back-link hover-target">← BACK TO WORK</a>
+    </nav>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        LOADING SEQUENCE <span id="loadingProgress" style="margin-left: 10px;">0%</span>
+    </div>
+    
+    <div class="scroll-indicator" id="scrollIndicator">
+        SCROLL TO EXPLORE ↓
+    </div>
+
+    <main class="scroll-container">
+        <div class="canvas-container">
+            <canvas id="transportationCanvas"></canvas>
+            <div class="transportation-description" id="transportationDesc">
+                <h2>Autonomous urban transit concept</h2>
+                <p>This project reimagines short-distance city transportation through a compact autonomous transit pod designed for fast and efficient urban mobility. Instead of traditional seating, the interior uses standing support fasteners and hanging grips, allowing passengers to travel comfortably for short durations while carrying bags or daily essentials.</p>
+                <p>The design focuses on maximizing passenger capacity, reducing congestion, and improving movement within dense city infrastructure. Its clean, minimal form language and seamless exterior create a futuristic yet approachable identity for next-generation smart transportation systems.</p>
+            </div>
+        </div>
+    </main>
+
+    <section class="project-details" style="background: #000; padding: 8rem 5vw 12rem; color: #fff; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.05);">
+        <style>
+            .transport-collage {
+                display: grid;
+                grid-template-columns: repeat(12, 1fr);
+                gap: 2rem;
+                max-width: 1400px;
+                margin: 0 auto;
+            }
+            
+            .tc-item { position: relative; border-radius: 8px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.6); }
+            .tc-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+            .tc-item:hover img { transform: scale(1.05); }
+            .tc-caption {
+                position: absolute; bottom: 20px; left: 20px;
+                font-family: 'Space Grotesk', sans-serif; color: var(--accent-color); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;
+                background: rgba(0,0,0,0.7); padding: 5px 10px; border-radius: 4px; backdrop-filter: blur(5px);
+            }
+            
+            /* Layout */
+            .tc-1 { grid-column: 1 / 8; grid-row: 1; border: 8px solid #0a0a0a; z-index: 2; margin-bottom: -50px; }
+            .tc-2 { grid-column: 7 / 13; grid-row: 1 / 3; z-index: 1; margin-top: 50px; }
+            .tc-3 { grid-column: 2 / 7; grid-row: 2 / 4; z-index: 3; margin-top: 50px; border: 8px solid #0a0a0a; }
+            .tc-4 { grid-column: 7 / 11; grid-row: 3; z-index: 2; margin-top: -30px; margin-left: -30px; }
+            .tc-5 { grid-column: 10 / 13; grid-row: 2; z-index: 4; border: 8px solid #000; }
+
+            @media (max-width: 900px) {
+                .transport-collage { display: flex; flex-direction: column; gap: 3rem; }
+                .tc-item { margin: 0 !important; border: none !important; }
+            }
+        </style>
+        
+        <div class="fade-up" style="display: flex; flex-direction: column; align-items: center;">
+            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: 500; letter-spacing: -1px; margin-bottom: 5rem; text-align: center;">From Concept to Reality</h3>
+            
+            <div class="transport-collage">
+                <div class="tc-item tc-1">
+                    <img src="assets/images/Transportaion folder/WhatsApp Image 2025-04-05 at 16.33.47_4d581b95.jpg" alt="Initial Sketch">
+                    <div class="tc-caption">01 / Ideation Sketch</div>
+                </div>
+                <div class="tc-item tc-2">
+                    <img src="assets/images/Transportaion folder/ChatGPT Image May 17, 2026, 03_21_37 AM.png" alt="Concept Render">
+                    <div class="tc-caption">02 / Form Study</div>
+                </div>
+                <div class="tc-item tc-3">
+                    <img src="assets/images/Transportaion folder/new.jpg" alt="Details">
+                    <div class="tc-caption">03 / Interior Details</div>
+                </div>
+                <div class="tc-item tc-4">
+                    <img src="assets/images/Transportaion folder/untitled.4.jpg" alt="Technical Layout">
+                    <div class="tc-caption">04 / Layout Study</div>
+                </div>
+                <div class="tc-item tc-5">
+                    <img src="assets/images/Transportaion folder/ChatGPT Image Apr 13, 2025, 03_56_27 AM.png" alt="Urban Render">
+                    <div class="tc-caption">05 / Urban Context</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/scripts.js"></script>
+    <script src="js/transportation.js"></script>
+</body>
+</html>

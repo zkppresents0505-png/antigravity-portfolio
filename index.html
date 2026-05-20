@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Industrial Design Portfolio</title>
+    <meta name="description" content="Award-winning product and industrial design portfolio.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@300;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="loading">
+    <!-- Interactive Page Loader -->
+    <div id="page-loader" class="page-loader">
+        <div class="loader-content">
+            <div class="loader-brand">ZKP.DESIGN</div>
+            <div class="loader-progress-wrapper">
+                <div class="loader-progress-bar" id="loader-progress"></div>
+            </div>
+            <div class="loader-percentage" id="loader-percentage">0%</div>
+            <div class="loader-text">Loading Space...</div>
+        </div>
+    </div>
+
+    <div class="cursor"></div>
+
+    <nav class="navbar">
+        <div class="logo">zkp.design</div>
+        <ul class="nav-links">
+            <li><a href="#about" class="hover-target">ABOUT</a></li>
+            <li><a href="works.html" class="hover-target">WORK</a></li>
+            <li><a href="#skills" class="hover-target">SKILLS</a></li>
+            <li><a href="#contact" class="hover-target">CONTACT</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="hero-spline fade-up">
+                <iframe src='https://my.spline.design/nexbotrobotcharacterconceptcopy-4mtbodrqjDjzwutWTd6OKYR2/'
+                    frameborder='0' width='100%' height='100%'></iframe>
+                <div class="spline-watermark-mask"></div>
+            </div>
+            <div class="hero-content fade-up">
+                <h1 class="hero-title"><span style="white-space: nowrap">Product & Industrial</span><br>Designer</h1>
+                <p class="hero-subtitle-top">"Designing a product is designing a relationship."</p>
+
+                <a href="#about" class="hero-author-row hover-target" style="text-decoration: none; color: inherit;">
+                    <img src="assets/images/hero.jpg" alt="Zidan Kareem P - Designer Portrait"
+                        class="hero-portrait-small interactive-img">
+                    <div class="hero-role-wrapper">
+                        <h3 class="hero-role">Zidan Kareem P</h3>
+                        <div class="hero-status">
+                            <span class="status-dot"></span> Available for work
+                        </div>
+                    </div>
+                </a>
+
+                <div class="hero-actions">
+                    <a href="works.html" class="btn hover-target magnetic-btn">VIEW WORK</a>
+                    <a href="#contact" class="btn hover-target magnetic-btn">CONTACT</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="about-grid">
+                <div class="about-text fade-up" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <div
+                        style="display: flex; align-items: center; gap: 10px; font-family: var(--font-body); font-size: 0.95rem; font-weight: 800; letter-spacing: 2px; color: #e65100; text-transform: uppercase;">
+                        <span
+                            style="display: inline-block; width: 30px; height: 2px; background-color: #e65100;"></span>
+                        ABOUT ME
+                    </div>
+
+                    <div style="margin-bottom: 0.5rem;">
+                        <h2
+                            style="font-family: var(--font-body); font-size: clamp(3rem, 5vw, 4.5rem); font-weight: 500; letter-spacing: -2px; line-height: 1.1; text-transform: none; color: #ffffff;">
+                            Zidan<br>Kareem <span style="color: #e65100;">P</span></h2>
+                        <h3
+                            style="font-family: var(--font-body); font-size: 0.95rem; font-weight: 600; color: #555555; letter-spacing: 1px; margin-top: 1rem; text-transform: uppercase;">
+                            Product & Industrial Designer</h3>
+                    </div>
+
+                    <p style="font-size: 1.05rem; color: #a0a0a0; line-height: 1.8; margin-bottom: 0;">
+                        I'm an industrial design student at <strong style="color: #ffffff; font-weight: 500;">Lovely
+                            Professional University</strong>, originally from <strong
+                            style="color: #ffffff; font-weight: 500;">Malappuram, Kerala</strong> — a place where
+                        craftsmanship and curiosity were part of everyday life long before I had words for design.
+                    </p>
+                    <p style="font-size: 1.05rem; color: #a0a0a0; line-height: 1.8;">
+                        My work spans <strong style="color: #ffffff; font-weight: 500;">CAD modeling, product concepts,
+                            furniture, and visual identity</strong> — from an autonomous agri-robot to a
+                        Nothing-inspired trimmer concept. I design things that earn the trust of whoever holds them.
+                    </p>
+                </div>
+                <div class="about-image fade-up" style="height: 100%; display: flex; align-items: center;">
+                    <img src="assets/images/hero.jpg" alt="Zidan Kareem P"
+                        style="width: 100%; max-height: 600px; object-fit: cover; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                </div>
+            </div>
+        </section>
+
+        <section id="work" class="work">
+            <h2 class="section-title fade-up">SELECTED WORKS</h2>
+
+            <style>
+                .works-portal {
+                    position: relative;
+                    width: 100%;
+                    height: 420px;
+                    border-radius: 12px;
+                    overflow: hidden;
+                    cursor: pointer;
+                    display: block;
+                    text-decoration: none;
+                    border: 1px solid rgba(255,255,255,0.07);
+                    transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1), border-color 0.4s ease;
+                }
+                .works-portal:hover { transform: translateY(-8px); border-color: rgba(255,255,255,0.2); }
+                .works-portal:hover .wp-img { transform: scale(1.06); }
+                .works-portal:hover .wp-overlay { opacity: 0.6; }
+                .works-portal:hover .wp-cta { letter-spacing: 6px; }
+
+                /* Mosaic grid behind */
+                .wp-mosaic {
+                    position: absolute;
+                    inset: 0;
+                    display: grid;
+                    grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+                    grid-template-rows: 1fr 1fr;
+                    gap: 3px;
+                }
+                .wp-cell {
+                    overflow: hidden;
+                    background: #0a0a0a;
+                }
+                .wp-cell.tall { grid-row: 1 / 3; }
+                .wp-img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    display: block;
+                    transition: transform 0.7s cubic-bezier(0.77, 0, 0.175, 1);
+                    filter: brightness(0.75) saturate(0.9);
+                }
+
+                /* Dark gradient overlay */
+                .wp-overlay {
+                    position: absolute;
+                    inset: 0;
+                    background: linear-gradient(135deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.75) 100%);
+                    opacity: 0.75;
+                    transition: opacity 0.5s ease;
+                    z-index: 2;
+                }
+                /* Accent glow */
+                .wp-glow {
+                    position: absolute;
+                    inset: 0;
+                    background: radial-gradient(ellipse at 50% 60%, rgba(230,81,0,0.18) 0%, transparent 65%);
+                    z-index: 3;
+                    pointer-events: none;
+                }
+                /* CTA text */
+                .wp-text {
+                    position: absolute;
+                    inset: 0;
+                    z-index: 4;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.75rem;
+                    text-align: center;
+                }
+                .wp-label {
+                    font-family: var(--font-mono);
+                    font-size: 0.75rem;
+                    letter-spacing: 4px;
+                    color: #e65100;
+                    text-transform: uppercase;
+                }
+                .wp-heading {
+                    font-family: var(--font-heading);
+                    font-size: clamp(2.2rem, 4vw, 4rem);
+                    font-weight: 700;
+                    color: #fff;
+                    letter-spacing: -1px;
+                    text-transform: uppercase;
+                    line-height: 1;
+                }
+                .wp-cta {
+                    font-family: var(--font-body);
+                    font-size: 0.8rem;
+                    letter-spacing: 4px;
+                    color: rgba(255,255,255,0.55);
+                    text-transform: uppercase;
+                    margin-top: 0.25rem;
+                    transition: letter-spacing 0.4s ease;
+                }
+                .wp-arrow {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 44px;
+                    height: 44px;
+                    border: 1px solid rgba(255,255,255,0.25);
+                    border-radius: 50%;
+                    font-size: 1.2rem;
+                    color: #fff;
+                    margin-top: 1rem;
+                    transition: background 0.3s ease, border-color 0.3s ease;
+                }
+                .works-portal:hover .wp-arrow { background: #e65100; border-color: #e65100; }
+            </style>
+
+            <a href="works.html" class="works-portal fade-up hover-target">
+                <!-- Mosaic of project images -->
+                <div class="wp-mosaic">
+                    <!-- Tall left cell -->
+                    <div class="wp-cell tall">
+                        <img class="wp-img" src="assets/images/Oblivion%20folder/Olblivion%20thumbnail.jpg" alt="Oblivion Drone">
+                    </div>
+                    <!-- Top row -->
+                    <div class="wp-cell">
+                        <img class="wp-img" src="assets/images/nothing_trimmer_thumbnail.jpg" alt="Nothing Trimmer">
+                    </div>
+                    <div class="wp-cell">
+                        <img class="wp-img" src="assets/images/Magic%20table%20thumbnail.jpg" alt="Magic Table">
+                    </div>
+                    <div class="wp-cell">
+                        <img class="wp-img" src="assets/images/namrtas%20teapoy%20rendered.jpg" alt="Teapoy">
+                    </div>
+                    <!-- Bottom row -->
+                    <div class="wp-cell">
+                        <img class="wp-img" src="assets/images/interactive_cad_viewer.png" alt="CAD Viewer">
+                    </div>
+                    <div class="wp-cell">
+                        <img class="wp-img" src="assets/images/Handgesteure%20thumbnail.png" alt="Hand Gesture">
+                    </div>
+                    <div class="wp-cell">
+                        <img class="wp-img" src="assets/images/nothing_trimmer_real.png" alt="Trimmer Real">
+                    </div>
+                </div>
+
+                <!-- Overlay layers -->
+                <div class="wp-overlay"></div>
+                <div class="wp-glow"></div>
+
+                <!-- CTA Text -->
+                <div class="wp-text">
+                    <span class="wp-label">Portfolio</span>
+                    <h3 class="wp-heading">See The Work ↗</h3>
+                    <p class="wp-cta">Full Project Gallery</p>
+                    <div class="wp-arrow">→</div>
+                </div>
+            </a>
+        </section>
+
+        <section id="skills" class="skills">
+            <h2 class="section-title fade-up">TOOLS & SKILLS</h2>
+            <div class="tools-grid fade-up">
+                <div class="tool-card hover-target" style="--brand-color: #0696D7;">
+                    <img src="https://cdn.simpleicons.org/autodesk/white" alt="Fusion 360" class="tool-icon">
+                    <span class="tool-name">Fusion 360</span>
+                    <span class="tool-category">CAD Modeling</span>
+                </div>
+                <div class="tool-card hover-target" style="--brand-color: #A0A0A0;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" class="tool-icon">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M14.31 8l5.74 9.94"></path>
+                        <path d="M9.69 8h11.48"></path>
+                        <path d="M7.38 12l5.74-9.94"></path>
+                        <path d="M9.69 16L3.95 6.06"></path>
+                        <path d="M14.31 16H2.83"></path>
+                        <path d="M16.62 12l-5.74 9.94"></path>
+                    </svg>
+                    <span class="tool-name">KeyShot</span>
+                    <span class="tool-category">Rendering</span>
+                </div>
+                <div class="tool-card hover-target" style="--brand-color: #EA7600;">
+                    <img src="https://cdn.simpleicons.org/blender/white" alt="Blender" class="tool-icon">
+                    <span class="tool-name">Blender</span>
+                    <span class="tool-category">3D & Animation</span>
+                </div>
+                <div class="tool-card hover-target" style="--brand-color: #F24E1E;">
+                    <img src="https://cdn.simpleicons.org/figma/white" alt="Figma" class="tool-icon">
+                    <span class="tool-name">Figma</span>
+                    <span class="tool-category">UI/UX Design</span>
+                </div>
+                <div class="tool-card hover-target" style="--brand-color: #FF9A00;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" class="tool-icon">
+                        <rect x="3" y="3" width="18" height="18" rx="3"></rect>
+                        <path d="M7.5 15l2-6.5 2 6.5"></path>
+                        <path d="M8.2 12.5h2.6"></path>
+                        <path d="M15 15v-5"></path>
+                        <circle cx="15" cy="7.5" r="1" fill="currentColor" stroke="none"></circle>
+                    </svg>
+                    <span class="tool-name">Illustrator</span>
+                    <span class="tool-category">Vector Graphics</span>
+                </div>
+                <div class="tool-card hover-target" style="--brand-color: #FFFFFF;">
+                    <img src="https://cdn.simpleicons.org/unity/white" alt="Unity Engine" class="tool-icon">
+                    <span class="tool-name">Unity Engine</span>
+                    <span class="tool-category">Interactive & Realtime</span>
+                </div>
+                <div class="tool-card hover-target" style="--brand-color: #8B5CF6;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" class="tool-icon">
+                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                        <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                        <path d="M9 14h6"></path>
+                        <path d="M9 10h6"></path>
+                        <path d="M9 18h4"></path>
+                    </svg>
+                    <span class="tool-name">User Research</span>
+                    <span class="tool-category">Strategy & UX</span>
+                </div>
+                <div class="tool-card hover-target" style="--brand-color: #FACC15;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" class="tool-icon">
+                        <path d="M9 18h6"></path>
+                        <path d="M10 22h4"></path>
+                        <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A6 6 0 1 0 7.5 11.5c.76.76 1.23 1.52 1.41 2.5">
+                        </path>
+                        <path d="M12 2v2"></path>
+                        <path d="M4 9h2"></path>
+                        <path d="M18 9h2"></path>
+                        <path d="M5 4l1.5 1.5"></path>
+                        <path d="M19 4l-1.5 1.5"></path>
+                    </svg>
+                    <span class="tool-name">Ideation</span>
+                    <span class="tool-category">Concept & Brainstorming</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact" class="footer">
+        <div class="footer-content fade-up">
+            <h2>LET'S BUILD SOMETHING?</h2>
+            <a href="mailto:zkppresents0505@gmail.com" class="email-link hover-target">zkppresents0505@gmail.com</a>
+            <div class="socials">
+                <a href="https://www.behance.net/zidankareem" target="_blank" class="hover-target social-icon"
+                    aria-label="Behance">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                        fill="currentColor">
+                        <path
+                            d="M22 7h-7v-2h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14h-8.027c.13 3.211 3.483 3.312 4.588 2.029h3.168zm-7.686-4h4.965c-.105-1.546-1.436-2.35-2.461-2.35-.986 0-2.366.739-2.504 2.35zm-8.53 3.146c1.514 0 2.905-.506 2.905-2.476 0-1.727-1.45-2.057-2.45-2.057h-3.047v4.533h2.592zm8.293-6.49c0-1.921-1.36-2.656-2.73-2.656h-5.073v10.999h5.116c1.373 0 3.352-.736 3.352-2.907 0-1.428-.756-2.197-1.884-2.519 1.256-.252 2.219-1.393 2.219-2.917zm-4.755-1.125h2.361c.883 0 2.016.326 2.016 1.63 0 1.258-1.096 1.603-2.058 1.603h-2.319v-3.233z" />
+                    </svg>
+                    <span>Behance</span>
+                </a>
+                <a href="https://www.instagram.com/zkp.design/" target="_blank" class="hover-target social-icon"
+                    aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                        fill="currentColor">
+                        <path
+                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                    </svg>
+                    <span>Instagram</span>
+                </a>
+                <a href="https://www.linkedin.com/in/zidan-kareem-500b93292/" target="_blank"
+                    class="hover-target social-icon" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                        fill="currentColor">
+                        <path
+                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                    </svg>
+                    <span>LinkedIn</span>
+                </a>
+                <a href="https://wa.me/919562552000" target="_blank" class="hover-target social-icon"
+                    aria-label="WhatsApp">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                        fill="currentColor">
+                        <path
+                            d="M12.031 0C5.385 0 0 5.385 0 12.033c0 2.115.55 4.183 1.595 6.002L.036 24l6.103-1.601c1.761.944 3.75 1.442 5.892 1.442 6.645 0 12.03-5.386 12.03-12.033S18.676 0 12.031 0zm0 21.821c-1.802 0-3.56-.474-5.111-1.395l-.367-.217-3.8.997 1.015-3.704-.239-.383c-1.002-1.614-1.536-3.488-1.536-5.417 0-5.592 4.549-10.141 10.138-10.141 5.591 0 10.14 4.549 10.14 10.141s-4.549 10.141-10.141 10.141zm5.555-7.587c-.305-.152-1.805-.891-2.083-.992-.28-.102-.484-.153-.687.152-.204.305-.788.992-.966 1.196-.178.204-.356.229-.661.077-.305-.153-1.284-.474-2.446-1.516-.906-.811-1.516-1.812-1.694-2.118-.178-.305-.019-.47.133-.622.138-.138.305-.356.458-.534.153-.178.204-.305.305-.509.102-.204.051-.382-.025-.534-.077-.152-.687-1.655-.941-2.266-.247-.595-.5-.514-.687-.524-.176-.008-.38-.008-.584-.008-.204 0-.534.077-.814.382-.28.305-1.069 1.044-1.069 2.545 0 1.501 1.094 2.952 1.246 3.155.152.204 2.152 3.284 5.213 4.605 2.1 1.042 2.7.992 3.183.84 0 0 1.603-.661 1.832-1.298.23-.637.23-1.183.161-1.298-.067-.116-.27-.192-.575-.344z" />
+                    </svg>
+                    <span>9562552000</span>
+                </a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 ZKP Design. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/scripts.js"></script>
+</body>
+
+</html>

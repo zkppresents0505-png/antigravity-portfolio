@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selected Works - ZKP.DESIGN</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@300;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .works-page-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 2rem 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            pointer-events: none;
+        }
+
+        .works-page-header > * {
+            pointer-events: auto;
+        }
+        
+        .back-link {
+            font-family: 'Space Grotesk', sans-serif;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s;
+        }
+        
+        .back-link:hover {
+            color: var(--accent-color);
+        }
+
+        .view-toggle button {
+            background: none;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #888;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 4px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .view-toggle button.active {
+            border-color: #fff;
+            color: #fff;
+        }
+        
+        @media (max-width: 768px) {
+            .works-page-header {
+                padding: 1rem 2rem;
+                flex-direction: row;
+                align-items: center;
+            }
+        }
+
+        .scroll-bounce-prompt {
+            position: absolute;
+            bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            pointer-events: none;
+        }
+
+        .page-bounce-anim {
+            animation: pageHintBounce 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        @keyframes pageHintBounce {
+            0% { transform: translateY(0); }
+            40% { transform: translateY(-80px); }
+            100% { transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cursor"></div>
+
+    <div class="works-page-header fade-up">
+        <a href="index.html" class="back-link hover-target">← HOME</a>
+        <div class="view-toggle" style="display: flex; gap: 1rem;">
+            <button id="btn-tile-view" class="hover-target">TILE VIEW</button>
+            <button id="btn-list-view" class="active hover-target">LIST VIEW</button>
+        </div>
+    </div>
+
+    <div class="loading-overlay" id="listViewLoadingOverlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; z-index: 9999; display: none; align-items: center; justify-content: center; color: #fff; font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; letter-spacing: 0.2em; transition: opacity 0.8s ease;">
+        LOADING SEQUENCE <span id="listViewLoadingProgress" style="margin-left: 10px;">0%</span>
+    </div>
+
+    <main>
+        <section id="work" class="work" style="padding-top: 10rem;">
+            <div id="tileViewContainer">
+                <h2 class="section-title fade-up">SELECTED WORKS</h2>
+                <div class="gallery">
+                    <article class="project-card fade-up">
+                        <a href="teapoy.html" style="display: block; text-decoration: none; color: inherit;">
+                            <div class="project-image">
+                                <img src="assets/images/namrtas%20teapoy%20rendered.jpg" alt="Teapoy Design" loading="lazy">
+                                <div class="project-overlay">
+                                    <h3>Teapoy Design</h3>
+                                    <p>Interactive Scroll Experience</p>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="project-card fade-up">
+                        <a href="transportation.html" style="display: block; text-decoration: none; color: inherit;">
+                            <div class="project-image">
+                                <img src="assets/images/interactive_cad_viewer.png" alt="Autonomous Urban Transit Concept" loading="lazy">
+                                <div class="project-overlay">
+                                    <h3>Autonomous Transit</h3>
+                                    <p>Urban Mobility Concept</p>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="project-card fade-up">
+                        <a href="trimmer.html" style="display: block; text-decoration: none; color: inherit;">
+                            <div class="project-image">
+                                <img src="assets/images/nothing_trimmer_thumbnail.jpg" alt="Nothing Trimmer" loading="lazy">
+                                <div class="project-overlay">
+                                    <h3>Nothing Trimmer</h3>
+                                    <p>Consumer Appliances</p>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="project-card fade-up">
+                        <a href="magictable.html" style="display: block; text-decoration: none; color: inherit;">
+                            <div class="project-image">
+                                <img src="assets/images/Magic%20table%20thumbnail.jpg" alt="Magic Table" loading="lazy">
+                                <div class="project-overlay">
+                                    <h3>Magic Table</h3>
+                                    <p>Biomimicry Furniture Design</p>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="project-card fade-up">
+                        <a href="obliviondrone.html" style="display: block; text-decoration: none; color: inherit;">
+                            <div class="project-image">
+                                <img src="assets/images/Oblivion%20folder/Olblivion%20thumbnail.jpg" alt="Oblivion Drone" loading="lazy">
+                                <div class="project-overlay">
+                                    <h3>Oblivion Drone</h3>
+                                    <p>Futuristic Combat Drone Concept</p>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="project-card fade-up">
+                        <a href="portfolio.html" style="display: block; text-decoration: none; color: inherit;">
+                            <div class="project-image">
+                                <img src="assets/images/Handgesteure%20thumbnail.png" alt="Interactive CAD Viewer" loading="lazy">
+                                <div class="project-overlay">
+                                    <h3>Interactive CAD Viewer</h3>
+                                    <p>A new way to experience CAD models</p>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                </div>
+            </div>
+
+            <!-- LIST VIEW CONTINUOUS SCROLL CONTAINER -->
+            <div id="listViewContainer" style="display: none; flex-direction: column; width: 100vw; margin-left: -50vw; left: 50%; position: relative;">
+                
+                <!-- TRIMMER TITLE -->
+                <div style="height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; border-top: 1px solid rgba(255,255,255,0.05); position: relative;">
+                    <span style="color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem;">Project 01</span>
+                    <h2 style="font-family: var(--font-heading); font-size: clamp(3rem, 6vw, 6rem); font-weight: 700; text-transform: uppercase; letter-spacing: -2px; margin: 0; color: #fff;">Nothing Trimmer</h2>
+                    <p style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-top: 1.2rem;">Consumer Appliances</p>
+                    
+                    <div class="scroll-bounce-prompt">
+                        <span style="font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase;">Scroll</span>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <polyline points="19 12 12 19 5 12"></polyline>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- TRIMMER BLOCK -->
+                <div class="scroll-sequence-block" id="block-trimmer" style="height: 400vh; position: relative;">
+                    <div class="canvas-container" style="position: sticky; top: 0; width: 100vw; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #000;">
+                        <canvas id="trimmerCanvasListView" style="max-width: 100%; max-height: 100%; position: absolute; top: 0; left: 0; width: 100%; height: 100%; transition: transform 0.1s ease-out;"></canvas>
+                        <div class="sequence-description" id="trimmerDescListView" style="position: absolute; right: 10%; top: 50%; transform: translateY(-40%); width: 35%; color: #fff; opacity: 0; pointer-events: none; transition: opacity 0.5s ease-out, transform 0.8s ease-out; font-family: 'Space Grotesk', sans-serif; z-index: 10;">
+                            <h2 style="font-size: 2.5rem; margin-bottom: 1rem; font-weight: 700;">Nothing Trimmer Concept</h2>
+                            <p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; line-height: 1.6; color: #ccc;">A minimalist hair trimmer reimagined in Nothing's signature style. The matte white cylindrical body features a transparent mid-section that exposes the internal motor with subtle LED illumination — a direct nod to Nothing's iconic see-through aesthetic. A ridged adjustment dial, flush circular power button, and precision steel T-blade complete the look, while the subtle Nothing wordmark sits quietly near the base. Functional, beautiful, and unmistakably Nothing.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TRIMMER COLLAGE SECTION -->
+                <section class="project-details" style="background: #000; padding: 8rem 5vw 12rem; color: #fff; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.05);">
+                    <style>
+                        .collage-container {
+                            display: flex;
+                            flex-wrap: wrap;
+                            justify-content: center;
+                            align-items: center;
+                            position: relative;
+                        }
+                        .collage-sketch {
+                            flex: 1 1 300px;
+                            max-width: 450px;
+                            z-index: 2;
+                            position: relative;
+                        }
+                        .collage-render {
+                            flex: 1 1 500px;
+                            max-width: 700px;
+                            z-index: 1;
+                            margin-left: -80px;
+                            margin-top: 80px;
+                            position: relative;
+                        }
+                        @media (max-width: 768px) {
+                            .collage-render {
+                                margin-left: 0;
+                                margin-top: -40px;
+                            }
+                        }
+                    </style>
+                    
+                    <div class="fade-up" style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
+                        <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: 500; letter-spacing: -1px; margin-bottom: 5rem; text-align: center;">From Sketch to Reality</h3>
+                        
+                        <div class="collage-container">
+                            <!-- Sketch (Left / Top) -->
+                            <div class="collage-sketch">
+                                <img src="assets/images/Nothing_trimmer Sketch.png" alt="Nothing Trimmer Sketches" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.9); border: 8px solid #000;">
+                                <span style="position: absolute; bottom: -35px; left: 10px; font-family: 'Space Grotesk', sans-serif; color: var(--accent-color); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;">01 / Ideation</span>
+                            </div>
+
+                            <!-- Render (Right / Bottom) -->
+                            <div class="collage-render">
+                                <img src="assets/images/Nothing_trimmer rendered.png" alt="Nothing Trimmer Rendered" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 30px 60px rgba(0,0,0,0.6);">
+                                <span style="position: absolute; top: -35px; right: 10px; font-family: 'Space Grotesk', sans-serif; color: var(--text-muted); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;">02 / Final Render</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TRANSPORTATION TITLE -->
+                <div style="height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; border-top: 1px solid rgba(255,255,255,0.05);">
+                    <span style="color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem;">Project 02</span>
+                    <h2 style="font-family: var(--font-heading); font-size: clamp(3rem, 5vw, 5rem); font-weight: 700; text-transform: uppercase; letter-spacing: -2px; margin: 0; color: #fff; text-align: center;">Autonomous Transit</h2>
+                    <p style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-top: 1.2rem;">Urban Mobility Concept</p>
+                </div>
+
+                <!-- TRANSPORTATION BLOCK -->
+                <div class="scroll-sequence-block" id="block-transportation" style="height: 300vh; position: relative;">
+                    <div class="canvas-container" style="position: sticky; top: 0; width: 100vw; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #000;">
+                        <canvas id="transportationCanvasListView" style="max-width: 100%; max-height: 100%; position: absolute; top: 0; left: 0; width: 100%; height: 100%; transition: transform 0.1s ease-out;"></canvas>
+                        <div class="sequence-description" id="transportationDescListView" style="position: absolute; right: 10%; top: 50%; transform: translateY(-40%); width: 35%; color: #fff; opacity: 0; pointer-events: none; transition: opacity 0.5s ease-out, transform 0.8s ease-out; font-family: 'Space Grotesk', sans-serif; z-index: 10;">
+                            <h2 style="font-size: 2.5rem; margin-bottom: 1rem; font-weight: 700;">Autonomous urban transit concept</h2>
+                            <p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; line-height: 1.6; color: #ccc; margin-bottom: 1rem;">This project reimagines short-distance city transportation through a compact autonomous transit pod designed for fast and efficient urban mobility. Instead of traditional seating, the interior uses standing support fasteners and hanging grips, allowing passengers to travel comfortably for short durations while carrying bags or daily essentials.</p>
+                            <p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; line-height: 1.6; color: #ccc;">The design focuses on maximizing passenger capacity, reducing congestion, and improving movement within dense city infrastructure. Its clean, minimal form language and seamless exterior create a futuristic yet approachable identity for next-generation smart transportation systems.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TRANSPORTATION COLLAGE SECTION -->
+                <section class="project-details" style="background: #000; padding: 8rem 5vw 12rem; color: #fff; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.05);">
+                    <style>
+                        .transport-collage { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2rem; max-width: 1400px; margin: 0 auto; }
+                        .tc-item { position: relative; border-radius: 8px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.6); }
+                        .tc-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+                        .tc-item:hover img { transform: scale(1.05); }
+                        .tc-caption { position: absolute; bottom: 20px; left: 20px; font-family: 'Space Grotesk', sans-serif; color: var(--accent-color); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; background: rgba(0,0,0,0.7); padding: 5px 10px; border-radius: 4px; backdrop-filter: blur(5px); }
+                        .tc-1 { grid-column: 1 / 8; grid-row: 1; border: 8px solid #0a0a0a; z-index: 2; margin-bottom: -50px; }
+                        .tc-2 { grid-column: 7 / 13; grid-row: 1 / 3; z-index: 1; margin-top: 50px; }
+                        .tc-3 { grid-column: 2 / 7; grid-row: 2 / 4; z-index: 3; margin-top: 50px; border: 8px solid #0a0a0a; }
+                        .tc-4 { grid-column: 7 / 11; grid-row: 3; z-index: 2; margin-top: -30px; margin-left: -30px; }
+                        .tc-5 { grid-column: 10 / 13; grid-row: 2; z-index: 4; border: 8px solid #000; }
+                        @media (max-width: 900px) { .transport-collage { display: flex; flex-direction: column; gap: 3rem; } .tc-item { margin: 0 !important; border: none !important; } }
+                    </style>
+                    <div class="fade-up" style="display: flex; flex-direction: column; align-items: center;">
+                        <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: 500; letter-spacing: -1px; margin-bottom: 5rem; text-align: center;">From Concept to Reality</h3>
+                        <div class="transport-collage">
+                            <div class="tc-item tc-1"><img src="assets/images/Transportaion folder/WhatsApp Image 2025-04-05 at 16.33.47_4d581b95.jpg" alt="Initial Sketch"><div class="tc-caption">01 / Ideation Sketch</div></div>
+                            <div class="tc-item tc-2"><img src="assets/images/Transportaion folder/ChatGPT Image May 17, 2026, 03_21_37 AM.png" alt="Concept Render"><div class="tc-caption">02 / Form Study</div></div>
+                            <div class="tc-item tc-3"><img src="assets/images/Transportaion folder/new.jpg" alt="Details"><div class="tc-caption">03 / Interior Details</div></div>
+                            <div class="tc-item tc-4"><img src="assets/images/Transportaion folder/untitled.4.jpg" alt="Technical Layout"><div class="tc-caption">04 / Layout Study</div></div>
+                            <div class="tc-item tc-5"><img src="assets/images/Transportaion folder/ChatGPT Image Apr 13, 2025, 03_56_27 AM.png" alt="Urban Render"><div class="tc-caption">05 / Urban Context</div></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TEAPOY TITLE -->
+                <div style="height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; border-top: 1px solid rgba(255,255,255,0.05);">
+                    <span style="color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem;">Project 03</span>
+                    <h2 style="font-family: var(--font-heading); font-size: clamp(3rem, 6vw, 6rem); font-weight: 700; text-transform: uppercase; letter-spacing: -2px; margin: 0; color: #fff;">Teapoy Design</h2>
+                    <p style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-top: 1.2rem;">Interactive Scroll Experience</p>
+                </div>
+
+                <!-- TEAPOY BLOCK -->
+                <div class="scroll-sequence-block" id="block-teapoy" style="height: 250vh; position: relative;">
+                    <div class="canvas-container" style="position: sticky; top: 0; width: 100vw; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #000;">
+                        <canvas id="teapoyCanvasListView" style="max-width: 100%; max-height: 100%; position: absolute; top: 0; left: 0; width: 100%; height: 100%; transition: transform 0.1s ease-out;"></canvas>
+                        <div class="sequence-description" id="teapoyDescListView" style="position: absolute; right: 10%; top: 50%; transform: translateY(-40%); width: 35%; color: #fff; opacity: 0; pointer-events: none; transition: opacity 0.5s ease-out, transform 0.8s ease-out; font-family: 'Space Grotesk', sans-serif; z-index: 10;">
+                            <h2 style="font-size: 2.5rem; margin-bottom: 1rem; font-weight: 700;">Teapoy Design</h2>
+                            <p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; line-height: 1.6; color: #ccc; margin-bottom: 1rem;">This teapoy design is inspired by the fluid and futuristic design language of Karim Rashid, reflecting his signature use of smooth curves, bold colours, and soft organic forms. The glossy finish and sculptural base create a modern, playful aesthetic while maintaining functional simplicity.</p>
+                            <p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; line-height: 1.6; color: #ccc;">Biomimicry is expressed through the organic leg structure, which resembles the natural flow and growth patterns found in flower petals or plant roots. Instead of using rigid geometric supports, the design adopts smooth, nature-inspired curves that provide both visual balance and structural stability. The form gives the furniture a living, dynamic appearance, blending natural inspiration with contemporary furniture design.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TEAPOY COLLAGE SECTION -->
+                <section class="project-details" style="background: #000; padding: 8rem 5vw 12rem; color: #fff; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.05);">
+                    <style>
+                        .collage-container-rev {
+                            display: flex;
+                            flex-wrap: wrap-reverse;
+                            justify-content: center;
+                            align-items: center;
+                            position: relative;
+                        }
+                        .collage-render-rev {
+                            flex: 1 1 500px;
+                            max-width: 700px;
+                            z-index: 1;
+                            position: relative;
+                        }
+                        .collage-sketch-rev {
+                            flex: 1 1 300px;
+                            max-width: 450px;
+                            z-index: 2;
+                            margin-left: -120px;
+                            margin-top: -80px;
+                            position: relative;
+                        }
+                        @media (max-width: 768px) {
+                            .collage-sketch-rev {
+                                margin-left: 0;
+                                margin-top: -40px;
+                            }
+                        }
+                    </style>
+                    
+                    <div class="fade-up" style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
+                        <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: 500; letter-spacing: -1px; margin-bottom: 5rem; text-align: center;">Organic Biomimicry</h3>
+                        
+                        <div class="collage-container-rev">
+                            <!-- Render (Left / Bottom) -->
+                            <div class="collage-render-rev">
+                                <img src="assets/images/namrtas teapoy rendered.jpg" alt="Teapoy Final Render" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 30px 60px rgba(0,0,0,0.6);">
+                                <span style="position: absolute; top: -35px; left: 10px; font-family: 'Space Grotesk', sans-serif; color: var(--text-muted); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;">02 / Final Render</span>
+                            </div>
+
+                            <!-- Sketch (Right / Top) -->
+                            <div class="collage-sketch-rev">
+                                <img src="assets/images/Namrta's Teapoy sketch.png" alt="Teapoy Sketches" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.9); border: 8px solid #000;">
+                                <span style="position: absolute; bottom: -35px; right: 10px; font-family: 'Space Grotesk', sans-serif; color: var(--accent-color); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;">01 / Ideation</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- MAGIC TABLE TITLE -->
+                <div style="height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; border-top: 1px solid rgba(255,255,255,0.05);">
+                    <span style="color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem;">Project 04</span>
+                    <h2 style="font-family: var(--font-heading); font-size: clamp(3rem, 6vw, 6rem); font-weight: 700; text-transform: uppercase; letter-spacing: -2px; margin: 0; color: #fff;">Magic Table</h2>
+                    <p style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-top: 1.2rem;">Biomimicry Furniture Design</p>
+                </div>
+
+                <!-- MAGIC TABLE BLOCK -->
+                <div class="scroll-sequence-block" id="block-magictable" style="height: 300vh; position: relative;">
+                    <div class="canvas-container" style="position: sticky; top: 0; width: 100vw; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #000;">
+                        <canvas id="magictableCanvasListView" style="max-width: 100%; max-height: 100%; position: absolute; top: 0; left: 0; width: 100%; height: 100%; transition: transform 0.1s ease-out;"></canvas>
+                        <div class="sequence-description" id="magictableDescListView" style="position: absolute; right: 10%; top: 50%; transform: translateY(-40%); width: 35%; color: #fff; opacity: 0; pointer-events: none; transition: opacity 0.5s ease-out, transform 0.8s ease-out; font-family: 'Space Grotesk', sans-serif; z-index: 10;">
+                            <h2 style="font-size: 2.5rem; margin-bottom: 1rem; font-weight: 700;">Magic table</h2>
+                            <p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; line-height: 1.6; color: #ccc; margin-bottom: 1rem;">This table design explores biomimicry through the organic form of an egg, translating its smooth curves and balanced structure into a functional furniture piece. The flowing continuous body reflects the natural strength and softness found in an eggshell, creating a form that feels stable yet visually lightweight. The open curved support beneath the tabletop enhances the sculptural appearance while maintaining structural balance and elegance.</p>
+                            <p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; line-height: 1.6; color: #ccc;">The design language is strongly inspired by Karim Rashid, incorporating his signature characteristics of fluid geometry, minimalism, and futuristic aesthetics. The seamless surfaces, soft transitions, and bold contemporary form give the table a modern emotional identity, turning it from a simple utility object into a statement piece. The vibrant finish further emphasizes the playful and expressive nature of the design while maintaining a clean and sophisticated visual appeal.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MAGIC TABLE COLLAGE SECTION -->
+                <section class="project-details" style="background: #000; padding: 8rem 5vw 12rem; color: #fff; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.05);">
+                    <style>
+                        .magic-collage { display: flex; flex-wrap: wrap; justify-content: center; gap: 4rem; max-width: 1200px; margin: 0 auto; align-items: center; }
+                        .mc-item { position: relative; border-radius: 8px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.6); flex: 1 1 400px; max-width: 600px; }
+                        .mc-item img { width: 100%; height: auto; display: block; transition: transform 0.5s ease; }
+                        .mc-item:hover img { transform: scale(1.05); }
+                        .mc-caption { position: absolute; bottom: 20px; left: 20px; font-family: 'Space Grotesk', sans-serif; color: var(--accent-color); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; background: rgba(0,0,0,0.7); padding: 5px 10px; border-radius: 4px; backdrop-filter: blur(5px); }
+                    </style>
+                    <div class="fade-up" style="display: flex; flex-direction: column; align-items: center;">
+                        <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: 500; letter-spacing: -1px; margin-bottom: 5rem; text-align: center;">Concept Derivation</h3>
+                        <div class="magic-collage">
+                            <div class="mc-item"><img src="assets/images/magic table/Screenshot 2025-11-27 101050.png" alt="Concept Inspiration"><div class="mc-caption">01 / Inspiration</div></div>
+                            <div class="mc-item" style="border: 8px solid #0a0a0a;"><img src="assets/images/magic table/ChatGPT Image May 17, 2026, 10_26_26 PM.png" alt="Derivation Sketch"><div class="mc-caption">02 / Form Exploration</div></div>
+                            <div class="mc-item" style="border: 8px solid #0a0a0a;"><img src="assets/images/magic table/Screenshot 2025-11-27 101108.png" alt="Concept Refinement"><div class="mc-caption">03 / Refinement</div></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- MAGIC TABLE STRUCTURAL ANALYSIS -->
+                <section class="project-details" style="background: #000; padding: 4rem 5vw 12rem; color: #fff; overflow: hidden;">
+                    <div class="fade-up" style="display: flex; flex-wrap: wrap; gap: 4rem; max-width: 1200px; margin: 0 auto; align-items: center;">
+                        <div style="flex: 1 1 400px;">
+                            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: 500; letter-spacing: -1px; margin-bottom: 2rem;">Structural Validation</h3>
+                            <p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; line-height: 1.6; color: #ccc;">The structural analysis of the biomimicry-inspired table demonstrates how the continuous organic form efficiently distributes load across the curved body. The stress simulation highlights that most areas of the structure experience low stress levels, shown in blue and green, while the highest stress concentration occurs at the inner curved transition where the upper and lower surfaces connect. This indicates that the flowing eggshell-inspired geometry provides overall stability and strength while maintaining a lightweight sculptural appearance. The analysis validates the balance between aesthetics and structural performance within the design.</p>
+                        </div>
+                        <div style="flex: 1 1 500px; position: relative;">
+                            <img src="assets/images/magic table/Structural Analysis.png" alt="Structural Analysis" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 30px 60px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1);">
+                            <span style="position: absolute; bottom: 20px; left: 20px; font-family: 'Space Grotesk', sans-serif; color: var(--accent-color); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; background: rgba(0,0,0,0.8); padding: 5px 10px; border-radius: 4px; backdrop-filter: blur(5px);">FEA Simulation</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- OBLIVION DRONE TITLE -->
+                <div style="height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; border-top: 1px solid rgba(255,255,255,0.05);">
+                    <span style="color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem;">Project 05</span>
+                    <h2 style="font-family: var(--font-heading); font-size: clamp(3rem, 6vw, 6rem); font-weight: 700; text-transform: uppercase; letter-spacing: -2px; margin: 0; color: #fff;">Oblivion Drone</h2>
+                    <p style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-top: 1.2rem;">Futuristic Combat Drone Concept</p>
+                </div>
+
+                <!-- OBLIVION DRONE BLOCK -->
+                <div class="scroll-sequence-block" id="block-obliviondrone" style="height: 450vh; position: relative;">
+                    <div class="canvas-container" style="position: sticky; top: 0; width: 100vw; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #000;">
+                        <canvas id="obliviondroneCanvasListView" style="max-width: 100%; max-height: 100%; position: absolute; top: 0; left: 0; width: 100%; height: 100%; transition: transform 0.1s ease-out;"></canvas>
+                        <div class="sequence-description" id="obliviondroneDescListView" style="position: absolute; right: 10%; top: 50%; transform: translateY(-40%); width: 35%; color: #fff; opacity: 0; pointer-events: none; transition: opacity 0.5s ease-out, transform 0.8s ease-out; font-family: 'Space Grotesk', sans-serif; z-index: 10;">
+                            <h2 style="font-size: 2.5rem; margin-bottom: 1rem; font-weight: 700;">Oblivion Drone</h2>
+                            <p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; line-height: 1.6; color: #ccc; margin-bottom: 1rem;">Oblivion Drone is a futuristic aerial surveillance and combat drone concept developed to strengthen my CAD modeling and rendering workflow. The project focuses on creating a clean, aerodynamic form language inspired by sci-fi robotics and autonomous defense systems. The smooth outer shell contrasts with the exposed mechanical weapon modules, giving the drone a balance between minimalism and aggression.</p>
+                            <p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; line-height: 1.6; color: #ccc;">The model was designed in CAD with attention to surface continuity, proportion, and detailing, while the final visualization was rendered in KeyShot Studio to explore realistic lighting, materials, and cinematic presentation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PORTFOLIO TITLE -->
+                <div style="height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; border-top: 1px solid rgba(255,255,255,0.05);">
+                    <span style="color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem;">Project 06</span>
+                    <h2 style="font-family: var(--font-heading); font-size: clamp(3rem, 5vw, 5.5rem); font-weight: 700; text-transform: uppercase; letter-spacing: -2px; margin: 0; color: #fff; text-align: center;">Interactive CAD Viewer</h2>
+                    <p style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-top: 1.2rem;">A New Way to Experience CAD Models</p>
+                </div>
+
+                <!-- PORTFOLIO CAD VIEWER BLOCK (IFRAME) -->
+                <div class="scroll-sequence-block" id="block-portfolio" style="height: 100vh; position: relative; width: 100vw;">
+                    <iframe src="portfolio.html" style="width: 100%; height: 100%; border: none; pointer-events: none;"></iframe>
+                </div>
+
+            </div>
+        </section>
+
+        <footer id="contact" class="footer">
+            <div class="footer-content fade-up">
+                <h2>Have an idea?</h2>
+                <a href="mailto:zidan@example.com" class="email-link hover-target">Let's talk</a>
+                
+                <div class="socials">
+                    <a href="#" class="hover-target">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                        LinkedIn
+                    </a>
+                    <a href="#" class="hover-target">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                        Instagram
+                    </a>
+                    <a href="#" class="hover-target">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        Email
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom fade-up">
+                <p>&copy; 2026 Zidan Kareem P. All rights reserved.</p>
+            </div>
+        </footer>
+    </main>
+
+    <script src="js/scripts.js"></script>
+    <script src="js/list-view.js"></script>
+</body>
+
+</html>

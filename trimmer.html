@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nothing Trimmer - Oblique.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .trimmer-nav {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 100;
+        }
+        
+        .back-link {
+            font-family: 'Space Grotesk', sans-serif;
+            text-decoration: none;
+            color: var(--text, #fff);
+            font-weight: 500;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: opacity 0.3s;
+        }
+        
+        .back-link:hover {
+            opacity: 0.7;
+        }
+
+        .scroll-container {
+            height: 700vh; /* Allow enough space for 192 frames + text reveal */
+            position: relative;
+        }
+
+        .canvas-container {
+            position: sticky;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+        }
+
+        #trimmerCanvas {
+            max-width: 100%;
+            max-height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.1s ease-out; /* Smooth follow for translation */
+        }
+
+        .trimmer-description {
+            position: absolute;
+            right: 10%;
+            top: 50%;
+            transform: translateY(-40%);
+            width: 35%;
+            color: #fff;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease-out, transform 0.8s ease-out;
+            font-family: 'Space Grotesk', sans-serif;
+            z-index: 10;
+        }
+
+        .trimmer-description h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .trimmer-description p {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #ccc;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            z-index: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.2em;
+            transition: opacity 0.8s ease;
+        }
+        
+        .scroll-indicator {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            opacity: 0.6;
+            animation: pulseFade 2s infinite ease-in-out;
+            pointer-events: none;
+        }
+        
+        @keyframes pulseFade {
+            0%, 100% { opacity: 0.3; transform: translate(-50%, 0); }
+            50% { opacity: 0.8; transform: translate(-50%, 5px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+
+    <nav class="trimmer-nav">
+        <a href="works.html?view=tile" class="back-link hover-target">← BACK TO WORK</a>
+    </nav>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        LOADING SEQUENCE <span id="loadingProgress" style="margin-left: 10px;">0%</span>
+    </div>
+    
+    <div class="scroll-indicator" id="scrollIndicator">
+        SCROLL TO EXPLORE ↓
+    </div>
+
+    <main class="scroll-container">
+        <div class="canvas-container">
+            <canvas id="trimmerCanvas"></canvas>
+            <div class="trimmer-description" id="trimmerDesc">
+                <h2>Nothing Trimmer Concept</h2>
+                <p>A minimalist hair trimmer reimagined in Nothing's signature style. The matte white cylindrical body features a transparent mid-section that exposes the internal motor with subtle LED illumination — a direct nod to Nothing's iconic see-through aesthetic. A ridged adjustment dial, flush circular power button, and precision steel T-blade complete the look, while the subtle Nothing wordmark sits quietly near the base. Functional, beautiful, and unmistakably Nothing.</p>
+            </div>
+        </div>
+    </main>
+
+    <section class="project-details" style="background: #0a0a0a; padding: 8rem 5vw 12rem; color: #fff; overflow: hidden;">
+        <style>
+            .collage-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+            }
+            .collage-sketch {
+                flex: 1 1 300px;
+                max-width: 450px;
+                z-index: 2;
+                position: relative;
+            }
+            .collage-render {
+                flex: 1 1 500px;
+                max-width: 700px;
+                z-index: 1;
+                margin-left: -80px;
+                margin-top: 80px;
+                position: relative;
+            }
+            @media (max-width: 768px) {
+                .collage-render {
+                    margin-left: 0;
+                    margin-top: -40px;
+                }
+            }
+        </style>
+        
+        <div class="fade-up" style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
+            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: 500; letter-spacing: -1px; margin-bottom: 5rem; text-align: center;">From Sketch to Reality</h3>
+            
+            <div class="collage-container">
+                <!-- Sketch (Left / Top) -->
+                <div class="collage-sketch">
+                    <img src="assets/images/Nothing_trimmer Sketch.png" alt="Nothing Trimmer Sketches" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.9); border: 8px solid #0a0a0a;">
+                    <span style="position: absolute; bottom: -35px; left: 10px; font-family: 'Space Grotesk', sans-serif; color: var(--accent-color); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;">01 / Ideation</span>
+                </div>
+
+                <!-- Render (Right / Bottom) -->
+                <div class="collage-render">
+                    <img src="assets/images/Nothing_trimmer rendered.png" alt="Nothing Trimmer Rendered" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 30px 60px rgba(0,0,0,0.6);">
+                    <span style="position: absolute; top: -35px; right: 10px; font-family: 'Space Grotesk', sans-serif; color: var(--text-muted); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;">02 / Final Render</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/scripts.js"></script>
+    <script src="js/trimmer.js"></script>
+</body>
+</html>

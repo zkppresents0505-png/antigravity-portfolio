@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic table - Oblique.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .magictable-nav {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 100;
+        }
+        
+        .back-link {
+            font-family: 'Space Grotesk', sans-serif;
+            text-decoration: none;
+            color: var(--text, #fff);
+            font-weight: 500;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: opacity 0.3s;
+        }
+        
+        .back-link:hover {
+            opacity: 0.7;
+        }
+
+        .scroll-container {
+            height: 700vh;
+            position: relative;
+        }
+
+        .canvas-container {
+            position: sticky;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+        }
+
+        #magictableCanvas {
+            max-width: 100%;
+            max-height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.1s ease-out;
+        }
+
+        .magictable-description {
+            position: absolute;
+            right: 10%;
+            top: 50%;
+            transform: translateY(-40%);
+            width: 35%;
+            color: #fff;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease-out, transform 0.8s ease-out;
+            font-family: 'Space Grotesk', sans-serif;
+            z-index: 10;
+        }
+
+        .magictable-description h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .magictable-description p {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #ccc;
+            margin-bottom: 1rem;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            z-index: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.2em;
+            transition: opacity 0.8s ease;
+        }
+        
+        .scroll-indicator {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            opacity: 0.6;
+            animation: pulseFade 2s infinite ease-in-out;
+            pointer-events: none;
+        }
+        
+        @keyframes pulseFade {
+            0%, 100% { opacity: 0.3; transform: translate(-50%, 0); }
+            50% { opacity: 0.8; transform: translate(-50%, 5px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+
+    <nav class="magictable-nav">
+        <a href="works.html?view=tile" class="back-link hover-target">← BACK TO WORK</a>
+    </nav>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        LOADING SEQUENCE <span id="loadingProgress" style="margin-left: 10px;">0%</span>
+    </div>
+    
+    <div class="scroll-indicator" id="scrollIndicator">
+        SCROLL TO EXPLORE ↓
+    </div>
+
+    <main class="scroll-container">
+        <div class="canvas-container">
+            <canvas id="magictableCanvas"></canvas>
+            <div class="magictable-description" id="magictableDesc">
+                <h2>Magic table</h2>
+                <p>This table design explores biomimicry through the organic form of an egg, translating its smooth curves and balanced structure into a functional furniture piece. The flowing continuous body reflects the natural strength and softness found in an eggshell, creating a form that feels stable yet visually lightweight. The open curved support beneath the tabletop enhances the sculptural appearance while maintaining structural balance and elegance.</p>
+                <p>The design language is strongly inspired by Karim Rashid, incorporating his signature characteristics of fluid geometry, minimalism, and futuristic aesthetics. The seamless surfaces, soft transitions, and bold contemporary form give the table a modern emotional identity, turning it from a simple utility object into a statement piece. The vibrant finish further emphasizes the playful and expressive nature of the design while maintaining a clean and sophisticated visual appeal.</p>
+            </div>
+        </div>
+    </main>
+
+    <section class="project-details" style="background: #000; padding: 8rem 5vw 12rem; color: #fff; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.05);">
+        <style>
+            .magic-collage {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 4rem;
+                max-width: 1200px;
+                margin: 0 auto;
+                align-items: center;
+            }
+            .mc-item { position: relative; border-radius: 8px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.6); flex: 1 1 400px; max-width: 600px; }
+            .mc-item img { width: 100%; height: auto; display: block; transition: transform 0.5s ease; }
+            .mc-item:hover img { transform: scale(1.05); }
+            .mc-caption {
+                position: absolute; bottom: 20px; left: 20px;
+                font-family: 'Space Grotesk', sans-serif; color: var(--accent-color); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;
+                background: rgba(0,0,0,0.7); padding: 5px 10px; border-radius: 4px; backdrop-filter: blur(5px);
+            }
+        </style>
+        
+        <div class="fade-up" style="display: flex; flex-direction: column; align-items: center;">
+            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: 500; letter-spacing: -1px; margin-bottom: 5rem; text-align: center;">Concept Derivation</h3>
+            
+            <div class="magic-collage">
+                <div class="mc-item">
+                    <img src="assets/images/magic table/Screenshot 2025-11-27 101050.png" alt="Concept Inspiration">
+                    <div class="mc-caption">01 / Inspiration</div>
+                </div>
+                <div class="mc-item" style="border: 8px solid #0a0a0a;">
+                    <img src="assets/images/magic table/ChatGPT Image May 17, 2026, 10_26_26 PM.png" alt="Derivation Sketch">
+                    <div class="mc-caption">02 / Form Exploration</div>
+                </div>
+                <div class="mc-item" style="border: 8px solid #0a0a0a;">
+                    <img src="assets/images/magic table/Screenshot 2025-11-27 101108.png" alt="Concept Refinement">
+                    <div class="mc-caption">03 / Refinement</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="project-details" style="background: #000; padding: 4rem 5vw 12rem; color: #fff; overflow: hidden;">
+        <div class="fade-up" style="display: flex; flex-wrap: wrap; gap: 4rem; max-width: 1200px; margin: 0 auto; align-items: center;">
+            <div style="flex: 1 1 400px;">
+                <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: 500; letter-spacing: -1px; margin-bottom: 2rem;">Structural Validation</h3>
+                <p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; line-height: 1.6; color: #ccc;">The structural analysis of the biomimicry-inspired table demonstrates how the continuous organic form efficiently distributes load across the curved body. The stress simulation highlights that most areas of the structure experience low stress levels, shown in blue and green, while the highest stress concentration occurs at the inner curved transition where the upper and lower surfaces connect. This indicates that the flowing eggshell-inspired geometry provides overall stability and strength while maintaining a lightweight sculptural appearance. The analysis validates the balance between aesthetics and structural performance within the design.</p>
+            </div>
+            <div style="flex: 1 1 500px; position: relative;">
+                <img src="assets/images/magic table/Structural Analysis.png" alt="Structural Analysis" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 30px 60px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1);">
+                <span style="position: absolute; bottom: 20px; left: 20px; font-family: 'Space Grotesk', sans-serif; color: var(--accent-color); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; background: rgba(0,0,0,0.8); padding: 5px 10px; border-radius: 4px; backdrop-filter: blur(5px);">FEA Simulation</span>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/scripts.js"></script>
+    <script src="js/magictable.js"></script>
+</body>
+</html>

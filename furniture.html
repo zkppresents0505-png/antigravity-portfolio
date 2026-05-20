@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furniture Design - ZKP.DESIGN</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Import model-viewer -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+    
+    <style>
+        /* Specific styles for the 3D scroll page */
+        body {
+            /* Create a long page to allow for scrolling */
+            height: 400vh;
+            margin: 0;
+            padding: 0;
+            background-color: #0d0d0d;
+            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+            color: #e8e4dc;
+        }
+
+        /* Grain overlay from portfolio style */
+        body::before {
+            content: "";
+            position: fixed; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none; z-index: 9999; opacity: 0.4;
+        }
+
+        .viewer-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none; /* Let scroll pass through */
+        }
+
+        model-viewer {
+            width: 100%;
+            height: 100%;
+            --poster-color: transparent;
+        }
+
+        .scroll-content {
+            position: relative;
+            z-index: 2;
+            pointer-events: none; /* Let scroll pass through empty areas */
+        }
+
+        .scroll-section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 10vw;
+            box-sizing: border-box;
+        }
+
+        .text-block {
+            max-width: 500px;
+            pointer-events: auto; /* Re-enable pointer events for text */
+            background: rgba(13, 13, 13, 0.6);
+            backdrop-filter: blur(12px);
+            padding: 40px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        
+        .text-block.left {
+            margin-right: auto;
+        }
+
+        .text-block.right {
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .text-block h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(32px, 4vw, 56px);
+            margin-bottom: 20px;
+            margin-top: 0;
+            color: #ffffff;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .text-block p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #a0a0a0;
+            margin-bottom: 0;
+        }
+
+        /* Back Button */
+        .back-btn {
+            position: fixed;
+            top: 40px;
+            left: 40px;
+            z-index: 100;
+            color: #d4a853; /* Accent color */
+            text-decoration: none;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            pointer-events: auto;
+            transition: opacity 0.3s;
+        }
+        
+        .back-btn:hover {
+            opacity: 0.7;
+        }
+
+        .back-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        
+        /* Fade in animations */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform;
+        }
+        
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+
+    <a href="index.html" class="back-btn">
+        <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to Portfolio
+    </a>
+
+    <div class="viewer-container">
+        <!-- 3D Model Viewer configured for scroll-driven rotation -->
+        <model-viewer 
+            id="chair-model" 
+            src="Folding%20chair.glb" 
+            alt="3D Folding Chair" 
+            camera-controls="false"
+            disable-zoom
+            disable-pan
+            disable-tap
+            camera-orbit="0deg 75deg 105%"
+            shadow-intensity="1"
+            environment-image="neutral"
+            exposure="1.2">
+        </model-viewer>
+    </div>
+
+    <div class="scroll-content">
+        <!-- Section 1 -->
+        <div class="scroll-section">
+            <div class="text-block left fade-in-section">
+                <h2>Folding Chair</h2>
+                <p>Scroll down to explore the design from every angle.</p>
+            </div>
+        </div>
+        
+        <!-- Section 2 -->
+        <div class="scroll-section">
+            <div class="text-block right fade-in-section">
+                <h2>Ergonomic Form</h2>
+                <p>Designed for comfort and space efficiency, the curved backrest provides optimal lumbar support while maintaining a minimal silhouette.</p>
+            </div>
+        </div>
+        
+        <!-- Section 3 -->
+        <div class="scroll-section">
+            <div class="text-block left fade-in-section">
+                <h2>Material Efficiency</h2>
+                <p>Constructed with lightweight, durable materials that ensure longevity while maintaining a sleek, modern profile suitable for any environment.</p>
+            </div>
+        </div>
+        
+        <!-- Section 4 -->
+        <div class="scroll-section">
+            <div class="text-block right fade-in-section">
+                <h2>Compact Storage</h2>
+                <p>The innovative folding mechanism allows for a completely flat profile, perfect for modern, space-conscious living spaces.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const modelViewer = document.getElementById('chair-model');
+            
+            // Map scroll to 3D rotation
+            modelViewer.addEventListener('load', () => {
+                window.addEventListener('scroll', () => {
+                    // Calculate scroll percentage (0 to 1)
+                    const scrollTop = window.scrollY;
+                    const docHeight = document.body.offsetHeight - window.innerHeight;
+                    const scrollPercent = scrollTop / docHeight;
+                    
+                    // Rotational parameters
+                    const startTheta = -45; // Start angle
+                    const endTheta = 315;   // End angle (360 degrees of rotation)
+                    
+                    const startPhi = 80; // Start vertical angle (looking straight on)
+                    const endPhi = 60;   // End vertical angle (looking slightly down)
+                    
+                    const currentTheta = startTheta + (endTheta - startTheta) * scrollPercent;
+                    const currentPhi = startPhi + (endPhi - startPhi) * scrollPercent;
+                    
+                    // Apply to model-viewer camera-orbit
+                    modelViewer.cameraOrbit = `${currentTheta}deg ${currentPhi}deg 105%`;
+                });
+            });
+
+            // Intersection Observer for fading text blocks
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.5
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    } else {
+                        // Optional: remove class to fade out when scrolling past
+                        entry.target.classList.remove('is-visible');
+                    }
+                });
+            }, observerOptions);
+
+            const fadeElements = document.querySelectorAll('.fade-in-section');
+            fadeElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>

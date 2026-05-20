@@ -1,0 +1,13 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Test / scratch files
+test_frames.html
+test_transport.html
+
+# Node / editor
+node_modules/
+.vscode/
+*.log

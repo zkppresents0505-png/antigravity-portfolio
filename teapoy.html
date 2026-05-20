@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teapoy Design - zkp.design</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .teapoy-nav {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 100;
+        }
+        
+        .back-link {
+            font-family: 'Space Grotesk', sans-serif;
+            text-decoration: none;
+            color: var(--text, #fff);
+            font-weight: 500;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: opacity 0.3s;
+        }
+        
+        .back-link:hover {
+            opacity: 0.7;
+        }
+
+        .scroll-container {
+            height: 500vh; /* Allow enough space for 60 frames + text reveal */
+            position: relative;
+        }
+
+        .canvas-container {
+            position: sticky;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+        }
+
+        #teapoyCanvas {
+            max-width: 100%;
+            max-height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.1s ease-out; /* Smooth follow for translation */
+        }
+
+        .teapoy-description {
+            position: absolute;
+            right: 10%;
+            top: 50%;
+            transform: translateY(-40%);
+            width: 35%;
+            color: #fff;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease-out, transform 0.8s ease-out;
+            font-family: 'Space Grotesk', sans-serif;
+            z-index: 10;
+        }
+
+        .teapoy-description h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .teapoy-description p {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #ccc;
+            margin-bottom: 1rem;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            z-index: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.2em;
+            transition: opacity 0.8s ease;
+        }
+        
+        .scroll-indicator {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            opacity: 0.6;
+            animation: pulseFade 2s infinite ease-in-out;
+            pointer-events: none;
+        }
+        
+        @keyframes pulseFade {
+            0%, 100% { opacity: 0.3; transform: translate(-50%, 0); }
+            50% { opacity: 0.8; transform: translate(-50%, 5px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+
+    <nav class="teapoy-nav">
+        <a href="works.html?view=tile" class="back-link hover-target">← BACK TO WORK</a>
+    </nav>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        LOADING SEQUENCE <span id="loadingProgress" style="margin-left: 10px;">0%</span>
+    </div>
+    
+    <div class="scroll-indicator" id="scrollIndicator">
+        SCROLL TO EXPLORE ↓
+    </div>
+
+    <main class="scroll-container">
+        <div class="canvas-container">
+            <canvas id="teapoyCanvas"></canvas>
+            <div class="teapoy-description" id="teapoyDesc">
+                <h2>Teapoy Design</h2>
+                <p>This teapoy design is inspired by the fluid and futuristic design language of Karim Rashid, reflecting his signature use of smooth curves, bold colours, and soft organic forms. The glossy finish and sculptural base create a modern, playful aesthetic while maintaining functional simplicity.</p>
+                <p>Biomimicry is expressed through the organic leg structure, which resembles the natural flow and growth patterns found in flower petals or plant roots. Instead of using rigid geometric supports, the design adopts smooth, nature-inspired curves that provide both visual balance and structural stability. The form gives the furniture a living, dynamic appearance, blending natural inspiration with contemporary furniture design.</p>
+            </div>
+        </div>
+    </main>
+
+    <section class="project-details" style="background: #000; padding: 8rem 5vw 12rem; color: #fff; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.05);">
+        <style>
+            .collage-container-rev {
+                display: flex;
+                flex-wrap: wrap-reverse;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+            }
+            .collage-render-rev {
+                flex: 1 1 500px;
+                max-width: 700px;
+                z-index: 1;
+                position: relative;
+            }
+            .collage-sketch-rev {
+                flex: 1 1 300px;
+                max-width: 450px;
+                z-index: 2;
+                margin-left: -120px;
+                margin-top: -80px;
+                position: relative;
+            }
+            @media (max-width: 768px) {
+                .collage-sketch-rev {
+                    margin-left: 0;
+                    margin-top: -40px;
+                }
+            }
+        </style>
+        
+        <div class="fade-up" style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
+            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: 500; letter-spacing: -1px; margin-bottom: 5rem; text-align: center;">Organic Biomimicry</h3>
+            
+            <div class="collage-container-rev">
+                <!-- Render (Left / Bottom) -->
+                <div class="collage-render-rev">
+                    <img src="assets/images/namrtas teapoy rendered.jpg" alt="Teapoy Final Render" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 30px 60px rgba(0,0,0,0.6);">
+                    <span style="position: absolute; top: -35px; left: 10px; font-family: 'Space Grotesk', sans-serif; color: var(--text-muted); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;">02 / Final Render</span>
+                </div>
+
+                <!-- Sketch (Right / Top) -->
+                <div class="collage-sketch-rev">
+                    <img src="assets/images/Namrta's Teapoy sketch.png" alt="Teapoy Sketches" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.9); border: 8px solid #000;">
+                    <span style="position: absolute; bottom: -35px; right: 10px; font-family: 'Space Grotesk', sans-serif; color: var(--accent-color); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;">01 / Ideation</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/scripts.js"></script>
+    <script src="js/teapoy.js"></script>
+</body>
+</html>
