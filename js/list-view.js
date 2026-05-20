@@ -177,7 +177,8 @@ document.addEventListener('DOMContentLoaded', () => {
             window.scrollTo(0, 0);
             resizeCanvases();
 
-            renderImageToCanvas(trimmerCtx, trimmerImages[0], true);
+
+
             renderImageToCanvas(transportationCtx, transportationImages[0], false);
             renderImageToCanvas(teapoyCtx, teapoyImages[0], false);
             renderImageToCanvas(magictableCtx, magictableImages[0], false);
@@ -375,7 +376,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!ticking) {
             window.requestAnimationFrame(() => {
-                handleScrollBlock(trimmerBlock, trimmerCanvas, trimmerCtx, trimmerImages, trimmerDesc, trimmerFrameCount, true);
+
+
                 handleScrollBlock(transportationBlock, transportationCanvas, transportationCtx, transportationImages, transportationDesc, transportationFrameCount, false);
                 handleScrollBlock(teapoyBlock, teapoyCanvas, teapoyCtx, teapoyImages, teapoyDesc, teapoyFrameCount, false);
                 handleScrollBlock(magictableBlock, magictableCanvas, magictableCtx, magictableImages, magictableDesc, magictableFrameCount, false);
