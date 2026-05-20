@@ -43,12 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- LIST VIEW LOGIC ---
 
-    const trimmerCanvas = document.getElementById('trimmerCanvasListView');
-    const trimmerCtx = trimmerCanvas?.getContext('2d');
-    const trimmerBlock = document.getElementById('block-trimmer');
-    const trimmerDesc = document.getElementById('trimmerDescListView');
-    const trimmerFrameCount = 192;
-    const trimmerImages = [];
 
     const transportationCanvas = document.getElementById('transportationCanvasListView');
     const transportationCtx = transportationCanvas?.getContext('2d');
@@ -84,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     // Track which animations have their first frame ready
-    const firstFrameReady = { trimmer: false, transportation: false, teapoy: false, magictable: false, obliviondrone: false };
+    const firstFrameReady = { transportation: false, teapoy: false, magictable: false, obliviondrone: false };
     let viewLaunched = false;
 
     function resizeCanvases() {
@@ -93,11 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const width = window.innerWidth * dpr;
         const height = window.innerHeight * dpr;
 
-        if (trimmerCanvas) {
-            trimmerCanvas.width = width;
-            trimmerCanvas.height = height;
-            trimmerCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        }
         if (transportationCanvas) {
             transportationCanvas.width = width;
             transportationCanvas.height = height;

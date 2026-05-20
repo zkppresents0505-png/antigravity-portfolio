@@ -187,33 +187,7 @@
             <!-- LIST VIEW CONTINUOUS SCROLL CONTAINER -->
             <div id="listViewContainer" style="display: none; flex-direction: column; width: 100vw; margin-left: -50vw; left: 50%; position: relative;">
                 
-                <!-- TRIMMER TITLE -->
-                <div style="height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; border-top: 1px solid rgba(255,255,255,0.05); position: relative;">
-                    <span style="color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem;">Project 01</span>
-                    <h2 style="font-family: var(--font-heading); font-size: clamp(3rem, 6vw, 6rem); font-weight: 700; text-transform: uppercase; letter-spacing: -2px; margin: 0; color: #fff;">Nothing Trimmer</h2>
-                    <p style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-top: 1.2rem;">Consumer Appliances</p>
-                    
-                    <div class="scroll-bounce-prompt">
-                        <span style="font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase;">Scroll</span>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                            <polyline points="19 12 12 19 5 12"></polyline>
-                        </svg>
-                    </div>
-                </div>
-
-                <!-- TRIMMER BLOCK -->
-                <div class="scroll-sequence-block" id="block-trimmer" style="height: 400vh; position: relative;">
-                    <div class="canvas-container" style="position: sticky; top: 0; width: 100vw; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #000;">
-                        <canvas id="trimmerCanvasListView" style="max-width: 100%; max-height: 100%; position: absolute; top: 0; left: 0; width: 100%; height: 100%; transition: transform 0.1s ease-out;"></canvas>
-                        <div class="sequence-description" id="trimmerDescListView" style="position: absolute; right: 10%; top: 50%; transform: translateY(-40%); width: 35%; color: #fff; opacity: 0; pointer-events: none; transition: opacity 0.5s ease-out, transform 0.8s ease-out; font-family: 'Space Grotesk', sans-serif; z-index: 10;">
-                            <h2 style="font-size: 2.5rem; margin-bottom: 1rem; font-weight: 700;">Nothing Trimmer Concept</h2>
-                            <p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; line-height: 1.6; color: #ccc;">A minimalist hair trimmer reimagined in Nothing's signature style. The matte white cylindrical body features a transparent mid-section that exposes the internal motor with subtle LED illumination — a direct nod to Nothing's iconic see-through aesthetic. A ridged adjustment dial, flush circular power button, and precision steel T-blade complete the look, while the subtle Nothing wordmark sits quietly near the base. Functional, beautiful, and unmistakably Nothing.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- TRIMMER COLLAGE SECTION -->
+                <!-- TRIMMER COLLAGE SECTION (static - no scroll animation) -->
                 <section class="project-details" style="background: #000; padding: 8rem 5vw 12rem; color: #fff; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.05);">
                     <style>
                         .collage-container {
@@ -266,7 +240,7 @@
 
                 <!-- TRANSPORTATION TITLE -->
                 <div style="height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; border-top: 1px solid rgba(255,255,255,0.05);">
-                    <span style="color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem;">Project 02</span>
+                    <span style="color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem;">Project 01</span>
                     <h2 style="font-family: var(--font-heading); font-size: clamp(3rem, 5vw, 5rem); font-weight: 700; text-transform: uppercase; letter-spacing: -2px; margin: 0; color: #fff; text-align: center;">Autonomous Transit</h2>
                     <p style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-top: 1.2rem;">Urban Mobility Concept</p>
                 </div>
@@ -312,7 +286,7 @@
 
                 <!-- TEAPOY TITLE -->
                 <div style="height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; border-top: 1px solid rgba(255,255,255,0.05);">
-                    <span style="color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem;">Project 03</span>
+                    <span style="color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem;">Project 02</span>
                     <h2 style="font-family: var(--font-heading); font-size: clamp(3rem, 6vw, 6rem); font-weight: 700; text-transform: uppercase; letter-spacing: -2px; margin: 0; color: #fff;">Teapoy Design</h2>
                     <p style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-top: 1.2rem;">Interactive Scroll Experience</p>
                 </div>
@@ -382,7 +356,7 @@
 
                 <!-- MAGIC TABLE TITLE -->
                 <div style="height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; border-top: 1px solid rgba(255,255,255,0.05);">
-                    <span style="color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem;">Project 04</span>
+                    <span style="color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem;">Project 03</span>
                     <h2 style="font-family: var(--font-heading); font-size: clamp(3rem, 6vw, 6rem); font-weight: 700; text-transform: uppercase; letter-spacing: -2px; margin: 0; color: #fff;">Magic Table</h2>
                     <p style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-top: 1.2rem;">Biomimicry Furniture Design</p>
                 </div>
@@ -434,7 +408,7 @@
 
                 <!-- OBLIVION DRONE TITLE -->
                 <div style="height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; border-top: 1px solid rgba(255,255,255,0.05);">
-                    <span style="color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem;">Project 05</span>
+                    <span style="color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem;">Project 04</span>
                     <h2 style="font-family: var(--font-heading); font-size: clamp(3rem, 6vw, 6rem); font-weight: 700; text-transform: uppercase; letter-spacing: -2px; margin: 0; color: #fff;">Oblivion Drone</h2>
                     <p style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-top: 1.2rem;">Futuristic Combat Drone Concept</p>
                 </div>
@@ -453,7 +427,7 @@
 
                 <!-- PORTFOLIO TITLE -->
                 <div style="height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; border-top: 1px solid rgba(255,255,255,0.05);">
-                    <span style="color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem;">Project 06</span>
+                    <span style="color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem;">Project 05</span>
                     <h2 style="font-family: var(--font-heading); font-size: clamp(3rem, 5vw, 5.5rem); font-weight: 700; text-transform: uppercase; letter-spacing: -2px; margin: 0; color: #fff; text-align: center;">Interactive CAD Viewer</h2>
                     <p style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-top: 1.2rem;">A New Way to Experience CAD Models</p>
                 </div>
