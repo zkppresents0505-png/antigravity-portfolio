@@ -83,8 +83,9 @@ document.addEventListener('DOMContentLoaded', () => {
         { xFrac: 0.05, yFrac: 0.05, wFrac: 0.26, hFrac: 0.65, fadeStart: 50, fadeEnd: 140 }
     ];
 
-    const totalImages = trimmerFrameCount + transportationFrameCount + teapoyFrameCount + magictableFrameCount + obliviondroneFrameCount;
-    let loadedImagesCount = 0;
+    // Track which animations have their first frame ready
+    const firstFrameReady = { trimmer: false, transportation: false, teapoy: false, magictable: false, obliviondrone: false };
+    let viewLaunched = false;
 
     function resizeCanvases() {
         if (!isListViewActive) return;
@@ -169,63 +170,24 @@ document.addEventListener('DOMContentLoaded', () => {
     function initListView() {
         loadingOverlay.style.display = 'flex';
         loadingOverlay.style.opacity = '1';
-        
-        // Preload Trimmer
-        for (let i = 1; i <= trimmerFrameCount; i++) {
-            const img = new Image();
-            img.src = `trimmer sequence/${i.toString().padStart(5, '0')}.png`;
-            img.onload = onImageLoaded;
-            trimmerImages.push(img);
-        }
+        loadingProgress.innerText = 'Loading...';
 
-        // Preload Transportation
-        for (let i = 0; i < transportationFrameCount; i++) {
-            const img = new Image();
-            img.src = `Bus animation sequence/0_${i}.jpg`;
-            img.onload = onImageLoaded;
-            transportationImages.push(img);
-        }
+        // --- PROGRESSIVE LOADING ---
+        // Load first frame of each animation first, then load the rest in background.
+        // The view launches as soon as all first-frames are ready.
 
-        // Preload Teapoy (first 80 frames only)
-        for (let i = 0; i < teapoyFrameCount; i++) {
-            const img = new Image();
-            img.src = `Teapoy sequence 2/keyshot project.10.${i + 1}.jpg`;
-            img.onload = onImageLoaded;
-            teapoyImages.push(img);
-        }
-
-        // Preload Magic Table
-        for (let i = 0; i < magictableFrameCount; i++) {
-            const img = new Image();
-            img.src = `Magic table sequence/karim rahid table sequence.12.${i + 1}.jpg`;
-            img.onload = onImageLoaded;
-            magictableImages.push(img);
-        }
-
-        // Preload Oblivion Drone
-        for (let i = 0; i < obliviondroneFrameCount; i++) {
-            const img = new Image();
-            img.src = `Oblivion drone sequence/oblivion.15.${i + 168}.jpg`;
-            img.onload = onImageLoaded;
-            obliviondroneImages.push(img);
-        }
-    }
-
-    function onImageLoaded() {
-        loadedImagesCount++;
-        loadingProgress.innerText = `${Math.floor((loadedImagesCount / totalImages) * 100)}%`;
-
-        if (loadedImagesCount === totalImages) {
+        function checkAllFirstFramesReady() {
+            if (viewLaunched) return;
+            const allReady = Object.values(firstFrameReady).every(v => v);
+            if (!allReady) return;
+            viewLaunched = true;
             isListViewLoaded = true;
-            
-            // Switch views
+
             tileViewContainer.style.display = 'none';
             listViewContainer.style.display = 'flex';
             window.scrollTo(0, 0);
-            
             resizeCanvases();
-            
-            // Draw initial frames
+
             renderImageToCanvas(trimmerCtx, trimmerImages[0], true);
             renderImageToCanvas(transportationCtx, transportationImages[0], false);
             renderImageToCanvas(teapoyCtx, teapoyImages[0], false);
@@ -233,24 +195,95 @@ document.addEventListener('DOMContentLoaded', () => {
             renderImageToCanvas(obliviondroneCtx, obliviondroneImages[0], false);
             applyOblivionMasks(obliviondroneCtx, 0);
 
+            loadingOverlay.style.opacity = '0';
             setTimeout(() => {
-                loadingOverlay.style.opacity = '0';
-                setTimeout(() => {
-                    loadingOverlay.style.display = 'none';
-                    window.dispatchEvent(new Event('scroll'));
-                    // Trigger full page bounce hint continuously until scroll
-                    const triggerBounce = () => {
-                        listViewContainer.classList.add('page-bounce-anim');
-                        setTimeout(() => {
-                            listViewContainer.classList.remove('page-bounce-anim');
-                        }, 1500);
-                    };
-                    
-                    triggerBounce(); // Initial bounce
-                    window.bounceInterval = setInterval(triggerBounce, 4000); // Repeat every 4s
-                }, 800);
-            }, 400);
+                loadingOverlay.style.display = 'none';
+                window.dispatchEvent(new Event('scroll'));
+                const triggerBounce = () => {
+                    listViewContainer.classList.add('page-bounce-anim');
+                    setTimeout(() => listViewContainer.classList.remove('page-bounce-anim'), 1500);
+                };
+                triggerBounce();
+                window.bounceInterval = setInterval(triggerBounce, 4000);
+            }, 600);
         }
+
+        function loadSequence(images, srcFn, count, key, startIndex = 0) {
+            // Load first frame immediately, rest after a small delay
+            const firstImg = new Image();
+            firstImg.src = srcFn(startIndex);
+            firstImg.onload = () => {
+                images[0] = firstImg;
+                firstFrameReady[key] = true;
+                checkAllFirstFramesReady();
+                // Load remaining frames in background
+                loadRemainingFrames(images, srcFn, count, startIndex);
+            };
+            firstImg.onerror = () => {
+                // Even on error, mark ready so we don't block forever
+                firstFrameReady[key] = true;
+                checkAllFirstFramesReady();
+            };
+        }
+
+        function loadRemainingFrames(images, srcFn, count, startIndex) {
+            // Fill array with placeholders first
+            for (let i = 1; i < count; i++) {
+                if (!images[i]) images[i] = null;
+            }
+            // Load remaining frames sequentially to avoid overwhelming the browser
+            let i = 1;
+            function loadNext() {
+                if (i >= count) return;
+                const img = new Image();
+                img.src = srcFn(startIndex + i);
+                img.onload = () => {
+                    images[i] = img;
+                    i++;
+                    // Small delay to let main thread breathe
+                    setTimeout(loadNext, 8);
+                };
+                img.onerror = () => { i++; setTimeout(loadNext, 8); };
+            }
+            setTimeout(loadNext, 100); // Start background load after brief pause
+        }
+
+        // Kick off all 5 sequences — first frames load in parallel
+        loadSequence(
+            trimmerImages,
+            i => `trimmer sequence/${(i).toString().padStart(5, '0')}.png`,
+            trimmerFrameCount,
+            'trimmer',
+            1  // trimmer is 1-indexed
+        );
+        loadSequence(
+            transportationImages,
+            i => `Bus animation sequence/0_${i}.jpg`,
+            transportationFrameCount,
+            'transportation',
+            0
+        );
+        loadSequence(
+            teapoyImages,
+            i => `Teapoy sequence 2/keyshot project.10.${i + 1}.jpg`,
+            teapoyFrameCount,
+            'teapoy',
+            0
+        );
+        loadSequence(
+            magictableImages,
+            i => `Magic table sequence/karim rahid table sequence.12.${i + 1}.jpg`,
+            magictableFrameCount,
+            'magictable',
+            0
+        );
+        loadSequence(
+            obliviondroneImages,
+            i => `Oblivion drone sequence/oblivion.15.${i + 168}.jpg`,
+            obliviondroneFrameCount,
+            'obliviondrone',
+            0
+        );
     }
 
     // Scroll Logic
@@ -291,6 +324,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    function getLoadedFrame(images, index) {
+        // Walk backwards to find nearest loaded frame if target isn't ready yet
+        let i = Math.min(index, images.length - 1);
+        while (i > 0 && !images[i]) i--;
+        return images[i] || null;
+    }
+
     function handleScrollBlock(block, canvas, ctx, images, descElement, frameCount, hideWatermark = false) {
         if (!block || !canvas || !ctx || images.length === 0) return;
 
@@ -308,7 +348,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Animate frames
             const frameProgress = progress / animationBreakPoint;
             const frameIndex = Math.min(frameCount - 1, Math.floor(frameProgress * frameCount));
-            renderImageToCanvas(ctx, images[frameIndex], hideWatermark);
+            const frame = getLoadedFrame(images, frameIndex);
+            if (frame) renderImageToCanvas(ctx, frame, hideWatermark);
 
             canvas.style.transform = 'translateX(0)';
             if (descElement) {
@@ -318,7 +359,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } else {
             // Text reveal
-            renderImageToCanvas(ctx, images[frameCount - 1], hideWatermark);
+            const lastFrame = getLoadedFrame(images, frameCount - 1);
+            if (lastFrame) renderImageToCanvas(ctx, lastFrame, hideWatermark);
             
             const revealProgress = (progress - animationBreakPoint) / (1 - animationBreakPoint);
             const canvasShift = revealProgress * -20; 
