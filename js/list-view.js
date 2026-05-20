@@ -161,12 +161,6 @@ document.addEventListener('DOMContentLoaded', () => {
         loadingOverlay.style.opacity = '1';
         loadingProgress.innerText = 'Loading...';
 
-        // Safety net: force-launch after 6s max so loading screen never gets stuck
-        const safetyTimer = setTimeout(() => {
-            Object.keys(firstFrameReady).forEach(k => { firstFrameReady[k] = true; });
-            checkAllFirstFramesReady();
-        }, 6000);
-
         // --- PROGRESSIVE LOADING ---
         // Load first frame of each animation first, then load the rest in background.
         // The view launches as soon as all first-frames are ready.
@@ -177,17 +171,18 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!allReady) return;
             viewLaunched = true;
             isListViewLoaded = true;
-            clearTimeout(safetyTimer); // cancel safety timer if images loaded in time
 
             tileViewContainer.style.display = 'none';
             listViewContainer.style.display = 'flex';
             window.scrollTo(0, 0);
             resizeCanvases();
 
-            if (transportationImages[0]) renderImageToCanvas(transportationCtx, transportationImages[0], false);
-            if (teapoyImages[0])        renderImageToCanvas(teapoyCtx, teapoyImages[0], false);
-            if (magictableImages[0])    renderImageToCanvas(magictableCtx, magictableImages[0], false);
-            if (obliviondroneImages[0]) { renderImageToCanvas(obliviondroneCtx, obliviondroneImages[0], false); applyOblivionMasks(obliviondroneCtx, 0); }
+            renderImageToCanvas(trimmerCtx, trimmerImages[0], true);
+            renderImageToCanvas(transportationCtx, transportationImages[0], false);
+            renderImageToCanvas(teapoyCtx, teapoyImages[0], false);
+            renderImageToCanvas(magictableCtx, magictableImages[0], false);
+            renderImageToCanvas(obliviondroneCtx, obliviondroneImages[0], false);
+            applyOblivionMasks(obliviondroneCtx, 0);
 
             loadingOverlay.style.opacity = '0';
             setTimeout(() => {
@@ -431,12 +426,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Default: TILE VIEW (instant, no loading screen)
-    // List view only loads when user explicitly clicks LIST VIEW button
+    // Default view: tile if ?view=tile, otherwise list view
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('view') === 'list') {
-        btnListView.click();
-    } else {
+    if (urlParams.get('view') === 'tile') {
         btnTileView.click();
+    } else {
+        btnListView.click();
     }
 });
