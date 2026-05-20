@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Total frames in the teapoy sequence (trimmed to 45 to avoid repetitive rotations)
     const frameCount = 45;
     const currentFrame = index => {
-        // Generates path like "Teapoy sequence 2/keyshot project.10.1.jpg"
-        return `Teapoy sequence 2/keyshot project.10.${index + 1}.jpg`;
+        // Generates path like "Teapoy Sequence 2/keyshot project.10.1.jpg"
+        return `Teapoy Sequence 2/keyshot project.10.${index + 1}.jpg`;
     };
 
     const images = [];

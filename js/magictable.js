@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Total frames in the magic table sequence
     const frameCount = 80;
     const currentFrame = index => {
-        // Generates path like "Magic table sequence/karim rahid table sequence.12.1.jpg"
-        return `Magic table sequence/karim rahid table sequence.12.${index + 1}.jpg`;
+        // Generates path like "Magic Table Sequence/karim rahid table sequence.12.1.jpg"
+        return `Magic Table Sequence/karim rahid table sequence.12.${index + 1}.jpg`;
     };
 
     const images = [];

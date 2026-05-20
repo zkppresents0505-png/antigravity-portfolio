@@ -265,14 +265,14 @@ document.addEventListener('DOMContentLoaded', () => {
         );
         loadSequence(
             teapoyImages,
-            i => `Teapoy sequence 2/keyshot project.10.${i + 1}.jpg`,
+            i => `Teapoy Sequence 2/keyshot project.10.${i + 1}.jpg`,
             teapoyFrameCount,
             'teapoy',
             0
         );
         loadSequence(
             magictableImages,
-            i => `Magic table sequence/karim rahid table sequence.12.${i + 1}.jpg`,
+            i => `Magic Table Sequence/karim rahid table sequence.12.${i + 1}.jpg`,
             magictableFrameCount,
             'magictable',
             0
