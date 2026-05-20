@@ -168,6 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function checkAllFirstFramesReady() {
             if (viewLaunched) return;
             const allReady = Object.values(firstFrameReady).every(v => v);
+            console.log("[ListView] firstFrameReady status:", JSON.stringify(firstFrameReady), "allReady:", allReady);
             if (!allReady) return;
             viewLaunched = true;
             isListViewLoaded = true;
@@ -199,17 +200,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function loadSequence(images, srcFn, count, key, startIndex = 0) {
+            console.log("[ListView] Starting load for sequence:", key, "at path:", srcFn(startIndex));
             // Load first frame immediately, rest after a small delay
             const firstImg = new Image();
             firstImg.src = srcFn(startIndex);
             firstImg.onload = () => {
+                console.log("[ListView] First frame loaded successfully for:", key);
                 images[0] = firstImg;
                 firstFrameReady[key] = true;
                 checkAllFirstFramesReady();
                 // Load remaining frames in background
                 loadRemainingFrames(images, srcFn, count, startIndex);
             };
-            firstImg.onerror = () => {
+            firstImg.onerror = (err) => {
+                console.warn("[ListView] Error loading first frame for:", key, "Path tried:", firstImg.src);
                 // Even on error, mark ready so we don't block forever
                 firstFrameReady[key] = true;
                 checkAllFirstFramesReady();
@@ -239,13 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Kick off all 5 sequences — first frames load in parallel
-        loadSequence(
-            trimmerImages,
-            i => `trimmer sequence/${(i).toString().padStart(5, '0')}.jpg`,
-            trimmerFrameCount,
-            'trimmer',
-            1  // trimmer is 1-indexed
-        );
+
         loadSequence(
             transportationImages,
             i => `Bus animation sequence/0_${i}.jpg`,
