@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const loadingOverlay = document.getElementById('listViewLoadingOverlay');
     const loadingProgress = document.getElementById('listViewLoadingProgress');
     
+    const scrollIndicator = document.getElementById('scrollIndicator');
+    
     let isListViewLoaded = false;
     let isListViewActive = false;
 
@@ -20,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         listViewContainer.style.display = 'none';
         tileViewContainer.style.display = 'block';
+        if (scrollIndicator) scrollIndicator.style.display = 'none';
         window.scrollTo(0, 0);
     });
 
@@ -35,6 +38,10 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             tileViewContainer.style.display = 'none';
             listViewContainer.style.display = 'flex';
+            if (scrollIndicator) {
+                scrollIndicator.style.display = 'block';
+                scrollIndicator.style.opacity = '0.6';
+            }
             window.scrollTo(0, 0);
             resizeCanvases();
             window.dispatchEvent(new Event('scroll'));
@@ -175,6 +182,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             tileViewContainer.style.display = 'none';
             listViewContainer.style.display = 'flex';
+            if (scrollIndicator) {
+                scrollIndicator.style.display = 'block';
+                scrollIndicator.style.opacity = '0.6';
+            }
             window.scrollTo(0, 0);
             resizeCanvases();
 
@@ -370,6 +381,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (window.bounceInterval) {
             clearInterval(window.bounceInterval);
             window.bounceInterval = null;
+        }
+
+        if (scrollIndicator) {
+            if (window.scrollY > 100 && scrollIndicator.style.opacity !== '0') {
+                scrollIndicator.style.transition = 'opacity 0.3s ease';
+                scrollIndicator.style.opacity = '0';
+            } else if (window.scrollY <= 100 && scrollIndicator.style.opacity === '0') {
+                scrollIndicator.style.opacity = '0.6';
+            }
         }
 
         if (!ticking) {

@@ -83,20 +83,34 @@
             pointer-events: none;
         }
 
-        .page-bounce-anim {
-            animation: pageHintBounce 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+        .scroll-indicator {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            opacity: 0.6;
+            animation: pulseFade 2s infinite ease-in-out;
+            pointer-events: none;
+            display: none; /* Hidden by default, toggled by list-view active state */
         }
 
-        @keyframes pageHintBounce {
-            0% { transform: translateY(0); }
-            40% { transform: translateY(-80px); }
-            100% { transform: translateY(0); }
+        @keyframes pulseFade {
+            0%, 100% { opacity: 0.3; transform: translate(-50%, 0); }
+            50% { opacity: 0.8; transform: translate(-50%, 5px); }
         }
     </style>
 </head>
 
 <body>
     <div class="cursor"></div>
+    <div class="scroll-indicator" id="scrollIndicator">
+        SCROLL TO EXPLORE ↓
+    </div>
 
     <div class="works-page-header fade-up">
         <a href="index.html" class="back-link hover-target">← HOME</a>
@@ -121,7 +135,7 @@
                                 <img src="assets/images/namrtas%20teapoy%20rendered.jpg" alt="Teapoy Design" loading="lazy">
                                 <div class="project-overlay">
                                     <h3>Teapoy Design</h3>
-                                    <p>Interactive Scroll Experience</p>
+                                    <p>Organic Shape Exploration</p>
                                 </div>
                             </div>
                         </a>
@@ -187,62 +201,16 @@
             <!-- LIST VIEW CONTINUOUS SCROLL CONTAINER -->
             <div id="listViewContainer" style="display: none; flex-direction: column; width: 100vw; margin-left: -50vw; left: 50%; position: relative;">
                 
-                <!-- TRIMMER COLLAGE SECTION (static - no scroll animation) -->
-                <section class="project-details" style="background: #000; padding: 8rem 5vw 12rem; color: #fff; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.05);">
-                    <style>
-                        .collage-container {
-                            display: flex;
-                            flex-wrap: wrap;
-                            justify-content: center;
-                            align-items: center;
-                            position: relative;
-                        }
-                        .collage-sketch {
-                            flex: 1 1 300px;
-                            max-width: 450px;
-                            z-index: 2;
-                            position: relative;
-                        }
-                        .collage-render {
-                            flex: 1 1 500px;
-                            max-width: 700px;
-                            z-index: 1;
-                            margin-left: -80px;
-                            margin-top: 80px;
-                            position: relative;
-                        }
-                        @media (max-width: 768px) {
-                            .collage-render {
-                                margin-left: 0;
-                                margin-top: -40px;
-                            }
-                        }
-                    </style>
-                    
-                    <div class="fade-up" style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
-                        <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: 500; letter-spacing: -1px; margin-bottom: 5rem; text-align: center;">From Sketch to Reality</h3>
-                        
-                        <div class="collage-container">
-                            <!-- Sketch (Left / Top) -->
-                            <div class="collage-sketch">
-                                <img src="assets/images/Nothing_trimmer Sketch.png" alt="Nothing Trimmer Sketches" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.9); border: 8px solid #000;">
-                                <span style="position: absolute; bottom: -35px; left: 10px; font-family: 'Space Grotesk', sans-serif; color: var(--accent-color); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;">01 / Ideation</span>
-                            </div>
-
-                            <!-- Render (Right / Bottom) -->
-                            <div class="collage-render">
-                                <img src="assets/images/Nothing_trimmer rendered.png" alt="Nothing Trimmer Rendered" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 30px 60px rgba(0,0,0,0.6);">
-                                <span style="position: absolute; top: -35px; right: 10px; font-family: 'Space Grotesk', sans-serif; color: var(--text-muted); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;">02 / Final Render</span>
-                            </div>
-                        </div>
-                    </div>
-                </section>
 
                 <!-- TRANSPORTATION TITLE -->
-                <div style="height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; border-top: 1px solid rgba(255,255,255,0.05);">
-                    <span style="color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem;">Project 01</span>
-                    <h2 style="font-family: var(--font-heading); font-size: clamp(3rem, 5vw, 5rem); font-weight: 700; text-transform: uppercase; letter-spacing: -2px; margin: 0; color: #fff; text-align: center;">Autonomous Transit</h2>
-                    <p style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-top: 1.2rem;">Urban Mobility Concept</p>
+                <div style="height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; border-top: 1px solid rgba(255,255,255,0.05); position: relative; overflow: hidden;">
+                    <!-- Fade background thumbnail (full-screen color image aligned with tile view) -->
+                    <img src="assets/images/interactive_cad_viewer.png" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.35; pointer-events: none; z-index: 1;">
+                    <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.8) 100%); z-index: 2; pointer-events: none;"></div>
+                    
+                    <span style="position: relative; z-index: 3; color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">Project 01</span>
+                    <h2 style="position: relative; z-index: 3; font-family: var(--font-heading); font-size: clamp(3rem, 5vw, 5rem); font-weight: 700; text-transform: uppercase; letter-spacing: -2px; margin: 0; color: #fff; text-align: center; text-shadow: 0 4px 16px rgba(0,0,0,0.95), 0 2px 4px rgba(0,0,0,0.9);">Autonomous Transit</h2>
+                    <p style="position: relative; z-index: 3; font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-top: 1.2rem; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">Urban Mobility Concept</p>
                 </div>
 
                 <!-- TRANSPORTATION BLOCK -->
@@ -260,19 +228,66 @@
                 <!-- TRANSPORTATION COLLAGE SECTION -->
                 <section class="project-details" style="background: #000; padding: 8rem 5vw 12rem; color: #fff; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.05);">
                     <style>
-                        .transport-collage { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2rem; max-width: 1400px; margin: 0 auto; }
-                        .tc-item { position: relative; border-radius: 8px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.6); }
-                        .tc-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-                        .tc-item:hover img { transform: scale(1.05); }
-                        .tc-caption { position: absolute; bottom: 20px; left: 20px; font-family: 'Space Grotesk', sans-serif; color: var(--accent-color); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; background: rgba(0,0,0,0.7); padding: 5px 10px; border-radius: 4px; backdrop-filter: blur(5px); }
-                        .tc-1 { grid-column: 1 / 8; grid-row: 1; border: 8px solid #0a0a0a; z-index: 2; margin-bottom: -50px; }
-                        .tc-2 { grid-column: 7 / 13; grid-row: 1 / 3; z-index: 1; margin-top: 50px; }
-                        .tc-3 { grid-column: 2 / 7; grid-row: 2 / 4; z-index: 3; margin-top: 50px; border: 8px solid #0a0a0a; }
-                        .tc-4 { grid-column: 7 / 11; grid-row: 3; z-index: 2; margin-top: -30px; margin-left: -30px; }
-                        .tc-5 { grid-column: 10 / 13; grid-row: 2; z-index: 4; border: 8px solid #000; }
-                        @media (max-width: 900px) { .transport-collage { display: flex; flex-direction: column; gap: 3rem; } .tc-item { margin: 0 !important; border: none !important; } }
+                        .transport-collage {
+                            display: grid;
+                            grid-template-columns: repeat(6, 1fr);
+                            gap: 8px;
+                            max-width: 1400px;
+                            margin: 0 auto;
+                            width: 100%;
+                        }
+                        .tc-item {
+                            position: relative;
+                            border-radius: 4px;
+                            overflow: hidden;
+                            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                            height: 420px;
+                        }
+                        .tc-item img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+                        }
+                        .tc-item:hover img {
+                            transform: scale(1.02);
+                        }
+                        .tc-caption {
+                            position: absolute;
+                            bottom: 12px;
+                            left: 12px;
+                            font-family: 'Space Grotesk', sans-serif;
+                            color: #fff;
+                            font-size: 0.75rem;
+                            letter-spacing: 1.5px;
+                            text-transform: uppercase;
+                            background: rgba(0,0,0,0.8);
+                            padding: 4px 8px;
+                            border-radius: 2px;
+                            backdrop-filter: blur(5px);
+                            z-index: 10;
+                            border: 1px solid rgba(255,255,255,0.08);
+                        }
+                        
+                        /* Clean non-overlapping grid layout */
+                        .tc-1 { grid-column: span 3; }
+                        .tc-2 { grid-column: span 3; }
+                        .tc-3 { grid-column: span 2; height: 350px; }
+                        .tc-4 { grid-column: span 2; height: 350px; }
+                        .tc-5 { grid-column: span 2; height: 350px; }
+
+                        @media (max-width: 900px) {
+                            .transport-collage {
+                                grid-template-columns: 1fr;
+                                gap: 8px;
+                            }
+                            .tc-item {
+                                grid-column: span 1 !important;
+                                height: 300px !important;
+                            }
+                        }
                     </style>
-                    <div class="fade-up" style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="fade-up" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
                         <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: 500; letter-spacing: -1px; margin-bottom: 5rem; text-align: center;">From Concept to Reality</h3>
                         <div class="transport-collage">
                             <div class="tc-item tc-1"><img src="assets/images/Transportaion folder/WhatsApp Image 2025-04-05 at 16.33.47_4d581b95.jpg" alt="Initial Sketch"><div class="tc-caption">01 / Ideation Sketch</div></div>
@@ -285,10 +300,14 @@
                 </section>
 
                 <!-- TEAPOY TITLE -->
-                <div style="height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; border-top: 1px solid rgba(255,255,255,0.05);">
-                    <span style="color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem;">Project 02</span>
-                    <h2 style="font-family: var(--font-heading); font-size: clamp(3rem, 6vw, 6rem); font-weight: 700; text-transform: uppercase; letter-spacing: -2px; margin: 0; color: #fff;">Teapoy Design</h2>
-                    <p style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-top: 1.2rem;">Interactive Scroll Experience</p>
+                <div style="height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; border-top: 1px solid rgba(255,255,255,0.05); position: relative; overflow: hidden;">
+                    <!-- Fade background thumbnail (full-screen color image) -->
+                    <img src="assets/images/namrtas teapoy rendered.jpg" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.35; pointer-events: none; z-index: 1;">
+                    <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.8) 100%); z-index: 2; pointer-events: none;"></div>
+
+                    <span style="position: relative; z-index: 3; color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">Project 02</span>
+                    <h2 style="position: relative; z-index: 3; font-family: var(--font-heading); font-size: clamp(3rem, 6vw, 6rem); font-weight: 700; text-transform: uppercase; letter-spacing: -2px; margin: 0; color: #fff; text-shadow: 0 4px 16px rgba(0,0,0,0.95), 0 2px 4px rgba(0,0,0,0.9);">Teapoy Design</h2>
+                    <p style="position: relative; z-index: 3; font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-top: 1.2rem; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">Organic Shape Exploration</p>
                 </div>
 
                 <!-- TEAPOY BLOCK -->
@@ -355,10 +374,14 @@
                 </section>
 
                 <!-- MAGIC TABLE TITLE -->
-                <div style="height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; border-top: 1px solid rgba(255,255,255,0.05);">
-                    <span style="color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem;">Project 03</span>
-                    <h2 style="font-family: var(--font-heading); font-size: clamp(3rem, 6vw, 6rem); font-weight: 700; text-transform: uppercase; letter-spacing: -2px; margin: 0; color: #fff;">Magic Table</h2>
-                    <p style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-top: 1.2rem;">Biomimicry Furniture Design</p>
+                <div style="height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; border-top: 1px solid rgba(255,255,255,0.05); position: relative; overflow: hidden;">
+                    <!-- Fade background thumbnail (full-screen color image) -->
+                    <img src="assets/images/Magic table thumbnail.jpg" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.35; pointer-events: none; z-index: 1;">
+                    <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.8) 100%); z-index: 2; pointer-events: none;"></div>
+
+                    <span style="position: relative; z-index: 3; color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">Project 03</span>
+                    <h2 style="position: relative; z-index: 3; font-family: var(--font-heading); font-size: clamp(3rem, 6vw, 6rem); font-weight: 700; text-transform: uppercase; letter-spacing: -2px; margin: 0; color: #fff; text-shadow: 0 4px 16px rgba(0,0,0,0.95), 0 2px 4px rgba(0,0,0,0.9);">Magic Table</h2>
+                    <p style="position: relative; z-index: 3; font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-top: 1.2rem; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">Biomimicry Furniture Design</p>
                 </div>
 
                 <!-- MAGIC TABLE BLOCK -->
@@ -407,10 +430,14 @@
                 </section>
 
                 <!-- OBLIVION DRONE TITLE -->
-                <div style="height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; border-top: 1px solid rgba(255,255,255,0.05);">
-                    <span style="color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem;">Project 04</span>
-                    <h2 style="font-family: var(--font-heading); font-size: clamp(3rem, 6vw, 6rem); font-weight: 700; text-transform: uppercase; letter-spacing: -2px; margin: 0; color: #fff;">Oblivion Drone</h2>
-                    <p style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-top: 1.2rem;">Futuristic Combat Drone Concept</p>
+                <div style="height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; border-top: 1px solid rgba(255,255,255,0.05); position: relative; overflow: hidden;">
+                    <!-- Fade background thumbnail (full-screen color image) -->
+                    <img src="assets/images/Oblivion folder/Olblivion thumbnail.jpg" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.35; pointer-events: none; z-index: 1;">
+                    <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.8) 100%); z-index: 2; pointer-events: none;"></div>
+
+                    <span style="position: relative; z-index: 3; color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">Project 04</span>
+                    <h2 style="position: relative; z-index: 3; font-family: var(--font-heading); font-size: clamp(3rem, 6vw, 6rem); font-weight: 700; text-transform: uppercase; letter-spacing: -2px; margin: 0; color: #fff; text-shadow: 0 4px 16px rgba(0,0,0,0.95), 0 2px 4px rgba(0,0,0,0.9);">Oblivion Drone</h2>
+                    <p style="position: relative; z-index: 3; font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-top: 1.2rem; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">Futuristic Combat Drone Concept</p>
                 </div>
 
                 <!-- OBLIVION DRONE BLOCK -->
@@ -426,10 +453,14 @@
                 </div>
 
                 <!-- PORTFOLIO TITLE -->
-                <div style="height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; border-top: 1px solid rgba(255,255,255,0.05);">
-                    <span style="color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem;">Project 05</span>
-                    <h2 style="font-family: var(--font-heading); font-size: clamp(3rem, 5vw, 5.5rem); font-weight: 700; text-transform: uppercase; letter-spacing: -2px; margin: 0; color: #fff; text-align: center;">Interactive CAD Viewer</h2>
-                    <p style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-top: 1.2rem;">A New Way to Experience CAD Models</p>
+                <div style="height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; border-top: 1px solid rgba(255,255,255,0.05); position: relative; overflow: hidden;">
+                    <!-- Fade background thumbnail (full-screen color image aligned with tile view) -->
+                    <img src="assets/images/Handgesteure thumbnail.png" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.35; pointer-events: none; z-index: 1;">
+                    <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.8) 100%); z-index: 2; pointer-events: none;"></div>
+
+                    <span style="position: relative; z-index: 3; color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">Project 05</span>
+                    <h2 style="position: relative; z-index: 3; font-family: var(--font-heading); font-size: clamp(3rem, 5vw, 5.5rem); font-weight: 700; text-transform: uppercase; letter-spacing: -2px; margin: 0; color: #fff; text-align: center; text-shadow: 0 4px 16px rgba(0,0,0,0.95), 0 2px 4px rgba(0,0,0,0.9);">Interactive CAD Viewer</h2>
+                    <p style="position: relative; z-index: 3; font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-top: 1.2rem; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">A New Way to Experience CAD Models</p>
                 </div>
 
                 <!-- PORTFOLIO CAD VIEWER BLOCK (IFRAME) -->
