@@ -97,34 +97,98 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Preload all 267 images
-    for (let i = 0; i < frameCount; i++) {
-        const img = new Image();
-        img.src = currentFrame(i);
+    // Stride loading (decimation) to reduce requests and memory.
+    // Stride 2 means we load every 2nd frame (134 total out of 267).
+    const stride = 2;
+    const targetFramesToLoad = [];
+    for (let i = 0; i < frameCount; i += stride) {
+        targetFramesToLoad.push(i);
+    }
+    // Always load the final frame for absolute visual completeness at the end of scroll
+    if (targetFramesToLoad[targetFramesToLoad.length - 1] !== frameCount - 1) {
+        targetFramesToLoad.push(frameCount - 1);
+    }
+    const totalExpectedToLoad = targetFramesToLoad.length;
+
+    // Helper to find the closest loaded frame to prevent canvas flickering
+    const findClosestFrame = (index) => {
+        if (images[index]) return images[index];
         
-        img.onload = () => {
-            loadedImages++;
-            loadingProgress.innerText = `${Math.floor((loadedImages / frameCount) * 100)}%`;
-            
-            // Draw the first frame as soon as it's ready
-            if (i === 0 || Object.keys(images).length === 1) {
-                resizeCanvas();
-                render(img, 0);
+        let left = index - 1;
+        let right = index + 1;
+        while (left >= 0 || right < frameCount) {
+            if (left >= 0 && images[left]) return images[left];
+            if (right < frameCount && images[right]) return images[right];
+            left--;
+            right++;
+        }
+        return null;
+    };
+
+    // Preload target images using a throttled, sequential queue
+    // 1. Prime the first frame immediately for instant view
+    const firstImg = new Image();
+    firstImg.src = currentFrame(0);
+    firstImg.onload = () => {
+        loadedImages++;
+        images[0] = firstImg;
+        resizeCanvas();
+        render(firstImg, 0);
+        
+        // 2. Start preloading remaining frames in the background
+        startBackgroundLoad();
+    };
+    firstImg.onerror = () => {
+        // Fallback in case of image failure
+        startBackgroundLoad();
+    };
+
+    function startBackgroundLoad() {
+        const remainingQueue = targetFramesToLoad.filter(num => num !== 0);
+        const maxConcurrent = 3;
+        let activeCount = 0;
+        let nextQueueIndex = 0;
+
+        function loadNext() {
+            if (loadingProgress) {
+                loadingProgress.innerText = `${Math.floor((loadedImages / totalExpectedToLoad) * 100)}%`;
             }
-            
-            if (loadedImages === frameCount) {
+
+            if (loadedImages >= totalExpectedToLoad) {
                 initialLoadComplete = true;
                 setTimeout(() => {
-                    loadingOverlay.style.opacity = '0';
-                    setTimeout(() => {
-                        loadingOverlay.style.display = 'none';
-                        window.dispatchEvent(new Event('scroll'));
-                    }, 800);
-                }, 400); 
+                    if (loadingOverlay) {
+                        loadingOverlay.style.opacity = '0';
+                        setTimeout(() => {
+                            loadingOverlay.style.display = 'none';
+                            window.dispatchEvent(new Event('scroll'));
+                        }, 800);
+                    }
+                }, 400);
+                return;
             }
-        };
-        // Store images 
-        images[i] = img;
+
+            while (activeCount < maxConcurrent && nextQueueIndex < remainingQueue.length) {
+                const frameNum = remainingQueue[nextQueueIndex++];
+                activeCount++;
+                
+                const img = new Image();
+                img.src = currentFrame(frameNum);
+                img.onload = () => {
+                    images[frameNum] = img;
+                    loadedImages++;
+                    activeCount--;
+                    setTimeout(loadNext, 10); // brief main-thread breathing room
+                };
+                img.onerror = () => {
+                    loadedImages++;
+                    activeCount--;
+                    setTimeout(loadNext, 10);
+                };
+            }
+        }
+
+        loadNext();
     }
     
     window.addEventListener('resize', () => {
@@ -139,10 +203,10 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', () => {
         if (!initialLoadComplete) return;
 
-        if (window.scrollY > 100 && scrollIndicator.style.opacity !== '0') {
+        if (window.scrollY > 100 && scrollIndicator && scrollIndicator.style.opacity !== '0') {
             scrollIndicator.style.transition = 'opacity 0.3s ease';
             scrollIndicator.style.opacity = '0';
-        } else if (window.scrollY <= 100 && scrollIndicator.style.opacity === '0') {
+        } else if (window.scrollY <= 100 && scrollIndicator && scrollIndicator.style.opacity === '0') {
             scrollIndicator.style.opacity = '0.6';
         }
         
@@ -160,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         frameCount - 1,
                         Math.floor(frameProgress * frameCount)
                     );
-                    render(images[frameIndex], frameIndex);
+                    render(findClosestFrame(frameIndex), frameIndex);
                     
                     canvas.style.transform = 'translateX(0)';
                     if (textDesc) {
@@ -169,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         textDesc.style.pointerEvents = 'none';
                     }
                 } else {
-                    render(images[frameCount - 1], frameCount - 1);
+                    render(findClosestFrame(frameCount - 1), frameCount - 1);
                     
                     const revealProgress = (totalScrollFraction - animationBreakPoint) / (1 - animationBreakPoint);
                     

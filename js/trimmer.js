@@ -78,35 +78,99 @@ document.addEventListener('DOMContentLoaded', () => {
         );
     };
 
-    // Preload all 192 images
-    for (let i = 1; i <= frameCount; i++) {
-        const img = new Image();
-        img.src = currentFrame(i);
+    // Stride loading (decimation) to reduce requests and memory. 
+    // Stride 2 means we load every 2nd frame (96 total out of 192).
+    const stride = 2;
+    const targetFramesToLoad = [];
+    for (let i = 1; i <= frameCount; i += stride) {
+        targetFramesToLoad.push(i);
+    }
+    // Always load the final frame for absolute visual completeness at the end of scroll
+    if (targetFramesToLoad[targetFramesToLoad.length - 1] !== frameCount) {
+        targetFramesToLoad.push(frameCount);
+    }
+    const totalExpectedToLoad = targetFramesToLoad.length;
+
+    // Helper to find the closest loaded frame to prevent canvas flickering
+    const findClosestFrame = (index) => {
+        if (images[index]) return images[index];
         
-        img.onload = () => {
-            loadedImages++;
-            loadingProgress.innerText = `${Math.floor((loadedImages / frameCount) * 100)}%`;
-            
-            // Draw the first frame as soon as it's ready
-            if (i === 1 || Object.keys(images).length === 1) {
-                resizeCanvas();
-                render(img);
+        let left = index - 1;
+        let right = index + 1;
+        while (left >= 0 || right < frameCount) {
+            if (left >= 0 && images[left]) return images[left];
+            if (right < frameCount && images[right]) return images[right];
+            left--;
+            right++;
+        }
+        return null;
+    };
+
+    // Preload target images using a throttled, sequential queue
+    // 1. Prime the first frame immediately for instant view
+    const firstImg = new Image();
+    firstImg.src = currentFrame(1);
+    firstImg.onload = () => {
+        loadedImages++;
+        images[0] = firstImg;
+        resizeCanvas();
+        render(firstImg);
+        
+        // 2. Start preloading remaining frames in the background
+        startBackgroundLoad();
+    };
+    firstImg.onerror = () => {
+        // Fallback in case of image failure
+        startBackgroundLoad();
+    };
+
+    function startBackgroundLoad() {
+        const remainingQueue = targetFramesToLoad.filter(num => num !== 1);
+        const maxConcurrent = 3;
+        let activeCount = 0;
+        let nextQueueIndex = 0;
+
+        function loadNext() {
+            if (loadingProgress) {
+                loadingProgress.innerText = `${Math.floor((loadedImages / totalExpectedToLoad) * 100)}%`;
             }
-            
-            if (loadedImages === frameCount) {
+
+            if (loadedImages >= totalExpectedToLoad) {
                 initialLoadComplete = true;
                 setTimeout(() => {
-                    loadingOverlay.style.opacity = '0';
-                    setTimeout(() => {
-                        loadingOverlay.style.display = 'none';
-                        // Re-trigger scroll event to show correct frame if user scrolled while loading
-                        window.dispatchEvent(new Event('scroll'));
-                    }, 800);
+                    if (loadingOverlay) {
+                        loadingOverlay.style.opacity = '0';
+                        setTimeout(() => {
+                            loadingOverlay.style.display = 'none';
+                            // Re-trigger scroll event to show correct frame if user scrolled while loading
+                            window.dispatchEvent(new Event('scroll'));
+                        }, 800);
+                    }
                 }, 400); // slight delay to feel smoother
+                return;
             }
-        };
-        // Store images (0-indexed array, so i-1)
-        images[i - 1] = img;
+
+            while (activeCount < maxConcurrent && nextQueueIndex < remainingQueue.length) {
+                const frameNum = remainingQueue[nextQueueIndex++];
+                activeCount++;
+                
+                const img = new Image();
+                img.src = currentFrame(frameNum);
+                img.onload = () => {
+                    images[frameNum - 1] = img;
+                    loadedImages++;
+                    activeCount--;
+                    setTimeout(loadNext, 10); // brief main-thread breathing room
+                };
+                img.onerror = () => {
+                    loadedImages++;
+                    activeCount--;
+                    setTimeout(loadNext, 10);
+                };
+            }
+        }
+
+        loadNext();
     }
     
     // Handle window resize properly
@@ -125,10 +189,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!initialLoadComplete) return;
 
         // Hide scroll indicator once user starts scrolling down
-        if (window.scrollY > 100 && scrollIndicator.style.opacity !== '0') {
+        if (window.scrollY > 100 && scrollIndicator && scrollIndicator.style.opacity !== '0') {
             scrollIndicator.style.transition = 'opacity 0.3s ease';
             scrollIndicator.style.opacity = '0';
-        } else if (window.scrollY <= 100 && scrollIndicator.style.opacity === '0') {
+        } else if (window.scrollY <= 100 && scrollIndicator && scrollIndicator.style.opacity === '0') {
             scrollIndicator.style.opacity = '0.6';
         }
         
@@ -149,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         frameCount - 1,
                         Math.floor(frameProgress * frameCount)
                     );
-                    render(images[frameIndex]);
+                    render(findClosestFrame(frameIndex));
                     
                     // Reset canvas position and hide text
                     canvas.style.transform = 'translateX(0)';
@@ -161,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     // Text Reveal phase
                     // Frame index stays at the last frame
-                    render(images[frameCount - 1]);
+                    render(findClosestFrame(frameCount - 1));
                     
                     // Map breakPoint -> 1 to 0 -> 1 for text reveal calculations
                     const revealProgress = (totalScrollFraction - animationBreakPoint) / (1 - animationBreakPoint);
