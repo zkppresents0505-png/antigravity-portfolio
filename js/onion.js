@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Total frames in the onion sequence
     const frameCount = 51;
     const currentFrame = index => {
-        // Generates path like "on-ion sequence/Onion animation.22.1.jpg"
-        return `on-ion sequence/Onion animation.22.${index}.jpg`;
+        // Generates path like "On-ion sequence/Onion animation.22.1.jpg"
+        return `On-ion sequence/Onion animation.22.${index}.jpg`;
     };
 
     const images = [];

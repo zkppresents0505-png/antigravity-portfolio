@@ -318,7 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
         );
         loadSequence(
             onionImages,
-            i => `on-ion sequence/Onion animation.22.${i + 1}.jpg`,
+            i => `On-ion sequence/Onion animation.22.${i + 1}.jpg`,
             onionFrameCount,
             'onion',
             0
