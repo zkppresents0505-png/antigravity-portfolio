@@ -402,6 +402,21 @@ document.addEventListener('DOMContentLoaded', () => {
         return null;
     }
 
+    function getLoadedFrameInfo(images, index) {
+        if (images[index]) return { frame: images[index], index: index };
+        
+        let left = index - 1;
+        let right = index + 1;
+        const len = images.length;
+        while (left >= 0 || right < len) {
+            if (left >= 0 && images[left]) return { frame: images[left], index: left };
+            if (right < len && images[right]) return { frame: images[right], index: right };
+            left--;
+            right++;
+        }
+        return { frame: null, index: 0 };
+    }
+
     function handleScrollBlock(block, canvas, ctx, images, descElement, frameCount, hideWatermark = false) {
         if (!block || !canvas || !ctx || images.length === 0) return;
 
@@ -480,17 +495,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     let progress = -rect.top / (rect.height - window.innerHeight);
                     progress = Math.max(0, Math.min(1, progress));
                     const animBreak = 0.75;
-                    let frameIdx;
                     if (progress <= animBreak) {
-                        frameIdx = Math.min(obliviondroneFrameCount - 1, Math.floor((progress / animBreak) * obliviondroneFrameCount));
-                        renderImageToCanvas(obliviondroneCtx, obliviondroneImages[frameIdx], false);
-                        applyOblivionMasks(obliviondroneCtx, frameIdx);
+                        const targetIdx = Math.min(obliviondroneFrameCount - 1, Math.floor((progress / animBreak) * obliviondroneFrameCount));
+                        const frameInfo = getLoadedFrameInfo(obliviondroneImages, targetIdx);
+                        if (frameInfo.frame) {
+                            renderImageToCanvas(obliviondroneCtx, frameInfo.frame, false);
+                            applyOblivionMasks(obliviondroneCtx, frameInfo.index);
+                        }
                         obliviondroneCanvas.style.transform = 'translateX(0)';
                         if (obliviondroneDesc) { obliviondroneDesc.style.opacity = '0'; obliviondroneDesc.style.pointerEvents = 'none'; }
                     } else {
-                        frameIdx = obliviondroneFrameCount - 1;
-                        renderImageToCanvas(obliviondroneCtx, obliviondroneImages[frameIdx], false);
-                        applyOblivionMasks(obliviondroneCtx, frameIdx);
+                        const targetIdx = obliviondroneFrameCount - 1;
+                        const frameInfo = getLoadedFrameInfo(obliviondroneImages, targetIdx);
+                        if (frameInfo.frame) {
+                            renderImageToCanvas(obliviondroneCtx, frameInfo.frame, false);
+                            applyOblivionMasks(obliviondroneCtx, frameInfo.index);
+                        }
                         const revealProgress = (progress - animBreak) / (1 - animBreak);
                         obliviondroneCanvas.style.transform = `translateX(${revealProgress * -20}vw)`;
                         if (obliviondroneDesc) { obliviondroneDesc.style.opacity = revealProgress; obliviondroneDesc.style.transform = 'translateY(-50%)'; obliviondroneDesc.style.pointerEvents = revealProgress > 0.8 ? 'auto' : 'none'; }

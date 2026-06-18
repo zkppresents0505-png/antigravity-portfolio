@@ -112,17 +112,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Helper to find the closest loaded frame to prevent canvas flickering
     const findClosestFrame = (index) => {
-        if (images[index]) return images[index];
+        if (images[index]) return { image: images[index], index: index };
         
         let left = index - 1;
         let right = index + 1;
         while (left >= 0 || right < frameCount) {
-            if (left >= 0 && images[left]) return images[left];
-            if (right < frameCount && images[right]) return images[right];
+            if (left >= 0 && images[left]) return { image: images[left], index: left };
+            if (right < frameCount && images[right]) return { image: images[right], index: right };
             left--;
             right++;
         }
-        return null;
+        return { image: null, index: 0 };
     };
 
     // Preload target images using a throttled, sequential queue
@@ -224,7 +224,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         frameCount - 1,
                         Math.floor(frameProgress * frameCount)
                     );
-                    render(findClosestFrame(frameIndex), frameIndex);
+                    const frameInfo = findClosestFrame(frameIndex);
+                    if (frameInfo.image) {
+                        render(frameInfo.image, frameInfo.index);
+                    }
                     
                     canvas.style.transform = 'translateX(0)';
                     if (textDesc) {
@@ -233,7 +236,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         textDesc.style.pointerEvents = 'none';
                     }
                 } else {
-                    render(findClosestFrame(frameCount - 1), frameCount - 1);
+                    const frameInfo = findClosestFrame(frameCount - 1);
+                    if (frameInfo.image) {
+                        render(frameInfo.image, frameInfo.index);
+                    }
                     
                     const revealProgress = (totalScrollFraction - animationBreakPoint) / (1 - animationBreakPoint);
                     
