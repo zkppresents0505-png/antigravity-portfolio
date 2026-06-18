@@ -325,11 +325,11 @@ document.addEventListener('DOMContentLoaded', () => {
         );
         loadSequence(
             obliviondroneImages,
-            i => `Oblivion drone sequence/oblivion.15.${i + 168}.jpg`,
+            i => `Oblivion drone sequence/oblivion.15.${i + 168}.webp`,
             obliviondroneFrameCount,
             'obliviondrone',
             0,
-            4
+            2
         );
         loadSequence(
             foldingchairImages,

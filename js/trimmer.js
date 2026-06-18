@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Total frames in the trimmer sequence
     const frameCount = 192;
     const currentFrame = index => {
-        // Generates path like "trimmer sequence/00001.jpg"
-        return `trimmer sequence/${index.toString().padStart(5, '0')}.jpg`;
+        // Generates path like "trimmer sequence/00001.webp"
+        return `trimmer sequence/${index.toString().padStart(5, '0')}.webp`;
     };
 
     const images = [];
@@ -79,8 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Stride loading (decimation) to reduce requests and memory. 
-    // Stride 4 means we load every 4th frame (48 total out of 192).
-    const stride = 4;
+    // Stride 2 means we load every 2nd frame (96 total out of 192).
+    const stride = 2;
     const targetFramesToLoad = [];
     for (let i = 1; i <= frameCount; i += stride) {
         targetFramesToLoad.push(i);

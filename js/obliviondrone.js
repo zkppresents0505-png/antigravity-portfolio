@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Total frames in the sequence
     const frameCount = 267;
     const currentFrame = index => {
-        // Generates path like "Oblivion drone sequence/oblivion.15.168.jpg"
-        return `Oblivion drone sequence/oblivion.15.${index + 168}.jpg`;
+        // Generates path like "Oblivion drone sequence/oblivion.15.168.webp"
+        return `Oblivion drone sequence/oblivion.15.${index + 168}.webp`;
     };
 
     const images = [];
@@ -98,8 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Stride loading (decimation) to reduce requests and memory.
-    // Stride 4 means we load every 4th frame (67 total out of 267).
-    const stride = 4;
+    // Stride 2 means we load every 2nd frame (134 total out of 267).
+    const stride = 2;
     const targetFramesToLoad = [];
     for (let i = 0; i < frameCount; i += stride) {
         targetFramesToLoad.push(i);

@@ -32,7 +32,7 @@ function startPrefetching() {
         {
             name: 'obliviondrone',
             count: 267,
-            srcFn: i => `Oblivion drone sequence/oblivion.15.${i + 168}.jpg`
+            srcFn: i => `Oblivion drone sequence/oblivion.15.${i + 168}.webp`
         }
     ];
 
