@@ -236,7 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 600);
         }
 
-        function loadSequence(images, srcFn, count, key, startIndex = 0) {
+        function loadSequence(images, srcFn, count, key, startIndex = 0, stride = 1) {
             console.log("[ListView] Starting load for sequence:", key, "at path:", srcFn(startIndex));
             // Load first frame immediately, rest after a small delay
             const firstImg = new Image();
@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 firstFrameReady[key] = true;
                 checkAllFirstFramesReady();
                 // Load remaining frames in background
-                loadRemainingFrames(images, srcFn, count, startIndex);
+                loadRemainingFrames(images, srcFn, count, startIndex, stride);
             };
             firstImg.onerror = (err) => {
                 console.warn("[ListView] Error loading first frame for:", key, "Path tried:", firstImg.src);
@@ -257,24 +257,42 @@ document.addEventListener('DOMContentLoaded', () => {
             };
         }
 
-        function loadRemainingFrames(images, srcFn, count, startIndex) {
+        function loadRemainingFrames(images, srcFn, count, startIndex, stride = 1) {
             // Fill array with placeholders first
             for (let i = 1; i < count; i++) {
-                if (!images[i]) images[i] = null;
+                if (images[i] === undefined) images[i] = null;
             }
-            // Load remaining frames sequentially to avoid overwhelming the browser
-            let i = 1;
+
+            const targetIndices = [];
+            for (let i = stride; i < count; i += stride) {
+                targetIndices.push(i);
+            }
+            if (targetIndices.length > 0 && targetIndices[targetIndices.length - 1] !== count - 1) {
+                targetIndices.push(count - 1);
+            }
+
+            if (targetIndices.length === 0) return;
+
+            const maxConcurrent = 6;
+            let activeCount = 0;
+            let nextQueueIndex = 0;
+
             function loadNext() {
-                if (i >= count) return;
-                const img = new Image();
-                img.src = srcFn(startIndex + i);
-                img.onload = () => {
-                    images[i] = img;
-                    i++;
-                    // Small delay to let main thread breathe
-                    setTimeout(loadNext, 8);
-                };
-                img.onerror = () => { i++; setTimeout(loadNext, 8); };
+                while (activeCount < maxConcurrent && nextQueueIndex < targetIndices.length) {
+                    const idx = targetIndices[nextQueueIndex++];
+                    activeCount++;
+                    const img = new Image();
+                    img.src = srcFn(startIndex + idx);
+                    img.onload = () => {
+                        images[idx] = img;
+                        activeCount--;
+                        setTimeout(loadNext, 10);
+                    };
+                    img.onerror = () => {
+                        activeCount--;
+                        setTimeout(loadNext, 10);
+                    };
+                }
             }
             setTimeout(loadNext, 100); // Start background load after brief pause
         }
@@ -286,42 +304,48 @@ document.addEventListener('DOMContentLoaded', () => {
             i => `Bus animation sequence/0_${i}.jpg`,
             transportationFrameCount,
             'transportation',
-            0
+            0,
+            1
         );
         loadSequence(
             teapoyImages,
             i => `Teapoy Sequence 2/keyshot project.10.${i + 1}.jpg`,
             teapoyFrameCount,
             'teapoy',
-            0
+            0,
+            1
         );
         loadSequence(
             magictableImages,
             i => `Magic Table Sequence/karim rahid table sequence.12.${i + 1}.jpg`,
             magictableFrameCount,
             'magictable',
-            0
+            0,
+            2
         );
         loadSequence(
             obliviondroneImages,
             i => `Oblivion drone sequence/oblivion.15.${i + 168}.jpg`,
             obliviondroneFrameCount,
             'obliviondrone',
-            0
+            0,
+            4
         );
         loadSequence(
             foldingchairImages,
             i => `folding chair Sequence/untitled.20.${i + 1}.jpg`,
             foldingchairFrameCount,
             'foldingchair',
-            0
+            0,
+            1
         );
         loadSequence(
             onionImages,
             i => `On-ion sequence/Onion animation.22.${i + 1}.jpg`,
             onionFrameCount,
             'onion',
-            0
+            0,
+            1
         );
     }
 
@@ -364,10 +388,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function getLoadedFrame(images, index) {
-        // Walk backwards to find nearest loaded frame if target isn't ready yet
-        let i = Math.min(index, images.length - 1);
-        while (i > 0 && !images[i]) i--;
-        return images[i] || null;
+        if (images[index]) return images[index];
+        
+        let left = index - 1;
+        let right = index + 1;
+        const len = images.length;
+        while (left >= 0 || right < len) {
+            if (left >= 0 && images[left]) return images[left];
+            if (right < len && images[right]) return images[right];
+            left--;
+            right++;
+        }
+        return null;
     }
 
     function handleScrollBlock(block, canvas, ctx, images, descElement, frameCount, hideWatermark = false) {

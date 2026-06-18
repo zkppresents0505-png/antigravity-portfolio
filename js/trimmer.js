@@ -79,8 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Stride loading (decimation) to reduce requests and memory. 
-    // Stride 2 means we load every 2nd frame (96 total out of 192).
-    const stride = 2;
+    // Stride 4 means we load every 4th frame (48 total out of 192).
+    const stride = 4;
     const targetFramesToLoad = [];
     for (let i = 1; i <= frameCount; i += stride) {
         targetFramesToLoad.push(i);
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function startBackgroundLoad() {
         const remainingQueue = targetFramesToLoad.filter(num => num !== 1);
-        const maxConcurrent = 3;
+        const maxConcurrent = 6;
         let activeCount = 0;
         let nextQueueIndex = 0;
 
