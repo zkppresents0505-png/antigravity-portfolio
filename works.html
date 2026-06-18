@@ -185,6 +185,28 @@
                         </a>
                     </article>
                     <article class="project-card fade-up">
+                        <a href="foldingchair.html" style="display: block; text-decoration: none; color: inherit;">
+                            <div class="project-image">
+                                <img src="assets/images/Folding%20chair%20thumbnail.jpg" alt="Portable Folding Chair" loading="lazy">
+                                <div class="project-overlay">
+                                    <h3>Portable Folding Chair</h3>
+                                    <p>Compact Wood Craftsmanship</p>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="project-card fade-up">
+                        <a href="onion.html" style="display: block; text-decoration: none; color: inherit;">
+                            <div class="project-image">
+                                <img src="on-ion%20sequence/Onion%20animation.22.1.jpg" alt="On-Ion Autonomous Machinery" loading="lazy">
+                                <div class="project-overlay">
+                                    <h3>On-Ion Autonomous Machinery</h3>
+                                    <p>Precision Autonomous Weeding</p>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="project-card fade-up">
                         <a href="portfolio.html" style="display: block; text-decoration: none; color: inherit;">
                             <div class="project-image">
                                 <img src="assets/images/Handgesteure%20thumbnail.png" alt="Interactive CAD Viewer" loading="lazy">
@@ -452,15 +474,352 @@
                     </div>
                 </div>
 
+                <!-- OBLIVION DRONE COLLAGE SECTION -->
+                <section class="project-details" style="background: #000; padding: 8rem 5vw 12rem; color: #fff; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.05);">
+                    <style>
+                        .oblivion-collage {
+                            display: grid;
+                            grid-template-columns: repeat(6, 1fr);
+                            gap: 8px;
+                            max-width: 1400px;
+                            margin: 0 auto;
+                            width: 100%;
+                        }
+                        .oc-item {
+                            position: relative;
+                            border-radius: 4px;
+                            overflow: hidden;
+                            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                            height: 380px;
+                        }
+                        .oc-item.big {
+                            height: 550px;
+                        }
+                        .oc-item img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+                        }
+                        .oc-item:hover img {
+                            transform: scale(1.02);
+                        }
+                        .oc-caption {
+                            position: absolute;
+                            bottom: 12px;
+                            left: 12px;
+                            font-family: 'Space Grotesk', sans-serif;
+                            color: #fff;
+                            font-size: 0.75rem;
+                            letter-spacing: 1.5px;
+                            text-transform: uppercase;
+                            background: rgba(0, 0, 0, 0.8);
+                            padding: 4px 8px;
+                            border-radius: 2px;
+                            backdrop-filter: blur(5px);
+                            z-index: 10;
+                            border: 1px solid rgba(255, 255, 255, 0.08);
+                        }
+                        
+                        .oc-1 { grid-column: span 6; }
+                        .oc-2 { grid-column: span 2; }
+                        .oc-3 { grid-column: span 2; }
+                        .oc-4 { grid-column: span 2; }
+
+                        @media (max-width: 900px) {
+                            .oblivion-collage {
+                                grid-template-columns: 1fr;
+                                gap: 8px;
+                            }
+                            .oc-item {
+                                grid-column: span 1 !important;
+                                height: 300px !important;
+                            }
+                            .oc-item.big {
+                                height: 400px !important;
+                            }
+                        }
+                    </style>
+                    <div class="fade-up" style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; width: 100%;">
+                        <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: 500; letter-spacing: -1px; margin-bottom: 5rem; text-align: center;">Design Process</h3>
+                        
+                        <div class="oblivion-collage">
+                            <!-- Concept Render -->
+                            <div class="oc-item oc-1 big">
+                                <img src="assets/images/Oblivion folder/Olblivion thumbnail.jpg" alt="Oblivion Drone Concept Render">
+                                <div class="oc-caption">01 / Concept Render</div>
+                            </div>
+                            <!-- CAD model -->
+                            <div class="oc-item oc-2">
+                                <img src="assets/images/Oblivion folder/Screenshot 2026-05-18 022807.png" alt="Fusion 360 CAD Model">
+                                <div class="oc-caption">02 / CAD Modelling</div>
+                            </div>
+                            <!-- Wireframe perspective -->
+                            <div class="oc-item oc-3">
+                                <img src="assets/images/Oblivion folder/Screenshot 2024-11-26 041812.png" alt="Wireframe Perspective View">
+                                <div class="oc-caption">03 / Wireframe Perspective</div>
+                            </div>
+                            <!-- Wireframe top view -->
+                            <div class="oc-item oc-4">
+                                <img src="assets/images/Oblivion folder/Screenshot 2024-11-26 041835.png" alt="Wireframe Top View">
+                                <div class="oc-caption">04 / Wireframe Top View</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PORTABLE FOLDING CHAIR TITLE -->
+                <div style="height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; border-top: 1px solid rgba(255,255,255,0.05); position: relative; overflow: hidden;">
+                    <!-- Fade background thumbnail (full-screen color image) -->
+                    <img src="assets/images/Folding%20chair%20thumbnail.jpg" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.35; pointer-events: none; z-index: 1;">
+                    <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.8) 100%); z-index: 2; pointer-events: none;"></div>
+
+                    <span style="position: relative; z-index: 3; color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">Project 05</span>
+                    <h2 style="position: relative; z-index: 3; font-family: var(--font-heading); font-size: clamp(3rem, 6vw, 6rem); font-weight: 700; text-transform: uppercase; letter-spacing: -2px; margin: 0; color: #fff; text-shadow: 0 4px 16px rgba(0,0,0,0.95), 0 2px 4px rgba(0,0,0,0.9);">Portable Folding Chair</h2>
+                    <p style="position: relative; z-index: 3; font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-top: 1.2rem; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">Compact Wood Craftsmanship</p>
+                </div>
+
+                <!-- PORTABLE FOLDING CHAIR BLOCK -->
+                <div class="scroll-sequence-block" id="block-foldingchair" style="height: 250vh; position: relative;">
+                    <div class="canvas-container" style="position: sticky; top: 0; width: 100vw; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #000;">
+                        <canvas id="foldingchairCanvasListView" style="max-width: 100%; max-height: 100%; position: absolute; top: 0; left: 0; width: 100%; height: 100%; transition: transform 0.1s ease-out;"></canvas>
+                        <div class="sequence-description" id="foldingchairDescListView" style="position: absolute; right: 10%; top: 50%; transform: translateY(-40%); width: 35%; color: #fff; opacity: 0; pointer-events: none; transition: opacity 0.5s ease-out, transform 0.8s ease-out; font-family: 'Space Grotesk', sans-serif; z-index: 10;">
+                            <h2 style="font-size: 2.5rem; margin-bottom: 1rem; font-weight: 700;">Portable Folding Chair</h2>
+                            <p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; line-height: 1.6; color: #ccc; margin-bottom: 1rem;">Portable Folding Chair is a minimalist furniture design designed for comfort, space efficiency, and durability. The curved backrest provides optimal lumbar support while maintaining a sleek, minimal silhouette.</p>
+                            <p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; line-height: 1.6; color: #ccc;">Constructed with lightweight, high-strength materials, it ensures longevity while maintaining a modern profile suitable for both indoor and outdoor environments. The innovative folding mechanism allows the chair to fold into a completely flat profile, making it perfect for modern, space-conscious living spaces and effortless portability.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PORTABLE FOLDING CHAIR COLLAGE SECTION -->
+                <section class="project-details" style="background: #000; padding: 8rem 5vw 12rem; color: #fff; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.05);">
+                    <style>
+                        .chair-collage {
+                            display: grid;
+                            grid-template-columns: repeat(6, 1fr);
+                            gap: 8px;
+                            max-width: 1400px;
+                            margin: 0 auto;
+                            width: 100%;
+                        }
+                        .cc-item {
+                            position: relative;
+                            border-radius: 4px;
+                            overflow: hidden;
+                            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                            height: 380px;
+                        }
+                        .cc-item.big {
+                            height: 550px;
+                        }
+                        .cc-item img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+                        }
+                        .cc-item:hover img {
+                            transform: scale(1.02);
+                        }
+                        .cc-caption {
+                            position: absolute;
+                            bottom: 12px;
+                            left: 12px;
+                            font-family: 'Space Grotesk', sans-serif;
+                            color: #fff;
+                            font-size: 0.75rem;
+                            letter-spacing: 1.5px;
+                            text-transform: uppercase;
+                            background: rgba(0,0,0,0.8);
+                            padding: 4px 8px;
+                            border-radius: 2px;
+                            backdrop-filter: blur(5px);
+                            z-index: 10;
+                            border: 1px solid rgba(255,255,255,0.08);
+                        }
+                        
+                        .cc-1 { grid-column: span 6; }
+                        .cc-2 { grid-column: span 2; }
+                        .cc-3 { grid-column: span 2; }
+                        .cc-4 { grid-column: span 2; }
+
+                        @media (max-width: 900px) {
+                            .chair-collage {
+                                grid-template-columns: 1fr;
+                                gap: 8px;
+                            }
+                            .cc-item {
+                                grid-column: span 1 !important;
+                                height: 300px !important;
+                            }
+                            .cc-item.big {
+                                height: 400px !important;
+                            }
+                        }
+                    </style>
+                    <div class="fade-up" style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; width: 100%;">
+                        <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: 500; letter-spacing: -1px; margin-bottom: 5rem; text-align: center;">Prototyping</h3>
+                        
+                        <div class="chair-collage">
+                            <div class="cc-item cc-1 big">
+                                <img src="assets/images/Folding%20folder/Group%20photo.jpeg" alt="Group Photo">
+                                <div class="cc-caption">01 / Design Team & Prototyping</div>
+                            </div>
+                            <div class="cc-item cc-2">
+                                <img src="assets/images/Folding%20folder/WhatsApp%20Image%202026-05-19%20at%205.34.03%20PM.jpeg" alt="Prototyping Phase 1">
+                                <div class="cc-caption">02 / Frame Assembly</div>
+                            </div>
+                            <div class="cc-item cc-3">
+                                <img src="assets/images/Folding%20folder/WhatsApp%20Image%202026-05-19%20at%205.34.15%20PM.jpeg" alt="Prototyping Phase 2">
+                                <div class="cc-caption">03 / Joint Mechanism</div>
+                            </div>
+                            <div class="cc-item cc-4">
+                                <img src="assets/images/Folding%20folder/WhatsApp%20Image%202026-05-19%20at%205.34.15%20PM%20(1).jpeg" alt="Prototyping Phase 3">
+                                <div class="cc-caption">04 / Functional Testing</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ON-ION TITLE -->
+                <div style="height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; border-top: 1px solid rgba(255,255,255,0.05); position: relative; overflow: hidden;">
+                    <!-- Fade background thumbnail (full-screen color image) -->
+                    <img src="on-ion%20sequence/Onion%20animation.22.1.jpg" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.35; pointer-events: none; z-index: 1;">
+                    <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.8) 100%); z-index: 2; pointer-events: none;"></div>
+
+                    <span style="position: relative; z-index: 3; color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">Project 06</span>
+                    <h2 style="position: relative; z-index: 3; font-family: var(--font-heading); font-size: clamp(3rem, 6vw, 6rem); font-weight: 700; text-transform: uppercase; letter-spacing: -2px; margin: 0; color: #fff; text-shadow: 0 4px 16px rgba(0,0,0,0.95), 0 2px 4px rgba(0,0,0,0.9);">On-Ion weeding machine</h2>
+                    <p style="position: relative; z-index: 3; font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-top: 1.2rem; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">Autonomous Onion row-following machinery</p>
+                </div>
+
+                <!-- ON-ION BLOCK -->
+                <div class="scroll-sequence-block" id="block-onion" style="height: 250vh; position: relative;">
+                    <div class="canvas-container" style="position: sticky; top: 0; width: 100vw; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #000;">
+                        <canvas id="onionCanvasListView" style="max-width: 100%; max-height: 100%; position: absolute; top: 0; left: 0; width: 100%; height: 100%; transition: transform 0.1s ease-out;"></canvas>
+                        <div class="sequence-description" id="onionDescListView" style="position: absolute; right: 10%; top: 50%; transform: translateY(-40%); width: 35%; color: #fff; opacity: 0; pointer-events: none; transition: opacity 0.5s ease-out, transform 0.8s ease-out; font-family: 'Space Grotesk', sans-serif; z-index: 10;">
+                            <h2 style="font-size: 2.5rem; margin-bottom: 1rem; font-weight: 700;">On-Ion weeding machine</h2>
+                            <p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; line-height: 1.6; color: #ccc; margin-bottom: 1rem;">On-ion is an autonomous precision weeding machine specifically designed for onion farming, addressing one of the most labor-intensive and recurring challenges in agriculture—weed removal between closely spaced crop rows. Traditional weeding methods are time-consuming, costly, and often require extensive manual labor, while existing mechanized solutions struggle to operate effectively within the narrow spacing of onion plantations.</p>
+                            <p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; line-height: 1.6; color: #ccc;">Our team developed On-ion as an intelligent field robot capable of navigating onion rows autonomously and performing targeted weed removal with minimal crop disturbance. The system combines autonomous mobility, precision guidance, and mechanical weeding tools to improve efficiency while reducing dependence on manual labor and chemical herbicides.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ON-ION COLLAGE SECTION -->
+                <section class="project-details" style="background: #000; padding: 8rem 5vw 12rem; color: #fff; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.05);">
+                    <style>
+                        .onion-collage {
+                            display: grid;
+                            grid-template-columns: repeat(6, 1fr);
+                            gap: 8px;
+                            max-width: 1400px;
+                            margin: 0 auto;
+                            width: 100%;
+                        }
+                        .oc-item {
+                            position: relative;
+                            border-radius: 4px;
+                            overflow: hidden;
+                            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                            height: 380px;
+                        }
+                        .oc-item.architecture {
+                            grid-column: span 6;
+                            height: auto;
+                            box-shadow: none;
+                        }
+                        .oc-item.architecture img {
+                            width: 100%;
+                            height: auto;
+                            object-fit: contain;
+                        }
+                        .oc-item.big {
+                            height: 480px;
+                        }
+                        .oc-item img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+                        }
+                        .oc-item:hover img {
+                            transform: scale(1.02);
+                        }
+                        .oc-caption {
+                            position: absolute;
+                            bottom: 12px;
+                            left: 12px;
+                            font-family: 'Space Grotesk', sans-serif;
+                            color: #fff;
+                            font-size: 0.75rem;
+                            letter-spacing: 1.5px;
+                            text-transform: uppercase;
+                            background: rgba(0,0,0,0.8);
+                            padding: 4px 8px;
+                            border-radius: 2px;
+                            backdrop-filter: blur(5px);
+                            z-index: 10;
+                            border: 1px solid rgba(255,255,255,0.08);
+                        }
+                        
+                        .oc-1 { grid-column: span 3; }
+                        .oc-2 { grid-column: span 3; }
+                        .oc-3 { grid-column: span 3; }
+                        .oc-4 { grid-column: span 3; }
+
+                        @media (max-width: 900px) {
+                            .onion-collage {
+                                grid-template-columns: 1fr;
+                                gap: 8px;
+                            }
+                            .oc-item {
+                                grid-column: span 1 !important;
+                                height: 300px !important;
+                            }
+                            .oc-item.architecture {
+                                height: auto !important;
+                            }
+                            .oc-item.big {
+                                height: 380px !important;
+                            }
+                        }
+                    </style>
+                    <div class="fade-up" style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; width: 100%;">
+                        <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: 500; letter-spacing: -1px; margin-bottom: 5rem; text-align: center;">Development Procedure</h3>
+                        
+                        <div class="onion-collage">
+                            <div class="oc-item architecture">
+                                <img src="assets/images/On-ion%20folder/Working%20arcitecture.png" alt="Working Architecture">
+                                <div class="oc-caption">01 / Working Architecture</div>
+                            </div>
+                            <div class="oc-item oc-1 big">
+                                <img src="assets/images/On-ion%20folder/award.jpeg" alt="Awards and Recognition">
+                                <div class="oc-caption">02 / Design Award & Team</div>
+                            </div>
+                            <div class="oc-item oc-2 big">
+                                <img src="assets/images/On-ion%20folder/WhatsApp%20Image%202026-06-12%20at%2011.18.23%20PM.jpeg" alt="Final Machine Concept">
+                                <div class="oc-caption">03 / Final Machine Concept</div>
+                            </div>
+                            <div class="oc-item oc-3">
+                                <img src="assets/images/On-ion%20folder/Screenshot%202026-04-10%20021716.png" alt="Weeding mechanism close-up">
+                                <div class="oc-caption">04 / Weeding Mechanism</div>
+                            </div>
+                            <div class="oc-item oc-4">
+                                <img src="assets/images/On-ion%20folder/WhatsApp%20Image%202025-10-06%20at%2015.39.08_5a907413.jpg" alt="Field prototyping close-up">
+                                <div class="oc-caption">05 / Field Testing</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- PORTFOLIO TITLE -->
                 <div style="height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; border-top: 1px solid rgba(255,255,255,0.05); position: relative; overflow: hidden;">
                     <!-- Fade background thumbnail (full-screen color image aligned with tile view) -->
                     <img src="assets/images/Handgesteure thumbnail.png" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.35; pointer-events: none; z-index: 1;">
                     <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.8) 100%); z-index: 2; pointer-events: none;"></div>
 
-                    <span style="position: relative; z-index: 3; color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">Project 05</span>
+                    <span style="position: relative; z-index: 3; color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">Project 07</span>
                     <h2 style="position: relative; z-index: 3; font-family: var(--font-heading); font-size: clamp(3rem, 5vw, 5.5rem); font-weight: 700; text-transform: uppercase; letter-spacing: -2px; margin: 0; color: #fff; text-align: center; text-shadow: 0 4px 16px rgba(0,0,0,0.95), 0 2px 4px rgba(0,0,0,0.9);">Interactive CAD Viewer</h2>
-                    <p style="position: relative; z-index: 3; font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-top: 1.2rem; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">A New Way to Experience CAD Models</p>
+                    <p style="position: relative; z-index: 3; font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-top: 1.2rem; text-shadow: 0 2px 8px rgba(0,0,0,0.95);">A New Way to Experience CAD Models</p>
                 </div>
 
                 <!-- PORTFOLIO CAD VIEWER BLOCK (IFRAME) -->

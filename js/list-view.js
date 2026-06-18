@@ -84,8 +84,22 @@ document.addEventListener('DOMContentLoaded', () => {
         { xFrac: 0.05, yFrac: 0.05, wFrac: 0.26, hFrac: 0.65, fadeStart: 50, fadeEnd: 140 }
     ];
 
+    const foldingchairCanvas = document.getElementById('foldingchairCanvasListView');
+    const foldingchairCtx = foldingchairCanvas?.getContext('2d');
+    const foldingchairBlock = document.getElementById('block-foldingchair');
+    const foldingchairDesc = document.getElementById('foldingchairDescListView');
+    const foldingchairFrameCount = 61;
+    const foldingchairImages = [];
+
+    const onionCanvas = document.getElementById('onionCanvasListView');
+    const onionCtx = onionCanvas?.getContext('2d');
+    const onionBlock = document.getElementById('block-onion');
+    const onionDesc = document.getElementById('onionDescListView');
+    const onionFrameCount = 51;
+    const onionImages = [];
+
     // Track which animations have their first frame ready
-    const firstFrameReady = { transportation: false, teapoy: false, magictable: false, obliviondrone: false };
+    const firstFrameReady = { transportation: false, teapoy: false, magictable: false, obliviondrone: false, foldingchair: false, onion: false };
     let viewLaunched = false;
 
     function resizeCanvases() {
@@ -113,6 +127,16 @@ document.addEventListener('DOMContentLoaded', () => {
             obliviondroneCanvas.width = width;
             obliviondroneCanvas.height = height;
             obliviondroneCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+        if (foldingchairCanvas) {
+            foldingchairCanvas.width = width;
+            foldingchairCanvas.height = height;
+            foldingchairCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+        if (onionCanvas) {
+            onionCanvas.width = width;
+            onionCanvas.height = height;
+            onionCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
         }
     }
 
@@ -196,6 +220,8 @@ document.addEventListener('DOMContentLoaded', () => {
             renderImageToCanvas(magictableCtx, magictableImages[0], false);
             renderImageToCanvas(obliviondroneCtx, obliviondroneImages[0], false);
             applyOblivionMasks(obliviondroneCtx, 0);
+            renderImageToCanvas(foldingchairCtx, foldingchairImages[0], false);
+            renderImageToCanvas(onionCtx, onionImages[0], false);
 
             loadingOverlay.style.opacity = '0';
             setTimeout(() => {
@@ -281,6 +307,20 @@ document.addEventListener('DOMContentLoaded', () => {
             i => `Oblivion drone sequence/oblivion.15.${i + 168}.jpg`,
             obliviondroneFrameCount,
             'obliviondrone',
+            0
+        );
+        loadSequence(
+            foldingchairImages,
+            i => `folding chair Sequence/untitled.20.${i + 1}.jpg`,
+            foldingchairFrameCount,
+            'foldingchair',
+            0
+        );
+        loadSequence(
+            onionImages,
+            i => `on-ion sequence/Onion animation.22.${i + 1}.jpg`,
+            onionFrameCount,
+            'onion',
             0
         );
     }
@@ -399,6 +439,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 handleScrollBlock(transportationBlock, transportationCanvas, transportationCtx, transportationImages, transportationDesc, transportationFrameCount, false);
                 handleScrollBlock(teapoyBlock, teapoyCanvas, teapoyCtx, teapoyImages, teapoyDesc, teapoyFrameCount, false);
                 handleScrollBlock(magictableBlock, magictableCanvas, magictableCtx, magictableImages, magictableDesc, magictableFrameCount, false);
+                handleScrollBlock(foldingchairBlock, foldingchairCanvas, foldingchairCtx, foldingchairImages, foldingchairDesc, foldingchairFrameCount, false);
+                handleScrollBlock(onionBlock, onionCanvas, onionCtx, onionImages, onionDesc, onionFrameCount, false);
 
                 // Oblivion Drone with cinematic mask
                 if (obliviondroneBlock && obliviondroneCanvas && obliviondroneCtx && obliviondroneImages.length > 0) {

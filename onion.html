@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oblivion Drone - Oblique.</title>
+    <title>On-Ion weeding machine - ZKP.DESIGN</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@300;500;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
     <style>
         body {
@@ -18,14 +15,14 @@
             margin: 0;
             padding: 0;
         }
-
-        .obliviondrone-nav {
+        
+        .onion-nav {
             position: fixed;
             top: 2rem;
             left: 2rem;
             z-index: 100;
         }
-
+        
         .back-link {
             font-family: 'Space Grotesk', sans-serif;
             text-decoration: none;
@@ -39,13 +36,13 @@
             gap: 0.5rem;
             transition: opacity 0.3s;
         }
-
+        
         .back-link:hover {
             opacity: 0.7;
         }
 
         .scroll-container {
-            height: 1000vh;
+            height: 500vh; /* Allow enough space for 51 frames + text reveal */
             position: relative;
         }
 
@@ -61,7 +58,7 @@
             background: #000;
         }
 
-        #obliviondroneCanvas {
+        #onionCanvas {
             max-width: 100%;
             max-height: 100%;
             position: absolute;
@@ -69,10 +66,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            transition: transform 0.1s ease-out;
+            transition: transform 0.1s ease-out; /* Smooth follow for translation */
         }
 
-        .obliviondrone-description {
+        .onion-description {
             position: absolute;
             right: 10%;
             top: 50%;
@@ -86,15 +83,15 @@
             z-index: 10;
         }
 
-        .obliviondrone-description h2 {
+        .onion-description h2 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
             font-weight: 700;
         }
 
-        .obliviondrone-description p {
+        .onion-description p {
             font-family: 'Inter', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             line-height: 1.6;
             color: #ccc;
             margin-bottom: 1rem;
@@ -117,7 +114,7 @@
             letter-spacing: 0.2em;
             transition: opacity 0.8s ease;
         }
-
+        
         .scroll-indicator {
             position: fixed;
             bottom: 2rem;
@@ -132,61 +129,51 @@
             animation: pulseFade 2s infinite ease-in-out;
             pointer-events: none;
         }
-
+        
         @keyframes pulseFade {
-
-            0%,
-            100% {
-                opacity: 0.3;
-                transform: translate(-50%, 0);
-            }
-
-            50% {
-                opacity: 0.8;
-                transform: translate(-50%, 5px);
-            }
+            0%, 100% { opacity: 0.3; transform: translate(-50%, 0); }
+            50% { opacity: 0.8; transform: translate(-50%, 5px); }
         }
     </style>
 </head>
-
 <body>
     <div class="cursor"></div>
 
-    <nav class="obliviondrone-nav">
+    <nav class="onion-nav">
         <a href="works.html?view=tile" class="back-link hover-target">← BACK TO WORK</a>
     </nav>
 
     <div class="loading-overlay" id="loadingOverlay">
         LOADING SEQUENCE <span id="loadingProgress" style="margin-left: 10px;">0%</span>
     </div>
-
+    
     <div class="scroll-indicator" id="scrollIndicator">
         SCROLL TO EXPLORE ↓
     </div>
 
     <main class="scroll-container">
         <div class="canvas-container">
-            <canvas id="obliviondroneCanvas"></canvas>
-            <div class="obliviondrone-description" id="obliviondroneDesc">
-                <h2>Oblivion Drone</h2>
-                <p>Oblivion Drone is a futuristic aerial surveillance and combat drone concept developed to strengthen
-                    my CAD modeling and rendering workflow. The project focuses on creating a clean, aerodynamic form
-                    language inspired by sci-fi robotics and autonomous defense systems. The smooth outer shell
-                    contrasts with the exposed mechanical weapon modules, giving the drone a balance between minimalism
-                    and aggression.</p>
-                <p>The model was designed in CAD with attention to surface continuity, proportion, and detailing, while
-                    the final visualization was rendered in KeyShot Studio to explore realistic lighting, materials, and
-                    cinematic presentation. Through this project, I experimented with hard-surface modeling techniques,
-                    form development, and visual storytelling to create a believable next-generation autonomous drone
-                    concept.</p>
+            <canvas id="onionCanvas"></canvas>
+            <div class="onion-description" id="onionDesc">
+                <h2>On-Ion weeding machine</h2>
+                <p>On-ion is an autonomous precision weeding machine specifically designed for onion farming, addressing one of the most labor-intensive and recurring challenges in agriculture—weed removal between closely spaced crop rows. Traditional weeding methods are time-consuming, costly, and often require extensive manual labor, while existing mechanized solutions struggle to operate effectively within the narrow spacing of onion plantations.</p>
+                <p>Our team developed On-ion as an intelligent field robot capable of navigating onion rows autonomously and performing targeted weed removal with minimal crop disturbance. The system combines autonomous mobility, precision guidance, and mechanical weeding tools to improve efficiency while reducing dependence on manual labor and chemical herbicides.</p>
+                <p><strong>Key Features:</strong></p>
+                <ul style="font-family: 'Inter', sans-serif; font-size: 1rem; line-height: 1.6; color: #ccc; margin-left: 20px; margin-bottom: 1rem; list-style-type: square;">
+                    <li>Autonomous row-following navigation for onion fields.</li>
+                    <li>Precision mechanical weeding between crop rows.</li>
+                    <li>Compact form factor designed for narrow agricultural pathways.</li>
+                    <li>Reduced labor requirements and operational costs.</li>
+                    <li>Environmentally friendly alternative to excessive herbicide usage.</li>
+                    <li>Modular architecture allowing future integration of AI-based crop and weed detection systems.</li>
+                </ul>
             </div>
         </div>
     </main>
 
-    <section class="project-details"
-        style="background: #000; padding: 8rem 5vw 12rem; color: #fff; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.05);">
+    <section class="project-details" style="background: #000; padding: 8rem 5vw 12rem; color: #fff; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.05);">
         <style>
-            .oblivion-collage {
+            .onion-collage {
                 display: grid;
                 grid-template-columns: repeat(6, 1fr);
                 gap: 8px;
@@ -194,30 +181,35 @@
                 margin: 0 auto;
                 width: 100%;
             }
-
             .oc-item {
                 position: relative;
                 border-radius: 4px;
                 overflow: hidden;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
                 height: 380px;
             }
-
-            .oc-item.big {
-                height: 550px;
+            .oc-item.architecture {
+                grid-column: span 6;
+                height: auto;
+                box-shadow: none;
             }
-
+            .oc-item.architecture img {
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+            }
+            .oc-item.big {
+                height: 480px;
+            }
             .oc-item img {
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
                 transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
             }
-
             .oc-item:hover img {
                 transform: scale(1.02);
             }
-
             .oc-caption {
                 position: absolute;
                 bottom: 12px;
@@ -227,66 +219,66 @@
                 font-size: 0.75rem;
                 letter-spacing: 1.5px;
                 text-transform: uppercase;
-                background: rgba(0, 0, 0, 0.8);
+                background: rgba(0,0,0,0.8);
                 padding: 4px 8px;
                 border-radius: 2px;
                 backdrop-filter: blur(5px);
                 z-index: 10;
-                border: 1px solid rgba(255, 255, 255, 0.08);
+                border: 1px solid rgba(255,255,255,0.08);
             }
-
-            .oc-1 { grid-column: span 6; }
-            .oc-2 { grid-column: span 2; }
-            .oc-3 { grid-column: span 2; }
-            .oc-4 { grid-column: span 2; }
+            
+            .oc-1 { grid-column: span 3; }
+            .oc-2 { grid-column: span 3; }
+            .oc-3 { grid-column: span 3; }
+            .oc-4 { grid-column: span 3; }
 
             @media (max-width: 900px) {
-                .oblivion-collage {
+                .onion-collage {
                     grid-template-columns: 1fr;
                     gap: 8px;
                 }
-
                 .oc-item {
                     grid-column: span 1 !important;
                     height: 300px !important;
                 }
-
+                .oc-item.architecture {
+                    height: auto !important;
+                }
                 .oc-item.big {
-                    height: 400px !important;
+                    height: 380px !important;
                 }
             }
         </style>
-
+        
         <div class="fade-up" style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; width: 100%;">
-            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: 500; letter-spacing: -1px; margin-bottom: 5rem; text-align: center;">Design Process</h3>
-
-            <div class="oblivion-collage">
-                <!-- Concept Render -->
+            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: 500; letter-spacing: -1px; margin-bottom: 5rem; text-align: center;">Development Procedure</h3>
+            
+            <div class="onion-collage">
+                <div class="oc-item architecture">
+                    <img src="assets/images/On-ion%20folder/Working%20arcitecture.png" alt="Working Architecture">
+                    <div class="oc-caption">01 / Working Architecture</div>
+                </div>
                 <div class="oc-item oc-1 big">
-                    <img src="assets/images/Oblivion folder/Olblivion thumbnail.jpg" alt="Oblivion Drone Concept Render">
-                    <div class="oc-caption">01 / Concept Render</div>
+                    <img src="assets/images/On-ion%20folder/award.jpeg" alt="Awards and Recognition">
+                    <div class="oc-caption">02 / Design Award & Team</div>
                 </div>
-                <!-- CAD model -->
-                <div class="oc-item oc-2">
-                    <img src="assets/images/Oblivion folder/Screenshot 2026-05-18 022807.png" alt="Fusion 360 CAD Model">
-                    <div class="oc-caption">02 / CAD Modelling</div>
+                <div class="oc-item oc-2 big">
+                    <img src="assets/images/On-ion%20folder/WhatsApp%20Image%202026-06-12%20at%2011.18.23%20PM.jpeg" alt="Final Machine Concept">
+                    <div class="oc-caption">03 / Final Machine Concept</div>
                 </div>
-                <!-- Wireframe perspective -->
                 <div class="oc-item oc-3">
-                    <img src="assets/images/Oblivion folder/Screenshot 2024-11-26 041812.png" alt="Wireframe Perspective View">
-                    <div class="oc-caption">03 / Wireframe Perspective</div>
+                    <img src="assets/images/On-ion%20folder/Screenshot%202026-04-10%20021716.png" alt="Weeding mechanism close-up">
+                    <div class="oc-caption">04 / Weeding Mechanism</div>
                 </div>
-                <!-- Wireframe top view -->
                 <div class="oc-item oc-4">
-                    <img src="assets/images/Oblivion folder/Screenshot 2024-11-26 041835.png" alt="Wireframe Top View">
-                    <div class="oc-caption">04 / Wireframe Top View</div>
+                    <img src="assets/images/On-ion%20folder/WhatsApp%20Image%202025-10-06%20at%2015.39.08_5a907413.jpg" alt="Field prototyping close-up">
+                    <div class="oc-caption">05 / Field Testing</div>
                 </div>
             </div>
         </div>
     </section>
 
     <script src="js/scripts.js"></script>
-    <script src="js/obliviondrone.js"></script>
+    <script src="js/onion.js"></script>
 </body>
-
 </html>

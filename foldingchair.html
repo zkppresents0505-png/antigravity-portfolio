@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oblivion Drone - Oblique.</title>
+    <title>Portable Folding Chair - ZKP.DESIGN</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@300;500;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
     <style>
         body {
@@ -18,14 +15,14 @@
             margin: 0;
             padding: 0;
         }
-
-        .obliviondrone-nav {
+        
+        .foldingchair-nav {
             position: fixed;
             top: 2rem;
             left: 2rem;
             z-index: 100;
         }
-
+        
         .back-link {
             font-family: 'Space Grotesk', sans-serif;
             text-decoration: none;
@@ -39,13 +36,13 @@
             gap: 0.5rem;
             transition: opacity 0.3s;
         }
-
+        
         .back-link:hover {
             opacity: 0.7;
         }
 
         .scroll-container {
-            height: 1000vh;
+            height: 500vh; /* Allow enough space for 61 frames + text reveal */
             position: relative;
         }
 
@@ -61,7 +58,7 @@
             background: #000;
         }
 
-        #obliviondroneCanvas {
+        #foldingchairCanvas {
             max-width: 100%;
             max-height: 100%;
             position: absolute;
@@ -69,10 +66,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            transition: transform 0.1s ease-out;
+            transition: transform 0.1s ease-out; /* Smooth follow for translation */
         }
 
-        .obliviondrone-description {
+        .foldingchair-description {
             position: absolute;
             right: 10%;
             top: 50%;
@@ -86,13 +83,13 @@
             z-index: 10;
         }
 
-        .obliviondrone-description h2 {
+        .foldingchair-description h2 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
             font-weight: 700;
         }
 
-        .obliviondrone-description p {
+        .foldingchair-description p {
             font-family: 'Inter', sans-serif;
             font-size: 1.1rem;
             line-height: 1.6;
@@ -117,7 +114,7 @@
             letter-spacing: 0.2em;
             transition: opacity 0.8s ease;
         }
-
+        
         .scroll-indicator {
             position: fixed;
             bottom: 2rem;
@@ -132,61 +129,42 @@
             animation: pulseFade 2s infinite ease-in-out;
             pointer-events: none;
         }
-
+        
         @keyframes pulseFade {
-
-            0%,
-            100% {
-                opacity: 0.3;
-                transform: translate(-50%, 0);
-            }
-
-            50% {
-                opacity: 0.8;
-                transform: translate(-50%, 5px);
-            }
+            0%, 100% { opacity: 0.3; transform: translate(-50%, 0); }
+            50% { opacity: 0.8; transform: translate(-50%, 5px); }
         }
     </style>
 </head>
-
 <body>
     <div class="cursor"></div>
 
-    <nav class="obliviondrone-nav">
+    <nav class="foldingchair-nav">
         <a href="works.html?view=tile" class="back-link hover-target">← BACK TO WORK</a>
     </nav>
 
     <div class="loading-overlay" id="loadingOverlay">
         LOADING SEQUENCE <span id="loadingProgress" style="margin-left: 10px;">0%</span>
     </div>
-
+    
     <div class="scroll-indicator" id="scrollIndicator">
         SCROLL TO EXPLORE ↓
     </div>
 
     <main class="scroll-container">
         <div class="canvas-container">
-            <canvas id="obliviondroneCanvas"></canvas>
-            <div class="obliviondrone-description" id="obliviondroneDesc">
-                <h2>Oblivion Drone</h2>
-                <p>Oblivion Drone is a futuristic aerial surveillance and combat drone concept developed to strengthen
-                    my CAD modeling and rendering workflow. The project focuses on creating a clean, aerodynamic form
-                    language inspired by sci-fi robotics and autonomous defense systems. The smooth outer shell
-                    contrasts with the exposed mechanical weapon modules, giving the drone a balance between minimalism
-                    and aggression.</p>
-                <p>The model was designed in CAD with attention to surface continuity, proportion, and detailing, while
-                    the final visualization was rendered in KeyShot Studio to explore realistic lighting, materials, and
-                    cinematic presentation. Through this project, I experimented with hard-surface modeling techniques,
-                    form development, and visual storytelling to create a believable next-generation autonomous drone
-                    concept.</p>
+            <canvas id="foldingchairCanvas"></canvas>
+            <div class="foldingchair-description" id="foldingchairDesc">
+                <h2>Portable Folding Chair</h2>
+                <p>Portable Folding Chair is a minimalist furniture design designed for comfort, space efficiency, and durability. The curved backrest provides optimal lumbar support while maintaining a sleek, minimal silhouette.</p>
+                <p>Constructed with lightweight, high-strength materials, it ensures longevity while maintaining a modern profile suitable for both indoor and outdoor environments. The innovative folding mechanism allows the chair to fold into a completely flat profile, making it perfect for modern, space-conscious living spaces and effortless portability.</p>
             </div>
         </div>
     </main>
 
-    <section class="project-details"
-        style="background: #000; padding: 8rem 5vw 12rem; color: #fff; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.05);">
+    <section class="project-details" style="background: #000; padding: 8rem 5vw 12rem; color: #fff; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.05);">
         <style>
-            .oblivion-collage {
+            .chair-collage {
                 display: grid;
                 grid-template-columns: repeat(6, 1fr);
                 gap: 8px;
@@ -194,31 +172,26 @@
                 margin: 0 auto;
                 width: 100%;
             }
-
-            .oc-item {
+            .cc-item {
                 position: relative;
                 border-radius: 4px;
                 overflow: hidden;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
                 height: 380px;
             }
-
-            .oc-item.big {
+            .cc-item.big {
                 height: 550px;
             }
-
-            .oc-item img {
+            .cc-item img {
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
                 transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
             }
-
-            .oc-item:hover img {
+            .cc-item:hover img {
                 transform: scale(1.02);
             }
-
-            .oc-caption {
+            .cc-caption {
                 position: absolute;
                 bottom: 12px;
                 left: 12px;
@@ -227,66 +200,59 @@
                 font-size: 0.75rem;
                 letter-spacing: 1.5px;
                 text-transform: uppercase;
-                background: rgba(0, 0, 0, 0.8);
+                background: rgba(0,0,0,0.8);
                 padding: 4px 8px;
                 border-radius: 2px;
                 backdrop-filter: blur(5px);
                 z-index: 10;
-                border: 1px solid rgba(255, 255, 255, 0.08);
+                border: 1px solid rgba(255,255,255,0.08);
             }
-
-            .oc-1 { grid-column: span 6; }
-            .oc-2 { grid-column: span 2; }
-            .oc-3 { grid-column: span 2; }
-            .oc-4 { grid-column: span 2; }
+            
+            .cc-1 { grid-column: span 6; }
+            .cc-2 { grid-column: span 2; }
+            .cc-3 { grid-column: span 2; }
+            .cc-4 { grid-column: span 2; }
 
             @media (max-width: 900px) {
-                .oblivion-collage {
+                .chair-collage {
                     grid-template-columns: 1fr;
                     gap: 8px;
                 }
-
-                .oc-item {
+                .cc-item {
                     grid-column: span 1 !important;
                     height: 300px !important;
                 }
-
-                .oc-item.big {
+                .cc-item.big {
                     height: 400px !important;
                 }
             }
         </style>
-
+        
         <div class="fade-up" style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; width: 100%;">
-            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: 500; letter-spacing: -1px; margin-bottom: 5rem; text-align: center;">Design Process</h3>
-
-            <div class="oblivion-collage">
-                <!-- Concept Render -->
-                <div class="oc-item oc-1 big">
-                    <img src="assets/images/Oblivion folder/Olblivion thumbnail.jpg" alt="Oblivion Drone Concept Render">
-                    <div class="oc-caption">01 / Concept Render</div>
+            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: 500; letter-spacing: -1px; margin-bottom: 5rem; text-align: center;">Prototyping</h3>
+            
+            <div class="chair-collage">
+                <div class="cc-item cc-1 big">
+                    <img src="assets/images/Folding%20folder/Group%20photo.jpeg" alt="Group Photo">
+                    <div class="cc-caption">01 / Design Team & Prototyping</div>
                 </div>
-                <!-- CAD model -->
-                <div class="oc-item oc-2">
-                    <img src="assets/images/Oblivion folder/Screenshot 2026-05-18 022807.png" alt="Fusion 360 CAD Model">
-                    <div class="oc-caption">02 / CAD Modelling</div>
+                <div class="cc-item cc-2">
+                    <img src="assets/images/Folding%20folder/WhatsApp%20Image%202026-05-19%20at%205.34.03%20PM.jpeg" alt="Prototyping Phase 1">
+                    <div class="cc-caption">02 / Frame Assembly</div>
                 </div>
-                <!-- Wireframe perspective -->
-                <div class="oc-item oc-3">
-                    <img src="assets/images/Oblivion folder/Screenshot 2024-11-26 041812.png" alt="Wireframe Perspective View">
-                    <div class="oc-caption">03 / Wireframe Perspective</div>
+                <div class="cc-item cc-3">
+                    <img src="assets/images/Folding%20folder/WhatsApp%20Image%202026-05-19%20at%205.34.15%20PM.jpeg" alt="Prototyping Phase 2">
+                    <div class="cc-caption">03 / Joint Mechanism</div>
                 </div>
-                <!-- Wireframe top view -->
-                <div class="oc-item oc-4">
-                    <img src="assets/images/Oblivion folder/Screenshot 2024-11-26 041835.png" alt="Wireframe Top View">
-                    <div class="oc-caption">04 / Wireframe Top View</div>
+                <div class="cc-item cc-4">
+                    <img src="assets/images/Folding%20folder/WhatsApp%20Image%202026-05-19%20at%205.34.15%20PM%20(1).jpeg" alt="Prototyping Phase 3">
+                    <div class="cc-caption">04 / Functional Testing</div>
                 </div>
             </div>
         </div>
     </section>
 
     <script src="js/scripts.js"></script>
-    <script src="js/obliviondrone.js"></script>
+    <script src="js/foldingchair.js"></script>
 </body>
-
 </html>
