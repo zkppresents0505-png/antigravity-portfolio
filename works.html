@@ -811,6 +811,517 @@
                     </div>
                 </section>
 
+                <!-- INTERNSHIP TITLE -->
+                <div style="height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; border-top: 1px solid rgba(255,255,255,0.05); position: relative; overflow: hidden;">
+                    <!-- dual-toned background using collage images -->
+                    <img src="assets/images/Internship images/CAD Modeling screenshot.png" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.25; pointer-events: none; z-index: 1; filter: grayscale(60%);">
+                    <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.92) 0%, rgba(10,10,20,0.6) 50%, rgba(0,0,0,0.92) 100%); z-index: 2; pointer-events: none;"></div>
+                    <!-- Decorative line element -->
+                    <div style="position: absolute; top: 50%; left: 4rem; width: 60px; height: 1px; background: var(--accent-color); opacity: 0.4; z-index: 3;"></div>
+                    <div style="position: absolute; top: 50%; right: 4rem; width: 60px; height: 1px; background: var(--accent-color); opacity: 0.4; z-index: 3;"></div>
+
+                    <span style="position: relative; z-index: 3; color: var(--accent-color); font-family: var(--font-mono); letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1rem; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">Experience</span>
+                    <h2 style="position: relative; z-index: 3; font-family: var(--font-heading); font-size: clamp(3rem, 5.5vw, 5.5rem); font-weight: 700; text-transform: uppercase; letter-spacing: -2px; margin: 0; color: #fff; text-align: center; text-shadow: 0 4px 16px rgba(0,0,0,0.95), 0 2px 4px rgba(0,0,0,0.9);">Internship</h2>
+                    <p style="position: relative; z-index: 3; font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-top: 1.2rem; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">Industry Practice &amp; Professional Growth</p>
+                    <!-- Bottom tag strip -->
+                    <div style="position: absolute; bottom: 3rem; z-index: 3; display: flex; gap: 1.5rem;">
+                        <span style="font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 2px; color: rgba(255,255,255,0.35); text-transform: uppercase; border: 1px solid rgba(255,255,255,0.12); padding: 5px 14px; border-radius: 2px;">CAD Engineering</span>
+                        <span style="font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 2px; color: rgba(255,255,255,0.35); text-transform: uppercase; border: 1px solid rgba(255,255,255,0.12); padding: 5px 14px; border-radius: 2px;">Structural Analysis</span>
+                        <span style="font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 2px; color: rgba(255,255,255,0.35); text-transform: uppercase; border: 1px solid rgba(255,255,255,0.12); padding: 5px 14px; border-radius: 2px;">Industry Practice</span>
+                    </div>
+                </div>
+
+                <!-- INTERNSHIP EXPERIENCE SECTION — 2-image collage + text -->
+                <section style="background: #000; padding: 10rem 5vw 10rem; color: #fff; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.05);">
+                    <style>
+                        /* ── Internship Experience Layout ── */
+                        .internship-experience-wrap {
+                            display: flex;
+                            align-items: flex-start;
+                            gap: 5rem;
+                            max-width: 1280px;
+                            margin: 0 auto;
+                        }
+
+                        /* LEFT — stacked 2-image collage */
+                        .internship-collage {
+                            flex: 0 0 36%;
+                            display: grid;
+                            grid-template-rows: 220px 220px;
+                            gap: 10px;
+                            position: relative;
+                        }
+
+                        .ic-frame {
+                            position: relative;
+                            border-radius: 6px;
+                            overflow: hidden;
+                            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+                        }
+
+                        .ic-frame img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            display: block;
+                            transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1), filter 0.7s ease;
+                            filter: grayscale(20%) brightness(0.85);
+                        }
+
+                        .ic-frame:hover img {
+                            transform: scale(1.04);
+                            filter: grayscale(0%) brightness(1);
+                        }
+
+                        .ic-label {
+                            position: absolute;
+                            bottom: 14px;
+                            left: 14px;
+                            font-family: 'Space Grotesk', sans-serif;
+                            font-size: 0.72rem;
+                            letter-spacing: 2px;
+                            text-transform: uppercase;
+                            color: #fff;
+                            background: rgba(0,0,0,0.75);
+                            padding: 5px 10px;
+                            border-radius: 2px;
+                            backdrop-filter: blur(6px);
+                            border: 1px solid rgba(255,255,255,0.1);
+                            z-index: 2;
+                        }
+
+                        /* Connecting accent line between the two images */
+                        .ic-divider-accent {
+                            position: absolute;
+                            left: -20px;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            width: 3px;
+                            height: 40%;
+                            background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.3), transparent);
+                            border-radius: 2px;
+                        }
+
+                        /* RIGHT — text panel */
+                        .internship-text-panel {
+                            flex: 1;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            padding-left: 1rem;
+                        }
+
+                        .internship-eyebrow {
+                            font-family: 'Space Grotesk', sans-serif;
+                            font-size: 0.78rem;
+                            letter-spacing: 4px;
+                            text-transform: uppercase;
+                            color: var(--accent-color);
+                            opacity: 0.7;
+                            margin-bottom: 1.4rem;
+                            display: flex;
+                            align-items: center;
+                            gap: 0.8rem;
+                        }
+
+                        .internship-eyebrow::before {
+                            content: '';
+                            display: inline-block;
+                            width: 30px;
+                            height: 1px;
+                            background: var(--accent-color);
+                            opacity: 0.5;
+                        }
+
+                        .internship-heading {
+                            font-family: 'Space Grotesk', sans-serif;
+                            font-size: clamp(2rem, 2.8vw, 3rem);
+                            font-weight: 700;
+                            line-height: 1.05;
+                            letter-spacing: -1.5px;
+                            margin-bottom: 2rem;
+                            color: #fff;
+                        }
+
+                        .internship-body {
+                            font-family: 'Inter', sans-serif;
+                            font-size: 1.05rem;
+                            line-height: 1.75;
+                            color: #aaa;
+                            margin-bottom: 1.6rem;
+                        }
+
+                        /* Learning outcomes pill list */
+                        .internship-outcomes {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 0.9rem;
+                            margin-top: 0.5rem;
+                        }
+
+                        .internship-outcome-item {
+                            display: flex;
+                            align-items: flex-start;
+                            gap: 0.9rem;
+                        }
+
+                        .outcome-bullet {
+                            flex-shrink: 0;
+                            width: 6px;
+                            height: 6px;
+                            border-radius: 50%;
+                            background: var(--accent-color);
+                            margin-top: 0.45em;
+                            opacity: 0.7;
+                        }
+
+                        .outcome-text {
+                            font-family: 'Inter', sans-serif;
+                            font-size: 0.95rem;
+                            line-height: 1.55;
+                            color: #888;
+                        }
+
+                        @media (max-width: 900px) {
+                            .internship-experience-wrap {
+                                flex-direction: column;
+                                gap: 3rem;
+                            }
+                            .internship-collage {
+                                flex: none;
+                                width: 100%;
+                                grid-template-rows: 240px 240px;
+                            }
+                        }
+                    </style>
+
+                    <div class="fade-up internship-experience-wrap">
+                        <!-- LEFT: 2-image stacked collage -->
+                        <div class="internship-collage">
+                            <div class="ic-divider-accent"></div>
+                            <!-- Image 1 -->
+                            <div class="ic-frame">
+                                <img src="assets/images/Internship images/CAD Modeling screenshot.png" alt="CAD Modeling at internship">
+                                <div class="ic-label">01 / CAD Modelling</div>
+                            </div>
+                            <!-- Image 2 -->
+                            <div class="ic-frame">
+                                <img src="assets/images/Internship images/Structural analysizi screenshot.png" alt="Structural Analysis work">
+                                <div class="ic-label">02 / Structural Analysis</div>
+                            </div>
+                        </div>
+
+                        <!-- RIGHT: experience description -->
+                        <div class="internship-text-panel">
+                            <p class="internship-eyebrow">Professional Experience</p>
+                            <h3 class="internship-heading">Design &amp; Engineering<br>in Practice</h3>
+                            <p class="internship-body">
+                                As a Product Head and CAD Specialist Intern at Hasol Energy, I contributed to the development and optimisation of solar tracking systems. My responsibilities included creating detailed 3D CAD models, engineering drawings, dimensional documentation, and technical drafts to support product development and prototyping. I conducted structural analysis and material evaluations to improve the feasibility, reliability, and manufacturability of the system while minimising potential design failures.
+                            </p>
+                            <p class="internship-body">
+                                By providing precise design data and engineering validation, I helped the team develop more refined prototypes that effectively demonstrated the product's technical viability — supporting the company's efforts in securing incubation funding and advancing the commercialisation of its renewable energy solutions.
+                            </p>
+
+                            <!-- Learning outcomes -->
+                            <div class="internship-outcomes">
+                                <div class="internship-outcome-item">
+                                    <div class="outcome-bullet"></div>
+                                    <p class="outcome-text">Detailed 3D CAD modelling, engineering drawings, and technical documentation for solar tracking systems.</p>
+                                </div>
+                                <div class="internship-outcome-item">
+                                    <div class="outcome-bullet"></div>
+                                    <p class="outcome-text">Structural analysis and material evaluations to improve reliability and manufacturability.</p>
+                                </div>
+                                <div class="internship-outcome-item">
+                                    <div class="outcome-bullet"></div>
+                                    <p class="outcome-text">Engineering validation that supported prototype development and incubation funding.</p>
+                                </div>
+                                <div class="internship-outcome-item">
+                                    <div class="outcome-bullet"></div>
+                                    <p class="outcome-text">Cross-functional collaboration within a fast-paced renewable energy startup environment.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- INTERNSHIP COMPANY & FOUNDER SECTION -->
+                <section style="background: #040406; padding: 8rem 5vw 10rem; color: #fff; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.05);">
+                    <style>
+                        /* ── Company Profile Card Layout ── */
+                        .company-section-wrap {
+                            max-width: 1200px;
+                            margin: 0 auto;
+                        }
+
+                        .company-section-label {
+                            font-family: 'Space Grotesk', sans-serif;
+                            font-size: 0.78rem;
+                            letter-spacing: 4px;
+                            text-transform: uppercase;
+                            color: var(--accent-color);
+                            opacity: 0.55;
+                            margin-bottom: 4rem;
+                            display: flex;
+                            align-items: center;
+                            gap: 1rem;
+                        }
+
+                        .company-section-label::after {
+                            content: '';
+                            flex: 1;
+                            height: 1px;
+                            background: rgba(255,255,255,0.08);
+                        }
+
+                        .company-profile-card {
+                            display: flex;
+                            gap: 3.5rem;
+                            align-items: stretch;
+                            background: rgba(255,255,255,0.02);
+                            border: 1px solid rgba(255,255,255,0.07);
+                            border-radius: 12px;
+                            padding: 3rem;
+                            backdrop-filter: blur(10px);
+                            position: relative;
+                            overflow: hidden;
+                            transition: border-color 0.4s ease, box-shadow 0.4s ease;
+                        }
+
+                        .company-profile-card:hover {
+                            border-color: rgba(255,255,255,0.15);
+                            box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+                        }
+
+                        /* Subtle background glow */
+                        .company-profile-card::before {
+                            content: '';
+                            position: absolute;
+                            top: -60%; left: -20%;
+                            width: 60%; height: 200%;
+                            background: radial-gradient(ellipse at center, rgba(255,255,255,0.03) 0%, transparent 70%);
+                            pointer-events: none;
+                        }
+
+                        /* LEFT sidebar — logo + meta + CEO stacked */
+                        .company-identity {
+                            flex: 0 0 220px;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: flex-start;
+                            gap: 0;
+                            border-right: 1px solid rgba(255,255,255,0.07);
+                            padding-right: 3rem;
+                        }
+
+                        .company-logo-frame {
+                            width: 100%;
+                            background: rgba(255,255,255,0.04);
+                            border: 1px solid rgba(255,255,255,0.1);
+                            border-radius: 8px;
+                            padding: 1.4rem;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            transition: background 0.3s ease;
+                            margin-bottom: 1.2rem;
+                        }
+
+                        .company-logo-frame:hover {
+                            background: rgba(255,255,255,0.07);
+                        }
+
+                        .company-logo-frame img {
+                            width: 100%;
+                            height: auto;
+                            max-height: 70px;
+                            object-fit: contain;
+                            filter: brightness(1.1);
+                        }
+
+                        .company-meta {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 0.3rem;
+                            margin-bottom: 2rem;
+                            padding-bottom: 2rem;
+                            border-bottom: 1px solid rgba(255,255,255,0.06);
+                            width: 100%;
+                        }
+
+                        .company-name-tag {
+                            font-family: 'Space Grotesk', sans-serif;
+                            font-size: 1rem;
+                            font-weight: 600;
+                            color: #fff;
+                            letter-spacing: -0.3px;
+                        }
+
+                        .company-type-tag {
+                            font-family: 'Inter', sans-serif;
+                            font-size: 0.75rem;
+                            letter-spacing: 1.5px;
+                            text-transform: uppercase;
+                            color: #555;
+                        }
+
+                        /* CEO block inside left sidebar */
+                        .ceo-profile-col {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: flex-start;
+                            gap: 0.8rem;
+                            width: 100%;
+                        }
+
+                        .ceo-portrait-frame {
+                            width: 72px;
+                            height: 72px;
+                            border-radius: 50%;
+                            overflow: hidden;
+                            border: 2px solid rgba(255,255,255,0.12);
+                            box-shadow: 0 6px 24px rgba(0,0,0,0.5);
+                            transition: border-color 0.4s ease, transform 0.4s ease;
+                            flex-shrink: 0;
+                        }
+
+                        .ceo-portrait-frame:hover {
+                            border-color: rgba(255,255,255,0.35);
+                            transform: scale(1.06);
+                        }
+
+                        .ceo-portrait-frame img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            filter: grayscale(30%);
+                            transition: filter 0.5s ease;
+                        }
+
+                        .ceo-portrait-frame:hover img {
+                            filter: grayscale(0%);
+                        }
+
+                        .ceo-name {
+                            font-family: 'Space Grotesk', sans-serif;
+                            font-size: 0.92rem;
+                            font-weight: 600;
+                            color: #ddd;
+                            letter-spacing: -0.2px;
+                            line-height: 1.2;
+                            white-space: nowrap;
+                        }
+
+                        .ceo-title-badge {
+                            font-family: 'Inter', sans-serif;
+                            font-size: 0.68rem;
+                            letter-spacing: 1.5px;
+                            text-transform: uppercase;
+                            color: #555;
+                            border: 1px solid rgba(255,255,255,0.08);
+                            padding: 3px 8px;
+                            border-radius: 20px;
+                        }
+
+                        .ceo-row {
+                            display: flex;
+                            align-items: center;
+                            gap: 0.9rem;
+                        }
+
+                        .ceo-text {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 0.3rem;
+                        }
+
+                        /* RIGHT — company description (full remaining width) */
+                        .company-desc-col {
+                            flex: 1;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            gap: 1.2rem;
+                        }
+
+                        .company-desc-heading {
+                            font-family: 'Space Grotesk', sans-serif;
+                            font-size: 1.8rem;
+                            font-weight: 700;
+                            letter-spacing: -0.8px;
+                            color: #fff;
+                            margin-bottom: 0.3rem;
+                        }
+
+                        .company-desc-body {
+                            font-family: 'Inter', sans-serif;
+                            font-size: 1rem;
+                            line-height: 1.8;
+                            color: #888;
+                        }
+
+                        /* hide old standalone divider elements */
+                        .company-divider { display: none; }
+
+                        @media (max-width: 1000px) {
+                            .company-profile-card {
+                                flex-direction: column;
+                                gap: 2.5rem;
+                            }
+                            .company-identity {
+                                flex: none;
+                                width: 100%;
+                                border-right: none;
+                                border-bottom: 1px solid rgba(255,255,255,0.07);
+                                padding-right: 0;
+                                padding-bottom: 2rem;
+                            }
+                        }
+                    </style>
+
+                    <div class="fade-up company-section-wrap">
+                        <p class="company-section-label">About the Company</p>
+
+                        <div class="company-profile-card" style="display: flex; padding: 3rem;">
+
+                            <!-- LEFT sidebar — logo + host meta + CEO stacked -->
+                            <div class="company-identity">
+                                <div class="company-logo-frame">
+                                    <img src="assets/images/Internship images/Company Logo.png" alt="Company Logo">
+                                </div>
+                                <div class="company-meta">
+                                    <p class="company-name-tag">Hasol Energy</p>
+                                    <p class="company-type-tag">Innovative Renewable Energy Solutions</p>
+                                    <p class="company-type-tag" style="margin-top: 0.3rem; opacity: 0.6;">Hyderabad</p>
+                                </div>
+                                <!-- CEO portrait below host info -->
+                                <div class="ceo-profile-col">
+                                    <div class="ceo-row">
+                                        <div class="ceo-portrait-frame">
+                                            <img src="assets/images/Internship images/CEO profile.jpg" alt="Founder &amp; CEO">
+                                        </div>
+                                        <div class="ceo-text">
+                                            <p class="ceo-name">Karthikeya K</p>
+                                            <span class="ceo-title-badge">Founder &amp; CEO</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- RIGHT — company description, full remaining width -->
+                            <div class="company-desc-col">
+                                <h3 class="company-desc-heading">Hasol Energy,<br>Hyderabad</h3>
+                                <p class="company-desc-body">
+                                    Under the leadership of Karthikeya Kakaraparthi, Hasol Energy has focused on developing innovative renewable energy solutions with an emphasis on practical engineering and sustainable technology. His entrepreneurial vision and commitment to product development have helped foster a collaborative environment where innovation, problem-solving, and continuous learning are encouraged.
+                                </p>
+                                <p class="company-desc-body">
+                                    During my internship, I gained valuable exposure to industry-driven design and engineering practices through projects aligned with the company's mission of advancing clean energy technology.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- PORTFOLIO TITLE -->
                 <div style="height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; border-top: 1px solid rgba(255,255,255,0.05); position: relative; overflow: hidden;">
                     <!-- Fade background thumbnail (full-screen color image aligned with tile view) -->
