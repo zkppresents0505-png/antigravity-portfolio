@@ -186,6 +186,429 @@
             </div>
         </section>
 
+
+        <!-- ══════════════════════════════════════ CERTIFICATIONS ══════════════════════════════════════ -->
+        <section id="certifications" style="background: #000; padding: 7rem 5vw 8rem; color: #fff; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.05);">
+            <style>
+                /* ── Section header ── */
+                .cert-list-header {
+                    display: flex;
+                    align-items: baseline;
+                    justify-content: space-between;
+                    max-width: 1200px;
+                    margin: 0 auto 3.5rem;
+                }
+                .cert-list-title {
+                    font-family: 'Space Grotesk', sans-serif;
+                    font-size: clamp(2rem, 3.5vw, 3rem);
+                    font-weight: 700;
+                    letter-spacing: -1px;
+                    color: #fff;
+                    line-height: 1;
+                }
+                .cert-list-count {
+                    font-family: 'Inter', sans-serif;
+                    font-size: 0.78rem;
+                    letter-spacing: 3px;
+                    text-transform: uppercase;
+                    color: #444;
+                }
+
+                /* ── Three-column card grid ── */
+                .cert-list-grid {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 1.5rem;
+                    max-width: 1200px;
+                    margin: 0 auto;
+                }
+
+                /* ── Individual card ── */
+                .cert-list-card {
+                    display: flex;
+                    flex-direction: column;
+                    background: rgba(255,255,255,0.02);
+                    border: 1px solid rgba(255,255,255,0.07);
+                    border-radius: 10px;
+                    overflow: hidden;
+                    cursor: pointer;
+                    transition: border-color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+                    position: relative;
+                }
+                .cert-list-card:hover {
+                    border-color: rgba(255,255,255,0.18);
+                    transform: translateY(-5px);
+                    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+                }
+
+                /* PDF thumbnail wrapper */
+                .cert-thumb-wrap {
+                    position: relative;
+                    width: 100%;
+                    height: 220px;
+                    background: #0d0d0d;
+                    overflow: hidden;
+                    border-bottom: 1px solid rgba(255,255,255,0.06);
+                }
+                .cert-thumb-wrap iframe {
+                    width: 100%;
+                    height: 100%;
+                    border: none;
+                    pointer-events: none;
+                    transform-origin: top left;
+                }
+                /* hover reveal overlay */
+                .cert-thumb-overlay {
+                    position: absolute;
+                    inset: 0;
+                    background: rgba(0,0,0,0.45);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                }
+                .cert-list-card:hover .cert-thumb-overlay { opacity: 1; }
+                .cert-thumb-overlay span {
+                    font-family: 'Space Grotesk', sans-serif;
+                    font-size: 0.72rem;
+                    letter-spacing: 3px;
+                    text-transform: uppercase;
+                    color: #fff;
+                    border: 1px solid rgba(255,255,255,0.4);
+                    padding: 8px 18px;
+                    border-radius: 3px;
+                }
+
+                /* Card meta */
+                .cert-card-meta {
+                    padding: 1.4rem 1.6rem 1.6rem;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.4rem;
+                    flex: 1;
+                }
+                .cert-card-org {
+                    font-family: 'Inter', sans-serif;
+                    font-size: 0.68rem;
+                    letter-spacing: 2px;
+                    text-transform: uppercase;
+                    color: #555;
+                }
+                .cert-card-title {
+                    font-family: 'Space Grotesk', sans-serif;
+                    font-size: 1rem;
+                    font-weight: 600;
+                    color: #e8e8e8;
+                    letter-spacing: -0.2px;
+                    line-height: 1.3;
+                }
+                .cert-card-tag {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.4rem;
+                    font-family: 'Inter', sans-serif;
+                    font-size: 0.65rem;
+                    letter-spacing: 1.5px;
+                    text-transform: uppercase;
+                    color: #22c55e;
+                    margin-top: 0.5rem;
+                    width: fit-content;
+                }
+                .cert-card-tag::before {
+                    content: '';
+                    width: 5px;
+                    height: 5px;
+                    border-radius: 50%;
+                    background: #22c55e;
+                    box-shadow: 0 0 5px rgba(34,197,94,0.5);
+                }
+
+                /* ── Modal overlay ── */
+                .cert-modal-backdrop {
+                    position: fixed;
+                    inset: 0;
+                    background: rgba(0,0,0,0.88);
+                    backdrop-filter: blur(12px);
+                    -webkit-backdrop-filter: blur(12px);
+                    z-index: 9000;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 2rem;
+                    opacity: 0;
+                    pointer-events: none;
+                    transition: opacity 0.35s ease;
+                }
+                .cert-modal-backdrop.active {
+                    opacity: 1;
+                    pointer-events: all;
+                }
+
+                .cert-modal {
+                    background: #0e0e0e;
+                    border: 1px solid rgba(255,255,255,0.1);
+                    border-radius: 12px;
+                    overflow: hidden;
+                    width: min(820px, 100%);
+                    max-height: 90vh;
+                    overflow-y: auto;
+                    display: flex;
+                    flex-direction: column;
+                    transform: translateY(24px) scale(0.97);
+                    transition: transform 0.38s cubic-bezier(0.34,1.56,0.64,1);
+                    scrollbar-width: thin;
+                    scrollbar-color: rgba(255,255,255,0.1) transparent;
+                }
+                .cert-modal-backdrop.active .cert-modal {
+                    transform: translateY(0) scale(1);
+                }
+
+                /* Modal PDF viewer */
+                .cert-modal-pdf {
+                    width: 100%;
+                    height: 500px;
+                    border: none;
+                    border-bottom: 1px solid rgba(255,255,255,0.07);
+                    display: block;
+                    background: #111;
+                    flex-shrink: 0;
+                }
+
+                /* Modal info panel */
+                .cert-modal-info {
+                    padding: 2rem 2.5rem;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.7rem;
+                }
+                .cert-modal-header {
+                    display: flex;
+                    align-items: flex-start;
+                    justify-content: space-between;
+                    gap: 1rem;
+                    margin-bottom: 0.3rem;
+                }
+                .cert-modal-close {
+                    flex-shrink: 0;
+                    width: 36px;
+                    height: 36px;
+                    background: rgba(255,255,255,0.05);
+                    border: 1px solid rgba(255,255,255,0.1);
+                    border-radius: 50%;
+                    color: #aaa;
+                    font-size: 1.1rem;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: background 0.2s ease, color 0.2s ease;
+                    line-height: 1;
+                }
+                .cert-modal-close:hover { background: rgba(255,255,255,0.1); color: #fff; }
+
+                .cert-modal-badge {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.4rem;
+                    font-family: 'Inter', sans-serif;
+                    font-size: 0.65rem;
+                    letter-spacing: 2px;
+                    text-transform: uppercase;
+                    color: #22c55e;
+                    border: 1px solid rgba(34,197,94,0.2);
+                    padding: 3px 9px;
+                    border-radius: 20px;
+                    width: fit-content;
+                    margin-bottom: 0.2rem;
+                }
+                .cert-modal-badge::before {
+                    content: '';
+                    width: 5px; height: 5px;
+                    border-radius: 50%;
+                    background: #22c55e;
+                    box-shadow: 0 0 5px rgba(34,197,94,0.5);
+                }
+                .cert-modal-title {
+                    font-family: 'Space Grotesk', sans-serif;
+                    font-size: 1.35rem;
+                    font-weight: 700;
+                    letter-spacing: -0.4px;
+                    color: #fff;
+                    line-height: 1.2;
+                }
+                .cert-modal-org {
+                    font-family: 'Inter', sans-serif;
+                    font-size: 0.82rem;
+                    color: #555;
+                    margin-bottom: 0.4rem;
+                }
+                .cert-modal-desc {
+                    font-family: 'Inter', sans-serif;
+                    font-size: 0.95rem;
+                    line-height: 1.75;
+                    color: #888;
+                }
+                .cert-modal-dl {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.6rem;
+                    font-family: 'Space Grotesk', sans-serif;
+                    font-size: 0.75rem;
+                    font-weight: 500;
+                    letter-spacing: 1.5px;
+                    text-transform: uppercase;
+                    color: #fff;
+                    border: 1px solid rgba(255,255,255,0.18);
+                    padding: 0.65rem 1.3rem;
+                    border-radius: 4px;
+                    text-decoration: none;
+                    margin-top: 0.8rem;
+                    width: fit-content;
+                    transition: background 0.25s ease, border-color 0.25s ease;
+                }
+                .cert-modal-dl:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.35); }
+
+                @media (max-width: 900px) {
+                    .cert-list-grid { grid-template-columns: 1fr; }
+                    .cert-modal-pdf { height: 340px; }
+                    .cert-modal-info { padding: 1.5rem; }
+                }
+                @media (max-width: 600px) {
+                    .cert-list-grid { grid-template-columns: 1fr; }
+                }
+            </style>
+
+            <!-- Header -->
+            <div class="cert-list-header fade-up">
+                <h2 class="cert-list-title">Certifications &amp; Experiences</h2>
+                <span class="cert-list-count">03 Documents</span>
+            </div>
+
+            <!-- Card grid -->
+            <div class="cert-list-grid fade-up">
+
+                <!-- 01 — Internship Certificate -->
+                <div class="cert-list-card" id="cert-card-0" onclick="openCertModal(0)">
+                    <div class="cert-thumb-wrap">
+                        <iframe src="assets/documents/internship-certificate.pdf" title="Internship Certificate preview" loading="lazy" tabindex="-1"></iframe>
+                        <div class="cert-thumb-overlay"><span>View PDF</span></div>
+                    </div>
+                    <div class="cert-card-meta">
+                        <span class="cert-card-org">Hasol Energy &nbsp;·&nbsp; Hyderabad</span>
+                        <p class="cert-card-title">Internship Completion Certificate</p>
+                        <span class="cert-card-tag">Verified</span>
+                    </div>
+                </div>
+
+                <!-- 02 — SIH Certificate -->
+                <div class="cert-list-card" id="cert-card-1" onclick="openCertModal(1)">
+                    <div class="cert-thumb-wrap">
+                        <iframe src="assets/documents/SIH certificate.pdf" title="SIH Certificate preview" loading="lazy" tabindex="-1"></iframe>
+                        <div class="cert-thumb-overlay"><span>View PDF</span></div>
+                    </div>
+                    <div class="cert-card-meta">
+                        <span class="cert-card-org">AICTE &nbsp;·&nbsp; Smart India Hackathon</span>
+                        <p class="cert-card-title">Smart India Hackathon Certificate</p>
+                        <span class="cert-card-tag">Verified</span>
+                    </div>
+                </div>
+
+                <!-- 03 — India Design Week -->
+                <div class="cert-list-card" id="cert-card-2" onclick="openCertModal(2)">
+                    <div class="cert-thumb-wrap">
+                        <iframe src="assets/documents/India Design Week.pdf" title="India Design Week preview" loading="lazy" tabindex="-1"></iframe>
+                        <div class="cert-thumb-overlay"><span>View PDF</span></div>
+                    </div>
+                    <div class="cert-card-meta">
+                        <span class="cert-card-org">ICT Academy &nbsp;·&nbsp; Autodesk</span>
+                        <p class="cert-card-title">India Design Week Certificate</p>
+                        <span class="cert-card-tag">Verified</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ── Modal ── -->
+            <div class="cert-modal-backdrop" id="certModalBackdrop" onclick="closeCertModalBackdrop(event)">
+                <div class="cert-modal" id="certModal">
+                    <!-- PDF viewer -->
+                    <iframe class="cert-modal-pdf" id="certModalPdf" src="" title="Certificate PDF" loading="lazy"></iframe>
+
+                    <!-- Info panel -->
+                    <div class="cert-modal-info">
+                        <div class="cert-modal-header">
+                            <div>
+                                <span class="cert-modal-badge">Verified</span>
+                                <h3 class="cert-modal-title" id="certModalTitle"></h3>
+                                <p class="cert-modal-org" id="certModalOrg"></p>
+                            </div>
+                            <button class="cert-modal-close" onclick="closeCertModal()" aria-label="Close">&#x2715;</button>
+                        </div>
+                        <p class="cert-modal-desc" id="certModalDesc"></p>
+                        <a class="cert-modal-dl" id="certModalDl" href="#" target="_blank" download>
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7 10 12 15 17 10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                            Download PDF
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                const CERTS = [
+                    {
+                        pdf: 'assets/documents/internship-certificate.pdf',
+                        title: 'Internship Completion Certificate',
+                        org: 'Hasol Energy · Hyderabad',
+                        desc: 'As a Product Head and CAD Specialist Intern at Hasol Energy, I contributed to the development and optimisation of solar tracking systems. My responsibilities included 3D CAD modelling, engineering drawings, dimensional documentation, and structural analysis. By providing precise design data and engineering validation, I helped the team develop refined prototypes that demonstrated the product\'s technical viability — supporting the company\'s efforts in securing incubation funding and advancing its renewable energy solutions.'
+                    },
+                    {
+                        pdf: 'assets/documents/SIH certificate.pdf',
+                        title: 'Smart India Hackathon Certificate',
+                        org: 'AICTE · Smart India Hackathon',
+                        desc: 'The Smart India Hackathon (SIH) is one of India\'s largest national-level open innovation competitions, organised by AICTE and the Ministry of Education. It challenges student teams to design and build solutions to real-world problem statements submitted by government ministries, PSUs, and industries. Participation in SIH provided hands-on exposure to rapid ideation, cross-disciplinary collaboration, and presenting design solutions under competitive conditions — reinforcing skills in product thinking, engineering feasibility, and user-centred design.'
+                    },
+                    {
+                        pdf: 'assets/documents/India Design Week.pdf',
+                        title: 'India Design Week Certificate',
+                        org: 'ICT Academy · Autodesk',
+                        desc: 'The India Design Week (IDW) competition is one of India\'s largest student design competitions organised by the ICT Academy and powered by Autodesk. It is aimed primarily at engineering and product design students and focuses on solving real-world problems using Autodesk\'s design tools, especially Autodesk Fusion (formerly Fusion 360). IDW challenges participants to apply design thinking and digital fabrication skills to create innovative, manufacturable solutions — bridging the gap between academic learning and industry-ready practice.'
+                    }
+                ];
+
+                function openCertModal(index) {
+                    const c = CERTS[index];
+                    document.getElementById('certModalPdf').src = c.pdf;
+                    document.getElementById('certModalTitle').textContent = c.title;
+                    document.getElementById('certModalOrg').textContent = c.org;
+                    document.getElementById('certModalDesc').textContent = c.desc;
+                    const dl = document.getElementById('certModalDl');
+                    dl.href = c.pdf;
+                    dl.download = c.title + '.pdf';
+                    document.getElementById('certModalBackdrop').classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+
+                function closeCertModal() {
+                    document.getElementById('certModalBackdrop').classList.remove('active');
+                    document.body.style.overflow = '';
+                    setTimeout(() => { document.getElementById('certModalPdf').src = ''; }, 400);
+                }
+
+                function closeCertModalBackdrop(e) {
+                    if (e.target === document.getElementById('certModalBackdrop')) closeCertModal();
+                }
+
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape') closeCertModal();
+                });
+            </script>
+        </section>
+
         <section id="work" class="work">
             <h2 class="section-title fade-up">SELECTED WORKS</h2>
 
