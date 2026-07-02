@@ -157,7 +157,10 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const hRatio = vpWidth / image.width;
         const vRatio = vpHeight / image.height;
-        const ratio  = Math.min(hRatio, vRatio); 
+        let ratio  = Math.min(hRatio, vRatio); 
+        if (vpWidth <= 768) {
+            ratio = ratio * 1.5;
+        }
         
         const drawWidth = image.width * ratio;
         const drawHeight = image.height * ratio;
@@ -365,7 +368,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Recalculate draw area (must match renderImageToCanvas logic)
         const img = obliviondroneImages[0];
         if (!img || !img.naturalWidth) return;
-        const ratio = Math.min(vpWidth / img.naturalWidth, vpHeight / img.naturalHeight);
+        let ratio = Math.min(vpWidth / img.naturalWidth, vpHeight / img.naturalHeight);
+        if (vpWidth <= 768) {
+            ratio = ratio * 1.5;
+        }
         const drawWidth = img.naturalWidth * ratio;
         const drawHeight = img.naturalHeight * ratio;
         const cx = (vpWidth - drawWidth) / 2;

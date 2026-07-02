@@ -33,9 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
         
         ctx.clearRect(0, 0, vpWidth, vpHeight);
         
-        const hRatio = vpWidth / image.width;
-        const vRatio = vpHeight / image.height;
-        const ratio  = Math.min(hRatio, vRatio); // Use min for object-fit: contain
+        let ratio  = Math.min(hRatio, vRatio); // Use min for object-fit: contain
+        if (vpWidth <= 768) {
+            ratio = ratio * 1.5;
+        }
         
         const drawWidth = image.width * ratio;
         const drawHeight = image.height * ratio;

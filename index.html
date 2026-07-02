@@ -250,14 +250,14 @@
                     overflow: hidden;
                     border-bottom: 1px solid rgba(255,255,255,0.06);
                 }
-                .cert-thumb-wrap iframe {
-                    width: calc(100% + 20px);
-                    height: calc(100% + 20px);
-                    border: none;
-                    pointer-events: none;
-                    transform-origin: top left;
-                    margin-right: -20px;
-                    scrollbar-width: none;
+                .cert-thumb-wrap img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: transform 0.5s ease;
+                }
+                .cert-list-card:hover .cert-thumb-wrap img {
+                    transform: scale(1.04);
                 }
                 /* hover reveal overlay */
                 .cert-thumb-overlay {
@@ -477,6 +477,7 @@
                     .cert-modal-info { padding: 1.5rem; }
                     .cert-list-header { flex-direction: column; gap: 0.5rem; align-items: flex-start; }
                     .cert-list-title { font-size: clamp(1.6rem, 4vw, 2.5rem); }
+                    .cert-thumb-overlay { display: none !important; }
                 }
                 @media (max-width: 600px) {
                     .cert-list-grid { grid-template-columns: 1fr; }
@@ -502,7 +503,7 @@
                 <!-- 01 — Internship Certificate -->
                 <div class="cert-list-card" id="cert-card-0" onclick="openCertModal(0)">
                     <div class="cert-thumb-wrap">
-                        <iframe src="assets/documents/internship-certificate.pdf" title="Internship Certificate preview" loading="lazy" tabindex="-1"></iframe>
+                        <img src="assets/images/Internship  certificate.png" alt="Internship Certificate Preview" loading="lazy">
                         <div class="cert-thumb-overlay"><span>View PDF</span></div>
                     </div>
                     <div class="cert-card-meta">
@@ -515,7 +516,7 @@
                 <!-- 02 — SIH Certificate -->
                 <div class="cert-list-card" id="cert-card-1" onclick="openCertModal(1)">
                     <div class="cert-thumb-wrap">
-                        <iframe src="assets/documents/SIH certificate.pdf" title="SIH Certificate preview" loading="lazy" tabindex="-1"></iframe>
+                        <img src="assets/images/SIH certificate.png" alt="SIH Certificate Preview" loading="lazy">
                         <div class="cert-thumb-overlay"><span>View PDF</span></div>
                     </div>
                     <div class="cert-card-meta">
@@ -528,7 +529,7 @@
                 <!-- 03 — India Design Week -->
                 <div class="cert-list-card" id="cert-card-2" onclick="openCertModal(2)">
                     <div class="cert-thumb-wrap">
-                        <iframe src="assets/documents/India Design Week.pdf" title="India Design Week preview" loading="lazy" tabindex="-1"></iframe>
+                        <img src="assets/images/India design week certificate.png" alt="India Design Week Certificate Preview" loading="lazy">
                         <div class="cert-thumb-overlay"><span>View PDF</span></div>
                     </div>
                     <div class="cert-card-meta">
