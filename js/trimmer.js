@@ -219,8 +219,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     canvas.style.transform = 'translateX(0)';
                     if (textDesc) {
                         textDesc.style.opacity = '0';
-                        textDesc.style.transform = 'translateY(-40%)';
                         textDesc.style.pointerEvents = 'none';
+                        textDesc.style.transform = (window.innerWidth <= 768) ? 'translateY(100%)' : 'translateY(-40%)';
                     }
                 } else {
                     // Text Reveal phase
@@ -230,14 +230,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Map breakPoint -> 1 to 0 -> 1 for text reveal calculations
                     const revealProgress = (totalScrollFraction - animationBreakPoint) / (1 - animationBreakPoint);
                     
-                    // Move canvas left based on progress (up to -20vw or so)
-                    const canvasShift = revealProgress * -20; 
-                    canvas.style.transform = `translateX(${canvasShift}vw)`;
-                    
-                    if (textDesc) {
-                        textDesc.style.opacity = revealProgress;
-                        textDesc.style.transform = `translateY(-50%)`; // smoothly settles into place
-                        textDesc.style.pointerEvents = revealProgress > 0.8 ? 'auto' : 'none';
+                    if (window.innerWidth <= 768) {
+                        // MOBILE: Canvas stays centered, text slides up from bottom
+                        canvas.style.transform = 'translateX(0)';
+                        if (textDesc) {
+                            textDesc.style.opacity = revealProgress;
+                            textDesc.style.transform = `translateY(${(1 - revealProgress) * 30}%)`;
+                            textDesc.style.pointerEvents = revealProgress > 0.8 ? 'auto' : 'none';
+                        }
+                    } else {
+                        // DESKTOP: Canvas shifts left, text appears on right
+                        const canvasShift = revealProgress * -20; 
+                        canvas.style.transform = `translateX(${canvasShift}vw)`;
+                        if (textDesc) {
+                            textDesc.style.opacity = revealProgress;
+                            textDesc.style.transform = `translateY(-50%)`;
+                            textDesc.style.pointerEvents = revealProgress > 0.8 ? 'auto' : 'none';
+                        }
                     }
                 }
                 

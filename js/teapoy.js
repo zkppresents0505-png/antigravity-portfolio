@@ -180,21 +180,29 @@ document.addEventListener('DOMContentLoaded', () => {
                     canvas.style.transform = 'translateX(0)';
                     if (textDesc) {
                         textDesc.style.opacity = '0';
-                        textDesc.style.transform = 'translateY(-40%)';
                         textDesc.style.pointerEvents = 'none';
+                        textDesc.style.transform = (window.innerWidth <= 768) ? 'translateY(100%)' : 'translateY(-40%)';
                     }
                 } else {
                     render(findClosestFrame(frameCount - 1));
                     
                     const revealProgress = (totalScrollFraction - animationBreakPoint) / (1 - animationBreakPoint);
                     
-                    const canvasShift = revealProgress * -20; 
-                    canvas.style.transform = `translateX(${canvasShift}vw)`;
-                    
-                    if (textDesc) {
-                        textDesc.style.opacity = revealProgress;
-                        textDesc.style.transform = `translateY(-50%)`; 
-                        textDesc.style.pointerEvents = revealProgress > 0.8 ? 'auto' : 'none';
+                    if (window.innerWidth <= 768) {
+                        canvas.style.transform = 'translateX(0)';
+                        if (textDesc) {
+                            textDesc.style.opacity = revealProgress;
+                            textDesc.style.transform = `translateY(${(1 - revealProgress) * 30}%)`;
+                            textDesc.style.pointerEvents = revealProgress > 0.8 ? 'auto' : 'none';
+                        }
+                    } else {
+                        const canvasShift = revealProgress * -20; 
+                        canvas.style.transform = `translateX(${canvasShift}vw)`;
+                        if (textDesc) {
+                            textDesc.style.opacity = revealProgress;
+                            textDesc.style.transform = `translateY(-50%)`; 
+                            textDesc.style.pointerEvents = revealProgress > 0.8 ? 'auto' : 'none';
+                        }
                     }
                 }
                 

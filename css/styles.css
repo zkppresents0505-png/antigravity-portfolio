@@ -388,7 +388,13 @@ a {
     overflow: hidden;
     background-color: #111;
     aspect-ratio: 4/3;
-    border-radius: 8px; /* Slight softening for industrial feel */
+    border-radius: 8px;
+    transition: transform 0.5s var(--transition), box-shadow 0.5s var(--transition);
+}
+
+.project-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
 }
 
 .project-card:nth-child(even) {
@@ -405,13 +411,12 @@ a {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.8s var(--transition), filter 0.8s var(--transition);
-    filter: grayscale(80%) brightness(0.8);
+    transition: transform 0.8s var(--transition);
+    filter: brightness(0.9);
 }
 
 .project-card:hover .project-image img {
     transform: scale(1.05);
-    filter: grayscale(0%) brightness(1);
 }
 
 .project-overlay {
@@ -654,18 +659,269 @@ a {
     transform: translateY(0);
 }
 
+/* ═══════════════════════════════════════════════════════
+   TABLET — iPad landscape / small laptops (≤ 1024px)
+   ═══════════════════════════════════════════════════════ */
 @media (max-width: 1024px) {
     .gallery { grid-template-columns: 1fr; }
     .project-card:nth-child(even) { margin-top: 0; }
-    .hero-title { font-size: 6rem; }
+    .hero-title { font-size: clamp(2.8rem, 6vw, 5rem); }
     .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+
+    .tools-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .hero-spline {
+        width: 120vw;
+    }
+
+    .hero-content {
+        max-width: 65vw;
+    }
+
+    /* Works portal mosaic — reduce height */
+    .works-portal { height: 320px; }
+
+    .section-title {
+        font-size: 2.4rem;
+        margin-bottom: 3rem;
+    }
+
+    .footer-content h2 { font-size: 5vw; }
+    .email-link { font-size: 1.5rem; }
 }
 
+/* ═══════════════════════════════════════════════════════
+   iPAD / LARGE MOBILE (≤ 768px)
+   ═══════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
-    .navbar { padding: 1.5rem 2rem; }
-    .hero { padding: 0 2rem; }
-    .work, .about, .skills, .footer { padding: 4rem 2rem; }
-    .hero-title { font-size: 4.5rem; }
+    .navbar {
+        padding: 1rem 1.5rem;
+    }
+
+    .logo {
+        font-size: 1.1rem;
+        padding: 0.15rem 0.5rem;
+    }
+
     .nav-links { display: none; }
+
+    .hero {
+        padding: 0 1.5rem;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .hero-spline {
+        width: 100vw;
+        height: 100%;
+        opacity: 0.4;
+    }
+
+    .hero-content {
+        max-width: 100%;
+        z-index: 2;
+    }
+
+    .hero-title {
+        font-size: clamp(2rem, 8vw, 3.5rem);
+        letter-spacing: -1px;
+    }
+
+    .hero-subtitle-top {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-author-row {
+        gap: 1rem;
+        padding: 0.4rem 1.5rem 0.4rem 0.4rem;
+        margin-bottom: 2rem;
+    }
+
+    .hero-portrait-small {
+        width: 60px;
+        height: 60px;
+    }
+
+    .hero-role {
+        font-size: 0.85rem;
+        letter-spacing: 1px;
+    }
+
+    .hero-status {
+        font-size: 0.75rem;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        gap: 0.75rem;
+        width: 100%;
+    }
+
+    .btn {
+        padding: 0.8rem 1.8rem;
+        font-size: 0.8rem;
+        text-align: center;
+        width: 100%;
+    }
+
+    .work, .about, .skills, .footer {
+        padding: 4rem 1.5rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .tools-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .tool-card {
+        padding: 1.8rem 1.2rem;
+    }
+
+    .tool-icon {
+        width: 36px;
+        height: 36px;
+    }
+
+    .tool-name {
+        font-size: 1.5rem;
+    }
+
+    .tool-category {
+        font-size: 0.75rem;
+        letter-spacing: 1.5px;
+    }
+
     .stat-number { font-size: 3rem; }
+    .about-stats { gap: 2rem; }
+
+    /* Works portal — single tall column */
+    .works-portal { height: 280px; }
+    .wp-mosaic {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+    .wp-cell.tall { grid-row: auto; }
+    .wp-heading { font-size: clamp(1.8rem, 5vw, 2.5rem); }
+
+    /* Footer */
+    .footer { padding: 4rem 1.5rem 1.5rem; }
+    .footer-content h2 { font-size: 7vw; }
+    .email-link {
+        font-size: 1.1rem;
+        margin-bottom: 3rem;
+        word-break: break-all;
+    }
+    .socials {
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 3rem;
+    }
+    .socials a { font-size: 0.7rem; }
+    .socials a svg { width: 24px; height: 24px; }
+
+    /* Custom cursor — hide on touch devices */
+    .cursor { display: none !important; }
+}
+
+/* ═══════════════════════════════════════════════════════
+   SMALL MOBILE (≤ 480px)
+   ═══════════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+    .navbar {
+        padding: 0.8rem 1rem;
+    }
+
+    .logo {
+        font-size: 1rem;
+    }
+
+    .hero {
+        padding: 0 1rem;
+    }
+
+    .hero-title {
+        font-size: clamp(1.8rem, 9vw, 2.8rem);
+    }
+
+    .hero-subtitle-top {
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+    }
+
+    .hero-portrait-small {
+        width: 48px;
+        height: 48px;
+    }
+
+    .hero-role {
+        font-size: 0.75rem;
+    }
+
+    .btn {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.75rem;
+    }
+
+    .work, .about, .skills, .footer {
+        padding: 3rem 1rem;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+        margin-bottom: 2rem;
+    }
+
+    .tools-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+
+    .tool-card {
+        padding: 1.4rem 1rem;
+        gap: 0.6rem;
+    }
+
+    .tool-icon {
+        width: 28px;
+        height: 28px;
+        margin-bottom: 0.2rem;
+    }
+
+    .tool-name {
+        font-size: 1.15rem;
+        letter-spacing: -0.5px;
+    }
+
+    .tool-category {
+        font-size: 0.65rem;
+        letter-spacing: 1px;
+    }
+
+    .works-portal { height: 220px; }
+    .wp-heading { font-size: clamp(1.4rem, 5vw, 2rem); }
+    .wp-label { font-size: 0.65rem; letter-spacing: 3px; }
+    .wp-cta { font-size: 0.65rem; letter-spacing: 3px; }
+    .wp-arrow { width: 36px; height: 36px; font-size: 1rem; }
+
+    .footer-content h2 { font-size: 8vw; }
+    .email-link { font-size: 0.95rem; }
+    .socials { gap: 1rem; }
+    .socials a { font-size: 0.65rem; }
+    .socials a svg { width: 20px; height: 20px; }
 }

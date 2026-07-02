@@ -475,9 +475,18 @@
                     .cert-list-grid { grid-template-columns: 1fr; }
                     .cert-modal-pdf { height: 340px; }
                     .cert-modal-info { padding: 1.5rem; }
+                    .cert-list-header { flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+                    .cert-list-title { font-size: clamp(1.6rem, 4vw, 2.5rem); }
                 }
                 @media (max-width: 600px) {
                     .cert-list-grid { grid-template-columns: 1fr; }
+                    .cert-thumb-wrap { height: 180px; }
+                    .cert-card-meta { padding: 1rem 1.2rem 1.2rem; }
+                    .cert-card-title { font-size: 0.9rem; }
+                    .cert-modal-pdf { height: 260px; }
+                    .cert-modal-title { font-size: 1.1rem; }
+                    .cert-modal-desc { font-size: 0.85rem; }
+                    .cert-modal { width: min(95%, 100%); }
                 }
             </style>
 

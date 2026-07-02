@@ -350,7 +350,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Scroll Logic
-    const animationBreakPoint = 0.75; 
+    const animationBreakPoint = 0.75;
+
+    // Mobile detection — check on each interaction since user may resize
+    function isMobile() {
+        return window.innerWidth <= 768;
+    }
 
     // Cinematic mask overlay for Oblivion Drone assembly animation
     function applyOblivionMasks(ctx, frameIndex) {
@@ -423,6 +428,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const rect = block.getBoundingClientRect();
         const blockHeight = rect.height;
         const viewportHeight = window.innerHeight;
+        const mobile = isMobile();
         
         // Calculate progress based on the block's current position relative to viewport
         let progress = -rect.top / (blockHeight - viewportHeight);
@@ -440,8 +446,12 @@ document.addEventListener('DOMContentLoaded', () => {
             canvas.style.transform = 'translateX(0)';
             if (descElement) {
                 descElement.style.opacity = '0';
-                descElement.style.transform = 'translateY(-40%)';
                 descElement.style.pointerEvents = 'none';
+                if (mobile) {
+                    descElement.style.transform = 'translateY(100%)';
+                } else {
+                    descElement.style.transform = 'translateY(-40%)';
+                }
             }
         } else {
             // Text reveal
@@ -449,13 +459,24 @@ document.addEventListener('DOMContentLoaded', () => {
             if (lastFrame) renderImageToCanvas(ctx, lastFrame, hideWatermark);
             
             const revealProgress = (progress - animationBreakPoint) / (1 - animationBreakPoint);
-            const canvasShift = revealProgress * -20; 
-            canvas.style.transform = `translateX(${canvasShift}vw)`;
-            
-            if (descElement) {
-                descElement.style.opacity = revealProgress;
-                descElement.style.transform = `translateY(-50%)`; 
-                descElement.style.pointerEvents = revealProgress > 0.8 ? 'auto' : 'none';
+
+            if (mobile) {
+                // MOBILE: Canvas stays centered, text slides up from bottom
+                canvas.style.transform = 'translateX(0)';
+                if (descElement) {
+                    descElement.style.opacity = revealProgress;
+                    descElement.style.transform = `translateY(${(1 - revealProgress) * 30}%)`;
+                    descElement.style.pointerEvents = revealProgress > 0.8 ? 'auto' : 'none';
+                }
+            } else {
+                // DESKTOP: Canvas shifts left, text appears on right
+                const canvasShift = revealProgress * -20; 
+                canvas.style.transform = `translateX(${canvasShift}vw)`;
+                if (descElement) {
+                    descElement.style.opacity = revealProgress;
+                    descElement.style.transform = `translateY(-50%)`; 
+                    descElement.style.pointerEvents = revealProgress > 0.8 ? 'auto' : 'none';
+                }
             }
         }
     }
@@ -495,6 +516,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     let progress = -rect.top / (rect.height - window.innerHeight);
                     progress = Math.max(0, Math.min(1, progress));
                     const animBreak = 0.75;
+                    const mobile = isMobile();
                     if (progress <= animBreak) {
                         const targetIdx = Math.min(obliviondroneFrameCount - 1, Math.floor((progress / animBreak) * obliviondroneFrameCount));
                         const frameInfo = getLoadedFrameInfo(obliviondroneImages, targetIdx);
@@ -503,7 +525,11 @@ document.addEventListener('DOMContentLoaded', () => {
                             applyOblivionMasks(obliviondroneCtx, frameInfo.index);
                         }
                         obliviondroneCanvas.style.transform = 'translateX(0)';
-                        if (obliviondroneDesc) { obliviondroneDesc.style.opacity = '0'; obliviondroneDesc.style.pointerEvents = 'none'; }
+                        if (obliviondroneDesc) {
+                            obliviondroneDesc.style.opacity = '0';
+                            obliviondroneDesc.style.pointerEvents = 'none';
+                            obliviondroneDesc.style.transform = mobile ? 'translateY(100%)' : 'translateY(-40%)';
+                        }
                     } else {
                         const targetIdx = obliviondroneFrameCount - 1;
                         const frameInfo = getLoadedFrameInfo(obliviondroneImages, targetIdx);
@@ -512,8 +538,21 @@ document.addEventListener('DOMContentLoaded', () => {
                             applyOblivionMasks(obliviondroneCtx, frameInfo.index);
                         }
                         const revealProgress = (progress - animBreak) / (1 - animBreak);
-                        obliviondroneCanvas.style.transform = `translateX(${revealProgress * -20}vw)`;
-                        if (obliviondroneDesc) { obliviondroneDesc.style.opacity = revealProgress; obliviondroneDesc.style.transform = 'translateY(-50%)'; obliviondroneDesc.style.pointerEvents = revealProgress > 0.8 ? 'auto' : 'none'; }
+                        if (mobile) {
+                            obliviondroneCanvas.style.transform = 'translateX(0)';
+                            if (obliviondroneDesc) {
+                                obliviondroneDesc.style.opacity = revealProgress;
+                                obliviondroneDesc.style.transform = `translateY(${(1 - revealProgress) * 30}%)`;
+                                obliviondroneDesc.style.pointerEvents = revealProgress > 0.8 ? 'auto' : 'none';
+                            }
+                        } else {
+                            obliviondroneCanvas.style.transform = `translateX(${revealProgress * -20}vw)`;
+                            if (obliviondroneDesc) {
+                                obliviondroneDesc.style.opacity = revealProgress;
+                                obliviondroneDesc.style.transform = 'translateY(-50%)';
+                                obliviondroneDesc.style.pointerEvents = revealProgress > 0.8 ? 'auto' : 'none';
+                            }
+                        }
                     }
                 }
                 
