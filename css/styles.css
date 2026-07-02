@@ -752,10 +752,11 @@ a {
     }
 
     .hero-title {
-        font-size: clamp(1.8rem, 8vw, 2.8rem);
+        font-size: clamp(1.3rem, 5.8vw, 1.8rem);
         letter-spacing: -1px;
         text-align: left;
         width: 100%;
+        line-height: 1.15;
     }
 
     .hero-subtitle-top {
@@ -900,7 +901,7 @@ a {
     }
 
     .hero-title {
-        font-size: clamp(1.8rem, 9vw, 2.8rem);
+        font-size: clamp(1.15rem, 5.2vw, 1.5rem);
     }
 
     .hero-subtitle-top {
